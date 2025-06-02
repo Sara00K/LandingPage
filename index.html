@@ -6,20 +6,58 @@
     <title>SaraSierra07</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-    <link rel = "icon" type="icon/png" size = "32x32" href = "favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dangrek&family=Knewave&family=Sniglet:wght@400;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <link rel = "icon" type="icon/png" size = "32x32" href = "D:\PaginasPortafolio\LandingPage\Img\favicon.ico">
     <style>
        html{
-        background-color: #D7C1F0;
+        background-color: #000000;
+        opacity: 1;
+        background-image:  linear-gradient(#fbfbef 0.5px, transparent 0.5px), linear-gradient(to right, #fbfbef 0.5px, #000000 0.5px);
+        background-size: 24px 24px;
        } 
        h1{
-        color: rgb(50, 3, 52);
-        font-family: "Space Grotesk", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 700;
+        color: #ac84c3;
+        font-family: "Dangrek", sans-serif;
+        font-weight: 400;
         font-style: normal;
         font-size: 56px;
-        text-align: center;
+        text-align: left;
+        margin-bottom: -10px;
+       }
+       h2{
+        color: #ff639f;
+        font-family: "Sniglet", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 24px;
+        text-align: left;
+        margin-top: 0px;
+       }
+       h3{
+        color: #fbfbef;
+        font-family: "Sniglet", system-ui;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 24px;
+        text-align: left;
+        margin: 0;
+       }
+       h4{
+        color: #a4f1ff;
+        font-family: "Dangrek", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 32px;
+        text-align: left;
+        margin-bottom: -10px;
+       }
+       p{
+        color: #ac84c3;
+        font-family: "Space Grotesk", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 300;
+        font-style: normal;
+        margin-right: 10px;
        }
        #contenido{
         /**border: 5px solid red;**/
@@ -30,13 +68,92 @@
         margin-bottom: auto;
         margin-left: auto;**/
        }
+       #ColorBar{
+        background-color: #fbfbef;
+       }
+       #ColorBarAbajo{
+        background-color: #ac84c3;
+        display: flex;
+        height: 100px;
+       }
+       #ColorBarAboutMe{
+        background-color: #000000;
+        opacity: 1;
+        margin: auto;
+        padding-bottom: 18px;
+       }
+       #Logo{
+        margin-top: 10px;
+        margin-left: 5px;
+       }
+       #HeaderContainer {
+        display: flex;
+        align-items: center; /* vertically align the text with the logo */
+        padding: 18px;
+        }
+        #Name {
+        margin-left: 20px; /* space between logo and text */
+        margin-top: auto;
+        margin-bottom: auto;
+        }
+        #Contactstxt{
+            margin-left: 25px;
+        }
+        #SocialMedia {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-top: auto;
+        margin-bottom: auto;
+        position: absolute;
+        right: 32px;
+        align-items: right;
+        }
 
     </style>
+
 </head>
+
 <body>
-    <div id = "contenido">
-        <a href = "https://www.linkedin.com/in/sarasierra07" target="_blank"><img src = "Img/LogoRosa.png" ></a>
-        <h1> Holi </h1>
+    <div id="ColorBar">
+        <div id="HeaderContainer">
+            <div id="Logo">
+                <img src="D:\PaginasPortafolio\LandingPage\Img\LogoRosa.png" width="200" height="200">
+            </div>
+            <div id="Name">
+                <h1>Sara Sierra</h1>
+                <h2>Technical Artist</h2>  
+            </div>
+        </div>
     </div>
+
+    <div id = "ColorBarAboutMe">
+        <div id = "Contactstxt">
+            <h4>Demo Reel</h4>
+            <video width="500px" height="400px" controls >
+                <source src="D:\Logo_Sara\LogoSaraESTESI_AME\Logo_Sara_SinFondo.mov" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div id = "contenido">
+
+    </div>
+
+
+    <div id="ColorBarAbajo">
+        <div id="HeaderContainer">
+            <div id="Contactstxt"> 
+                <h3>Get in contact with me!</h3> 
+            </div>
+            <div id="SocialMedia">
+                <a href = "https://www.instagram.com/sarasierra07/" target="_blank"><img src = "D:\LogosRedes\Insta.png" width="32" height="32" >  </a>
+                <a href = "https://linktr.ee/sarasierra07" target="_blank"><img src = "D:\LogosRedes\LinkTree.png" width="32" height="32" ></a>
+                <a href = "https://www.linkedin.com/in/sarasierra07" target="_blank"><img src = "D:\LogosRedes\Link.png" width="32" height="32" ></a>
+                <a href = "mailto:ssierrar07@gmail.com ?subject=Hello!&body= I came from your website and I'm excited to keep in touch and continue learning together :D" target="_blank"><img src = "D:\LogosRedes\Mail.png" width="32" height="32" ></a>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
