@@ -1,115 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SaraSierra07</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dangrek&family=Knewave&family=Sniglet:wght@400;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-    <link rel = "icon" type="icon/png" size = "32x32" href = "favicon.ico">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dangrek&family=Knewave&family=Sniglet:wght@400;800&family=Space+Grotesk:wght@700&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon/png" size="32x32" href="D:\PaginasPortafolio\LandingPage\Img\favicon.ico">
     <style>
-       html{
-        background-color: #000000;
-        opacity: 1;
-        background-image:  linear-gradient(#fbfbef 0.5px, transparent 0.5px), linear-gradient(to right, #fbfbef 0.5px, #000000 0.5px);
-        background-size: 24px 24px;
-       } 
-       h1{
-        color: #ac84c3;
-        font-family: "Dangrek", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 56px;
-        text-align: left;
-        margin-bottom: -10px;
-       }
-       h2{
-        color: #ff639f;
-        font-family: "Sniglet", system-ui;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 24px;
-        text-align: left;
-        margin-top: 0px;
-       }
-       h3{
-        color: #fbfbef;
-        font-family: "Sniglet", system-ui;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 24px;
-        text-align: left;
-        margin: 0;
-       }
-       h4{
-        color: #a4f1ff;
-        font-family: "Dangrek", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 32px;
-        text-align: left;
-        margin-bottom: -10px;
-       }
-       p{
-        color: #ac84c3;
-        font-family: "Space Grotesk", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 300;
-        font-style: normal;
-        margin-right: 10px;
-       }
-       #contenido{
-        /**border: 5px solid red;**/
-        width: 500px;
-        margin: 50px auto 0 auto;
-        /**margin-top: 50px;
-        margin-right: auto;
-        margin-bottom: auto;
-        margin-left: auto;**/
-       }
-       #ColorBar{
-        background-color: #fbfbef;
-       }
-       #ColorBarAbajo{
-        background-color: #ac84c3;
-        display: flex;
-        height: 100px;
-       }
-       #ColorBarAboutMe{
-        background-color: #000000;
-        opacity: 1;
-        margin: auto;
-        padding-bottom: 18px;
-       }
-       #Logo{
-        margin-top: 10px;
-        margin-left: 5px;
-       }
-       #HeaderContainer {
-        display: flex;
-        align-items: center; /* vertically align the text with the logo */
-        padding: 18px;
-        }
-        #Name {
-        margin-left: 20px; /* space between logo and text */
-        margin-top: auto;
-        margin-bottom: auto;
-        }
-        #Contactstxt{
-            margin-left: 25px;
-        }
-        #SocialMedia {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-top: auto;
-        margin-bottom: auto;
-        position: absolute;
-        right: 32px;
-        align-items: right;
+        html {
+            background-color: #000000;
+            opacity: 1;
+            background-image: linear-gradient(rgba(251, 251, 239, 250), transparent 0.5px), linear-gradient(to right, rgba(251, 251, 239, 250), #000000 0.5px);
+            background-size: 24px 24px;
+            scroll-behavior: smooth;
         }
 
+        h1 {
+            color: #ac84c3;
+            font-family: "Dangrek", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 56px;
+            text-align: left;
+            margin-bottom: -10px;
+            transition: font-size 0.3s ease;
+        }
+
+        h2 {
+            color: #ff639f;
+            font-family: "Sniglet", system-ui;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 24px;
+            text-align: left;
+            margin-top: 0px;
+            transition: font-size 0.3s ease;
+        }
+
+        h3 {
+            color: #fbfbef;
+            font-family: "Sniglet", system-ui;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 20px;
+            text-align: left;
+            margin: 0;
+        }
+
+        h4 {
+            color: #a4f1ff;
+            font-family: "Dangrek", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 32px;
+            text-align: left;
+            margin-bottom: -10px;
+        }
+
+        h5 {
+            color: #a4f1ff;
+            font-family: "Dangrek", sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: -10px;
+        }
+
+        h6 {
+            color: #a4f1ff;
+            font-family: "Dangrek", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: -10px;
+        }
+
+        p {
+            color: #ac84c3;
+            font-family: "Space Grotesk", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 200;
+            font-style: normal;
+            margin-right: 30px;
+            margin-left: auto;
+            text-align: center;
+        }
+
+        #contenido {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            max-width: 65%;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #ColorBar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            transition: all 0.3s ease;
+            height: 200px;
+            /* starting height */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-radius: 15px;
+            background-color: #fbfbef;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #ColorBarAbajo {
+            background-color: #ac84c3;
+            display: flex;
+            border-radius: 15px;
+            height: 100px;
+        }
+
+        #ColorBarAboutMe {
+            background-color: #000000;
+            opacity: 1;
+            margin: auto;
+            padding-bottom: 18px;
+        }
+
+        #TransparentSquare {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            height: 72px;
+            margin-left: auto+200px;
+            margin-right: auto+200px;
+            align-items: center;
+        }
+
+        #Logo img {
+            margin-top: 10px;
+            margin-left: -10px;
+            width: 200px;
+            height: 200px;
+            transition: all 0.3s ease;
+        }
+
+        #HeaderContainer {
+            display: flex;
+            align-items: center;
+            /* vertically align the text with the logo */
+            padding: 18px;
+        }
+
+        #Name {
+            margin-left: 10px;
+            /* space between logo and text */
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        #Contactstxt {
+            margin-left: 25px;
+        }
+
+        #SocialMedia {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: auto;
+            margin-bottom: auto;
+            position: absolute;
+            right: 32px;
+            align-items: right;
+        }
+
+        #VideoSpace {
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            align-items: center;
+        }
+
+        #ColorBar.shrink #Logo img {
+            width: 64px;
+            height: 64px;
+        }
+
+        #ColorBar.shrink {
+            height: 80px;
+        }
+
+        #ColorBar.shrink #Name h1 {
+            font-size: 32px;
+            margin-top: auto;
+        }
+
+        #ColorBar.shrink #Name h2 {
+            font-size: 16px;
+            margin-top: auto;
+        }
+
+        #MainMenu {
+            position: absolute;
+            right: 64px;
+            align-items: right;
+            display: flex;
+            gap: 30px;
+            font-family: "Sniglet", system-ui;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        #MainMenu a {
+            color: #ff639f;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        #MainMenu a:hover {
+            color: #ac84c3;
+        }
+
+        #about,
+        #demo,
+        #projects,
+        #blog {
+            scroll-margin-top: 125px;
+            /* adjust to match your sticky header height */
+        }
+
+        .carousel {
+
+            position: relative;
+            max-width: 55%;
+            margin-top: 25px;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: visible;
+            border-radius: 12px;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 60px;
+            border-radius: 25px;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            background: #ac84c3;
+            border: none;
+            color: #fbfbef;
+            padding: 5px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .carousel-btn.prev {
+            left: -50px;
+        }
+
+        .carousel-btn.next {
+            right: -50px;
+        }
+
+        .carousel-dots {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .carousel-dots span {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin: 0 10px;
+            background-color: #bbb;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-dots span.active {
+            background-color: #a4f1ff;
+        }
+
+        .carousel-slide {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .carousel-slide.active {
+            display: flex;
+        }
+
+        .slide-info {
+            background-color: #fbfbef;
+            color: #000;
+            padding: 10px 20px;
+            width: 96%;
+            border-radius: 0 0 8px 8px;
+            font-family: "Sniglet", sans-serif;
+            text-align: left;
+        }
+
+        .slide-info h2 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: #ac84c3;
+        }
+
+        .slide-info p {
+            margin: 0 0 5px 0;
+            color: #000000;
+            text-align: left;
+        }
+
+        .slide-info h3 {
+            margin: 3px 0;
+            color: #ff639f;
+        }
     </style>
 
 </head>
@@ -118,42 +345,230 @@
     <div id="ColorBar">
         <div id="HeaderContainer">
             <div id="Logo">
-                <img src="LogoRosa.png" width="200" height="200">
+                <img src="D:\PaginasPortafolio\LandingPage\Img\LogoRosa.png">
             </div>
             <div id="Name">
                 <h1>Sara Sierra</h1>
-                <h2>Technical Artist</h2>  
+                <h2>Technical Artist</h2>
+            </div>
+            <nav id="MainMenu">
+                <a href="#about">About</a>
+                <a href="#demo">Demo Reel</a>
+                <a href="#projects">Projects</a>
+                <a href="#blog">Blog</a>
+            </nav>
+        </div>
+    </div>
+    <div id="about">
+        <div id="ColorBarAboutMe">
+            <div id="Contactstxt">
+                <h6>About me</h6>
+                <p>I'm Sara, a video game developer focused on Technical Art who loves to experiment and try new things.
+                    I'm fascinated by the way videogames can introduce players to narratives where they create their own
+                    experiences and form connections.
+                    I'm excited to take on new challenges, learn more, and experiment alongside people to continue
+                    growing and creating.</p>
             </div>
         </div>
     </div>
 
-    <div id = "ColorBarAboutMe">
-        <div id = "Contactstxt">
-            <h4>Demo Reel</h4>
-            <video width="500px" height="400px" controls >
-                <source src="D:\Logo_Sara\LogoSaraESTESI_AME\Logo_Sara_SinFondo.mov" type="video/mp4">
-            </video>
+    <div id="demo">
+        <div id="Contactstxt">
+            <h6>Demo Reel</h6>
+            <div id="contenido">
+                <video width="100%" controls>
+                    <source src="C:\Users\Usuario\Downloads\PreviewAR.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
     </div>
 
-    <div id = "contenido">
+    <div id="projects">
 
+        <h5> Projects</h5>
+
+        <div class="carousel">
+            <div class="carousel-images">
+                <div class="carousel-slide active">
+                    <video width="100%" controls>
+                        <source src="C:\Users\Usuario\Downloads\PreviewAR.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="slide-info">
+                        <h3>AR experience based on children's books</h3>
+                        <p>In collaboration with the Stiftung Internationale Jugendbibliothek library in Germany, we
+                            created various mini interactive AR experiences for children based on illustrated books.</p>
+                        <h2>Unity, AR</h2>
+                        <h2>Tech Art, Programming, 3D Generalist</h2>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <video width="100%" controls>
+                        <source src="C:\Users\Usuario\Downloads\Trailer_Nauh.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="slide-info">
+                        <h3>Nauh: Serious game Demo</h3>
+                        <p>In collaboration with Isla Urbana, we developed a serious game demo aimed at promoting a
+                            sense of community and educate people about a new water culture.</p>
+                        <h2>Unity 3D game</h2>
+                        <h2>Tech Art, Programming, VFX</h2>
+                    </div>
+                </div>
+
+                <div class="carousel-slide">
+                    <video width="100%" controls>
+                        <source src="C:\Users\Usuario\Downloads\3AM VR Gameplay.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="slide-info">
+                        <h3>3AM: a VR Game</h3>
+                        <p>The player takes on the role of a baker who must make night time preparations for the next
+                            day while being attacked by ghosts.</p>
+                        <h2>Unreal, VR</h2>
+                        <h2>Tech Art, Programming, 3D Generalist</h2>
+                    </div>
+                </div>
+
+                <div class="carousel-slide active">
+                    <video width="100%" controls>
+                        <source src="C:\Users\Usuario\Downloads\CCC_Trailer (2).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="slide-info">
+                        <h3>Cotton Candy Clowns</h3>
+                        <p>Video game where the player is the new employee at the famous CCC, and they must do their
+                            best to become employee of the month—although as the days go by, the surroundings don't feel
+                            right.</p>
+                        <h2>Unity, 3D game</h2>
+                        <h2>Tech Art, 3D Generalist, UI & UX</h2>
+                    </div>
+                </div>
+
+            </div>
+            <button class="carousel-btn prev">&#10094;</button>
+            <button class="carousel-btn next">&#10095;</button>
+            <div class="carousel-dots"></div>
+        </div>
     </div>
 
+    <div id="blog">
+        <h5> Blog</h5>
+        <p>
+            Coming soon...
+        </p>
+    </div>
 
     <div id="ColorBarAbajo">
         <div id="HeaderContainer">
-            <div id="Contactstxt"> 
-                <h3>Get in contact with me!</h3> 
+            <div id="Contactstxt">
+                <h3>Get in contact with me!</h3>
             </div>
             <div id="SocialMedia">
-                <a href = "https://www.instagram.com/sarasierra07/" target="_blank"><img src = "Insta.png" width="32" height="32" >  </a>
-                <a href = "https://linktr.ee/sarasierra07" target="_blank"><img src = "LinkTree.png" width="32" height="32" ></a>
-                <a href = "https://www.linkedin.com/in/sarasierra07" target="_blank"><img src = "Link.png" width="32" height="32" ></a>
-                <a href = "mailto:ssierrar07@gmail.com ?subject=Hello!&body= I came from your website and I'm excited to keep in touch and continue learning together :D" target="_blank"><img src = "Mail.png" width="32" height="32" ></a>
+                <a href="https://www.artstation.com/sarasierra07" target="_blank"><img
+                        src="D:\LogosRedes\ArtStation.png" width="36" height="36"></a>
+                <a href="https://www.instagram.com/sarasierra07/" target="_blank"><img src="D:\LogosRedes\Insta.png"
+                        width="32" height="32"> </a>
+                <a href="https://linktr.ee/sarasierra07" target="_blank"><img src="D:\LogosRedes\LinkTree.png"
+                        width="32" height="32"></a>
+                <a href="https://www.linkedin.com/in/sarasierra07" target="_blank"><img src="D:\LogosRedes\Link.png"
+                        width="32" height="32"></a>
+                <a href="mailto:ssierrar07@gmail.com ?subject=Hello!&body= I came from your website and I'm excited to keep in touch and continue learning together :D"
+                    target="_blank"><img src="D:\LogosRedes\Mail.png" width="32" height="32"></a>
             </div>
         </div>
     </div>
-    
+
+
+    <script>
+        const navbar = document.getElementById('ColorBar');
+        let isShrunk = false;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 90 && !isShrunk) {
+                navbar.classList.add('shrink');
+                isShrunk = true;
+            } else if (window.scrollY < 30 && isShrunk) {
+                navbar.classList.remove('shrink');
+                isShrunk = false;
+            }
+        });
+    </script>
+
+    <script>
+
+        const slides = document.querySelectorAll('.carousel-slide');
+        const prev = document.querySelector('.carousel-btn.prev');
+        const next = document.querySelector('.carousel-btn.next');
+        const dotsContainer = document.querySelector('.carousel-dots');
+
+        let currentIndex = 0;
+
+        // Create dots
+        slides.forEach((_, index) => {
+            const dot = document.createElement('span');
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                showImage(currentIndex);
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        function updateDots() {
+            const dots = dotsContainer.querySelectorAll('span');
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (dots[currentIndex]) {
+                dots[currentIndex].classList.add('active');
+            }
+        }
+
+        function showImage(index) {
+            slides.forEach((slide, i) => {
+                // Pause any playing video when switching
+                const video = slide.querySelector('video');
+                if (video) video.pause();
+
+                slide.classList.remove('active');
+            });
+
+            slides[index].classList.add('active');
+            updateDots();
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            showImage(currentIndex);
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            showImage(currentIndex);
+        }
+
+        next.addEventListener('click', showNext);
+        prev.addEventListener('click', showPrev);
+
+        let autoScroll;
+
+        function startAutoScroll() {
+            autoScroll = setInterval(showNext, 10000);
+        }
+
+        function stopAutoScroll() {
+            clearInterval(autoScroll);
+        }
+
+        const carousel = document.querySelector('.carousel');
+        carousel.addEventListener('mouseenter', stopAutoScroll);
+        carousel.addEventListener('mouseleave', startAutoScroll);
+
+        // Start on load
+        startAutoScroll();
+
+        // Initialize
+        showImage(currentIndex);
+    </script>
 </body>
+
 </html>
