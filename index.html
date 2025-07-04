@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SaraSierra07</title>
+    <title>Sara Sierra</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -12,6 +12,7 @@
         rel="stylesheet">
     <link rel="icon" type="icon/png" size="32x32" href="favicon.ico">
     <style>
+        /* General configurations for the page: background */
         html {
             background-color: #000000;
             opacity: 1;
@@ -20,6 +21,7 @@
             scroll-behavior: smooth;
         }
 
+        /* General typography configuration*/
         h1 {
             color: #ac84c3;
             font-family: "Dangrek", sans-serif;
@@ -93,6 +95,7 @@
             text-align: center;
         }
 
+        /* "Info boxes" */
         #contenido {
             display: flex;
             justify-content: center;
@@ -102,22 +105,6 @@
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
-        }
-
-        #ColorBar {
-            position: sticky;
-            top: 0;
-            z-index: 999;
-            transition: all 0.3s ease;
-            height: 200px;
-            /* starting height */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            border-radius: 15px;
-            background-color: #fbfbef;
-            transition: all 0.3s ease-in-out;
         }
 
         #ColorBarAbajo {
@@ -143,12 +130,22 @@
             align-items: center;
         }
 
-        #Logo img {
-            margin-top: 10px;
-            margin-left: -10px;
-            width: 200px;
-            height: 200px;
+        /* Header slide configuration */
+
+        #ColorBar {
+            position: sticky;
+            top: 0;
+            z-index: 999;
             transition: all 0.3s ease;
+            height: 200px;
+            /* starting height */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-radius: 15px;
+            background-color: #fbfbef;
+            transition: all 0.3s ease-in-out;
         }
 
         #HeaderContainer {
@@ -158,33 +155,19 @@
             padding: 18px;
         }
 
+        #Logo img {
+            margin-top: 10px;
+            margin-left: -10px;
+            width: 200px;
+            height: 200px;
+            transition: all 0.3s ease;
+        }
+
         #Name {
             margin-left: 10px;
             /* space between logo and text */
             margin-top: auto;
             margin-bottom: auto;
-        }
-
-        #Contactstxt {
-            margin-left: 25px;
-        }
-
-        #SocialMedia {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-top: auto;
-            margin-bottom: auto;
-            position: absolute;
-            right: 32px;
-            align-items: right;
-        }
-
-        #VideoSpace {
-            margin-top: 20px;
-            margin-left: auto;
-            margin-right: auto;
-            align-items: center;
         }
 
         #ColorBar.shrink #Logo img {
@@ -208,7 +191,7 @@
 
         #MainMenu {
             position: absolute;
-            right: 64px;
+            right: 48px;
             align-items: right;
             display: flex;
             gap: 30px;
@@ -229,12 +212,85 @@
 
         #about,
         #demo,
+        #shaders,
         #projects,
         #blog {
             scroll-margin-top: 125px;
             /* adjust to match your sticky header height */
         }
 
+        /* Toogle para activar las lineas en lugar del texto en pantalla "pequeña" */
+        #menu-toggle {
+            display: none;
+            font-size: 28px;
+            background: none;
+            border: none;
+            color: #ff639f;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            margin-top: 80px;
+            transform: translateY(-50%);
+            right: 20px;
+            z-index: 1001;
+        }
+
+        #ColorBar.shrink #menu-toggle {
+            margin-top: 20px;
+        }
+
+        @media (max-width: 820px) {
+            #MainMenu {
+                display: none;
+                position: absolute;
+                top: 80px;
+                right: 25px;
+                background-color: #fbfbef;
+                flex-direction: column;
+                gap: 15px;
+                padding: 10px;
+                border-radius: 10px;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+                z-index: 1000;
+            }
+
+            #MainMenu.active {
+                display: flex;
+            }
+
+            #menu-toggle {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                z-index: 1001;
+            }
+        }
+
+        /* Averiguaremos que es esto */
+        #Contactstxt {
+            margin-left: 25px;
+        }
+
+        #SocialMedia {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: auto;
+            margin-bottom: auto;
+            position: absolute;
+            right: 32px;
+            align-items: right;
+        }
+
+        #VideoSpace {
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            align-items: center;
+        }
+
+        /* Carrusel */
         .carousel {
 
             position: relative;
@@ -351,9 +407,13 @@
                 <h1>Sara Sierra</h1>
                 <h2>Technical Artist</h2>
             </div>
+            <button id="menu-toggle" aria-label="Toggle Menu">
+                &#9776;
+            </button>
             <nav id="MainMenu">
                 <a href="#about">About</a>
                 <a href="#demo">Demo Reel</a>
+                <a href="#shaders">Shaders</a>
                 <a href="#projects">Projects</a>
                 <a href="#blog">Blog</a>
             </nav>
@@ -363,7 +423,9 @@
         <div id="ColorBarAboutMe">
             <div id="Contactstxt">
                 <h6>About me</h6>
-                <p>I'm Sara, a video game developer focused on Technical Art who loves to experiment and try new things.
+                <p>Hello!
+                    I'm Sara, a video game developer focused on Technical Art who loves to experiment and try new
+                    things.
                     I'm fascinated by the way videogames can introduce players to narratives where they create their own
                     experiences and form connections.
                     I'm excited to take on new challenges, learn more, and experiment alongside people to continue
@@ -376,9 +438,19 @@
         <div id="Contactstxt">
             <h6>Demo Reel</h6>
             <div id="contenido">
-                <iframe width="764" height="430" src="https://www.youtube.com/embed/n86L-y_Awvs" title="Technical Artist : Demo Reel 2025" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="764" height="430" src="https://www.youtube.com/embed/n86L-y_Awvs"
+                    title="Technical Artist : Demo Reel 2025" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
+    </div>
+
+    <div id="shaders">
+        <h5> Shaders</h5>
+        <p>
+            <a href="D:\PaginasPortafolio\LandingPage\toon-shader.html">ShaderPageTest</a>
+        </p>
     </div>
 
     <div id="projects">
@@ -388,7 +460,10 @@
         <div class="carousel">
             <div class="carousel-images">
                 <div class="carousel-slide active">
-                        <iframe width="100%" height="500" src="https://www.youtube.com/embed/unwhfF73x74" title="AR Project Preview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/unwhfF73x74"
+                        title="AR Project Preview" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     <div class="slide-info">
                         <h3>AR experience based on children's books</h3>
                         <p>In collaboration with the Stiftung Internationale Jugendbibliothek library in Germany, we
@@ -399,7 +474,10 @@
                 </div>
 
                 <div class="carousel-slide">
-                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/cau_Nqdyx8c" title="Trailer Nauh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/cau_Nqdyx8c"
+                        title="Trailer Nauh" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     <div class="slide-info">
                         <h3>Nauh: Serious game Demo</h3>
                         <p>In collaboration with Isla Urbana, we developed a serious game demo aimed at promoting a
@@ -410,7 +488,10 @@
                 </div>
 
                 <div class="carousel-slide">
-                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/5chZVdJoqzw" title="3AM VR Gameplay" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/5chZVdJoqzw"
+                        title="3AM VR Gameplay" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     <div class="slide-info">
                         <h3>3AM: a VR Game</h3>
                         <p>The player takes on the role of a baker who must make night time preparations for the next
@@ -421,7 +502,10 @@
                 </div>
 
                 <div class="carousel-slide active">
-                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/S0j41PxWeOg" title="Cotton Candy Clowns" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/S0j41PxWeOg"
+                        title="Cotton Candy Clowns" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     <div class="slide-info">
                         <h3>Cotton Candy Clowns</h3>
                         <p>Video game where the player is the new employee at the famous CCC, and they must do their
@@ -452,27 +536,27 @@
                 <h3>Get in contact with me!</h3>
             </div>
             <div id="SocialMedia">
-                <a href="https://www.artstation.com/sarasierra07" target="_blank"><img
-                        src="ArtStation.png" width="36" height="36"></a>
-                <a href="https://www.instagram.com/sarasierra07/" target="_blank"><img src="Insta.png"
-                        width="32" height="32"> </a>
-                <a href="https://linktr.ee/sarasierra07" target="_blank"><img src="LinkTree.png"
-                        width="32" height="32"></a>
-                <a href="https://www.linkedin.com/in/sarasierra07" target="_blank"><img src="Link.png"
-                        width="32" height="32"></a>
+                <a href="https://www.artstation.com/sarasierra07" target="_blank"><img src="ArtStation.png" width="36"
+                        height="36"></a>
+                <a href="https://www.instagram.com/sarasierra07/" target="_blank"><img src="Insta.png" width="32"
+                        height="32"> </a>
+                <!--<a href="https://linktr.ee/sarasierra07" target="_blank"><img src="LinkTree.png" width="32"
+                        height="32"></a>-->
+                <a href="https://www.linkedin.com/in/sarasierra07" target="_blank"><img src="Link.png" width="32"
+                        height="32"></a>
                 <a href="mailto:ssierrar07@gmail.com ?subject=Hello!&body= I came from your website and I'm excited to keep in touch and continue learning together :D"
                     target="_blank"><img src="Mail.png" width="32" height="32"></a>
             </div>
         </div>
     </div>
 
-
+    <!--Color bar shrink on scroll-->
     <script>
         const navbar = document.getElementById('ColorBar');
         let isShrunk = false;
 
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 90 && !isShrunk) {
+            if (window.scrollY > 145 && !isShrunk) {
                 navbar.classList.add('shrink');
                 isShrunk = true;
             } else if (window.scrollY < 30 && isShrunk) {
@@ -482,6 +566,7 @@
         });
     </script>
 
+    <!--Carousel sliding-->
     <script>
 
         const slides = document.querySelectorAll('.carousel-slide');
@@ -555,6 +640,21 @@
         // Initialize
         showImage(currentIndex);
     </script>
+
+    <script>
+        const toggleBtn = document.getElementById('menu-toggle');
+        const mainMenu = document.getElementById('MainMenu');
+
+        toggleBtn.addEventListener('click', () => {
+            mainMenu.classList.toggle('active');
+        });
+        document.querySelectorAll('#MainMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mainMenu.classList.remove('active');
+            });
+        });
+    </script>
+
 </body>
 
 </html>
