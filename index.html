@@ -393,6 +393,63 @@
             margin: 3px 0;
             color: #ff639f;
         }
+
+        /* Galeria de imagenes */
+        div.gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        div.gallery-item {
+            position: relative;
+            display: block;
+            margin: 80px;
+            border: 1px solid #ccc;
+            width: 320px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+            overflow: hidden; 
+        }
+
+
+        .rounded-corners {
+            border-top-left-radius: 7.5px;
+            border-top-right-radius: 7.5px;
+            border-bottom-left-radius: 1.5px;
+            border-bottom-right-radius: 1.5px;
+
+        }
+
+        .overlay {
+            border-bottom-left-radius: 1.5px;
+            border-bottom-right-radius: 1.5px;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            transition: .5s ease;
+            opacity: 0;
+            transform: translateY(60px);
+
+        }
+
+        div.gallery-item:hover .overlay{
+            opacity: 1;
+            transition: transform 0.2s ease-in-out;
+            transform: translateY(5px);
+        }
+
+        div.gallery-item img {
+            width: 100%;
+            height: 100%;
+        }
+
+        div.gallery-item div.desc {
+            padding: 15px;
+            text-align: center;
+        }
     </style>
 
 </head>
@@ -449,216 +506,225 @@
     <div id="shaders">
         <h5> Shaders</h5>
         <p>
-            <a href="https://www.artstation.com/sarasierra07" target="_blank"><img src="WavesShader_ThumbNail.png" width="36"
-                        height="36"></a>
-            <a href="waves_shader.html">Sea Waves Shader</a>
-        </p>
-    </div>
+        <div class="gallery">
 
-    <div id="projects">
-
-        <h5> Projects</h5>
-
-        <div class="carousel">
-            <div class="carousel-images">
-                <div class="carousel-slide active">
-                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/unwhfF73x74"
-                        title="AR Project Preview" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <div class="slide-info">
-                        <h3>AR experience based on children's books</h3>
-                        <p>In collaboration with the Stiftung Internationale Jugendbibliothek library in Germany, we
-                            created various mini interactive AR experiences for children based on illustrated books.</p>
-                        <h2>Unity, AR</h2>
-                        <h2>Tech Art, Programming, 3D Generalist</h2>
-                    </div>
-                </div>
-
-                <div class="carousel-slide">
-                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/cau_Nqdyx8c"
-                        title="Trailer Nauh" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <div class="slide-info">
-                        <h3>Nauh: Serious game Demo</h3>
-                        <p>In collaboration with Isla Urbana, we developed a serious game demo aimed at promoting a
-                            sense of community and educate people about a new water culture.</p>
-                        <h2>Unity 3D game</h2>
-                        <h2>Tech Art, Programming, VFX</h2>
-                    </div>
-                </div>
-
-                <div class="carousel-slide">
-                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/5chZVdJoqzw"
-                        title="3AM VR Gameplay" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <div class="slide-info">
-                        <h3>3AM: a VR Game</h3>
-                        <p>The player takes on the role of a baker who must make night time preparations for the next
-                            day while being attacked by ghosts.</p>
-                        <h2>Unreal, VR</h2>
-                        <h2>Tech Art, Programming, 3D Generalist</h2>
-                    </div>
-                </div>
-
-                <div class="carousel-slide active">
-                    <iframe width="100%" height="500" src="https://www.youtube.com/embed/S0j41PxWeOg"
-                        title="Cotton Candy Clowns" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <div class="slide-info">
-                        <h3>Cotton Candy Clowns</h3>
-                        <p>Video game where the player is the new employee at the famous CCC, and they must do their
-                            best to become employee of the month—although as the days go by, the surroundings don't feel
-                            right.</p>
-                        <h2>Unity, 3D game</h2>
-                        <h2>Tech Art, 3D Generalist, UI & UX</h2>
-                    </div>
-                </div>
-
+            <div class="gallery-item"> <!--Cambiar aqui la liga al shader de agua-->
+                <a href="https://www.artstation.com/sarasierra07" target="_blank"
+                    href="D:\TodoPortafolio_ELEMENTOS\Thumbnails\WavesShader_Img.png">
+                    <img src="D:\TodoPortafolio_ELEMENTOS\Thumbnails\WavesShader_Img.png" class="rounded-corners"
+                        alt="Sea Waves Shader" width="600">
+                        <div class="overlay"><img src="D:\TodoPortafolio_ELEMENTOS\Thumbnails\WavesShader_Text.png" alt="Sea Waves Shader title"
+                        class="animate-image"></div>
+                </a>
             </div>
-            <button class="carousel-btn prev">&#10094;</button>
-            <button class="carousel-btn next">&#10095;</button>
-            <div class="carousel-dots"></div>
+            </p>
         </div>
-    </div>
 
-    <div id="blog">
-        <h5> Blog</h5>
-        <p>
-            Coming soon...
-        </p>
-    </div>
+        <div id="projects">
 
-    <div id="ColorBarAbajo">
-        <div id="HeaderContainer">
-            <div id="Contactstxt">
-                <h3>Get in contact with me!</h3>
+            <h5> Projects</h5>
+
+            <div class="carousel">
+                <div class="carousel-images">
+                    <div class="carousel-slide active">
+                        <iframe width="100%" height="500" src="https://www.youtube.com/embed/unwhfF73x74"
+                            title="AR Project Preview" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="slide-info">
+                            <h3>AR experience based on children's books</h3>
+                            <p>In collaboration with the Stiftung Internationale Jugendbibliothek library in Germany, we
+                                created various mini interactive AR experiences for children based on illustrated books.
+                            </p>
+                            <h2>Unity, AR</h2>
+                            <h2>Tech Art, Programming, 3D Generalist</h2>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <iframe width="100%" height="500" src="https://www.youtube.com/embed/cau_Nqdyx8c"
+                            title="Trailer Nauh" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="slide-info">
+                            <h3>Nauh: Serious game Demo</h3>
+                            <p>In collaboration with Isla Urbana, we developed a serious game demo aimed at promoting a
+                                sense of community and educate people about a new water culture.</p>
+                            <h2>Unity 3D game</h2>
+                            <h2>Tech Art, Programming, VFX</h2>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <iframe width="100%" height="500" src="https://www.youtube.com/embed/5chZVdJoqzw"
+                            title="3AM VR Gameplay" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="slide-info">
+                            <h3>3AM: a VR Game</h3>
+                            <p>The player takes on the role of a baker who must make night time preparations for the
+                                next
+                                day while being attacked by ghosts.</p>
+                            <h2>Unreal, VR</h2>
+                            <h2>Tech Art, Programming, 3D Generalist</h2>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide active">
+                        <iframe width="100%" height="500" src="https://www.youtube.com/embed/S0j41PxWeOg"
+                            title="Cotton Candy Clowns" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="slide-info">
+                            <h3>Cotton Candy Clowns</h3>
+                            <p>Video game where the player is the new employee at the famous CCC, and they must do their
+                                best to become employee of the month—although as the days go by, the surroundings don't
+                                feel
+                                right.</p>
+                            <h2>Unity, 3D game</h2>
+                            <h2>Tech Art, 3D Generalist, UI & UX</h2>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="carousel-btn prev">&#10094;</button>
+                <button class="carousel-btn next">&#10095;</button>
+                <div class="carousel-dots"></div>
             </div>
-            <div id="SocialMedia">
-                <a href="https://www.artstation.com/sarasierra07" target="_blank"><img src="ArtStation.png" width="36"
-                        height="36"></a>
-                <a href="https://www.instagram.com/sarasierra07/" target="_blank"><img src="Insta.png" width="32"
-                        height="32"> </a>
-                <!--<a href="https://linktr.ee/sarasierra07" target="_blank"><img src="LinkTree.png" width="32"
+        </div>
+
+        <div id="blog">
+            <h5> Blog</h5>
+            <p>
+                Coming soon...
+            </p>
+        </div>
+
+        <div id="ColorBarAbajo">
+            <div id="HeaderContainer">
+                <div id="Contactstxt">
+                    <h3>Get in contact with me!</h3>
+                </div>
+                <div id="SocialMedia">
+                    <a href="https://www.artstation.com/sarasierra07" target="_blank"><img src="ArtStation.png"
+                            width="36" height="36"></a>
+                    <a href="https://www.instagram.com/sarasierra07/" target="_blank"><img src="Insta.png" width="32"
+                            height="32"> </a>
+                    <!--<a href="https://linktr.ee/sarasierra07" target="_blank"><img src="LinkTree.png" width="32"
                         height="32"></a>-->
-                <a href="https://www.linkedin.com/in/sarasierra07" target="_blank"><img src="Link.png" width="32"
-                        height="32"></a>
-                <a href="mailto:ssierrar07@gmail.com ?subject=Hello!&body= I came from your website and I'm excited to keep in touch and continue learning together :D"
-                    target="_blank"><img src="Mail.png" width="32" height="32"></a>
+                    <a href="https://www.linkedin.com/in/sarasierra07" target="_blank"><img src="Link.png" width="32"
+                            height="32"></a>
+                    <a href="mailto:ssierrar07@gmail.com ?subject=Hello!&body= I came from your website and I'm excited to keep in touch and continue learning together :D"
+                        target="_blank"><img src="Mail.png" width="32" height="32"></a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!--Color bar shrink on scroll-->
-    <script>
-        const navbar = document.getElementById('ColorBar');
-        let isShrunk = false;
+        <!--Color bar shrink on scroll-->
+        <script>
+            const navbar = document.getElementById('ColorBar');
+            let isShrunk = false;
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 145 && !isShrunk) {
-                navbar.classList.add('shrink');
-                isShrunk = true;
-            } else if (window.scrollY < 30 && isShrunk) {
-                navbar.classList.remove('shrink');
-                isShrunk = false;
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 145 && !isShrunk) {
+                    navbar.classList.add('shrink');
+                    isShrunk = true;
+                } else if (window.scrollY < 30 && isShrunk) {
+                    navbar.classList.remove('shrink');
+                    isShrunk = false;
+                }
+            });
+        </script>
+
+        <!--Carousel sliding-->
+        <script>
+
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prev = document.querySelector('.carousel-btn.prev');
+            const next = document.querySelector('.carousel-btn.next');
+            const dotsContainer = document.querySelector('.carousel-dots');
+
+            let currentIndex = 0;
+
+            // Create dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('span');
+                dot.addEventListener('click', () => {
+                    currentIndex = index;
+                    showImage(currentIndex);
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            function updateDots() {
+                const dots = dotsContainer.querySelectorAll('span');
+                dots.forEach(dot => dot.classList.remove('active'));
+                if (dots[currentIndex]) {
+                    dots[currentIndex].classList.add('active');
+                }
             }
-        });
-    </script>
 
-    <!--Carousel sliding-->
-    <script>
+            function showImage(index) {
+                slides.forEach((slide, i) => {
+                    // Pause any playing video when switching
+                    const video = slide.querySelector('video');
+                    if (video) video.pause();
 
-        const slides = document.querySelectorAll('.carousel-slide');
-        const prev = document.querySelector('.carousel-btn.prev');
-        const next = document.querySelector('.carousel-btn.next');
-        const dotsContainer = document.querySelector('.carousel-dots');
+                    slide.classList.remove('active');
+                });
 
-        let currentIndex = 0;
+                slides[index].classList.add('active');
+                updateDots();
+            }
 
-        // Create dots
-        slides.forEach((_, index) => {
-            const dot = document.createElement('span');
-            dot.addEventListener('click', () => {
-                currentIndex = index;
+            function showNext() {
+                currentIndex = (currentIndex + 1) % slides.length;
                 showImage(currentIndex);
-            });
-            dotsContainer.appendChild(dot);
-        });
-
-        function updateDots() {
-            const dots = dotsContainer.querySelectorAll('span');
-            dots.forEach(dot => dot.classList.remove('active'));
-            if (dots[currentIndex]) {
-                dots[currentIndex].classList.add('active');
             }
-        }
 
-        function showImage(index) {
-            slides.forEach((slide, i) => {
-                // Pause any playing video when switching
-                const video = slide.querySelector('video');
-                if (video) video.pause();
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+                showImage(currentIndex);
+            }
 
-                slide.classList.remove('active');
-            });
+            next.addEventListener('click', showNext);
+            prev.addEventListener('click', showPrev);
 
-            slides[index].classList.add('active');
-            updateDots();
-        }
+            let autoScroll;
 
-        function showNext() {
-            currentIndex = (currentIndex + 1) % slides.length;
+            function startAutoScroll() {
+                autoScroll = setInterval(showNext, 10000);
+            }
+
+            function stopAutoScroll() {
+                clearInterval(autoScroll);
+            }
+
+            const carousel = document.querySelector('.carousel');
+            carousel.addEventListener('mouseenter', stopAutoScroll);
+            carousel.addEventListener('mouseleave', startAutoScroll);
+
+            // Start on load
+            startAutoScroll();
+
+            // Initialize
             showImage(currentIndex);
-        }
+        </script>
 
-        function showPrev() {
-            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-            showImage(currentIndex);
-        }
+        <script>
+            const toggleBtn = document.getElementById('menu-toggle');
+            const mainMenu = document.getElementById('MainMenu');
 
-        next.addEventListener('click', showNext);
-        prev.addEventListener('click', showPrev);
-
-        let autoScroll;
-
-        function startAutoScroll() {
-            autoScroll = setInterval(showNext, 10000);
-        }
-
-        function stopAutoScroll() {
-            clearInterval(autoScroll);
-        }
-
-        const carousel = document.querySelector('.carousel');
-        carousel.addEventListener('mouseenter', stopAutoScroll);
-        carousel.addEventListener('mouseleave', startAutoScroll);
-
-        // Start on load
-        startAutoScroll();
-
-        // Initialize
-        showImage(currentIndex);
-    </script>
-
-    <script>
-        const toggleBtn = document.getElementById('menu-toggle');
-        const mainMenu = document.getElementById('MainMenu');
-
-        toggleBtn.addEventListener('click', () => {
-            mainMenu.classList.toggle('active');
-        });
-        document.querySelectorAll('#MainMenu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mainMenu.classList.remove('active');
+            toggleBtn.addEventListener('click', () => {
+                mainMenu.classList.toggle('active');
             });
-        });
-    </script>
+            document.querySelectorAll('#MainMenu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mainMenu.classList.remove('active');
+                });
+            });
+        </script>
 
 </body>
 
 </html>
-
-
