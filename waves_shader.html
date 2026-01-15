@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sea Waves Shader</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dangrek&family=Knewave&family=Sniglet:wght@400;800&family=Space+Grotesk:wght@700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Bytesized&family=Changa+One:ital@0;1&family=DM+Serif+Text:ital@0;1&family=Dangrek&family=Geologica:wght,CRSV@100..900,0&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&family=Jersey+10&family=Lilita+One&family=Pacifico&family=Platypi:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Sniglet:wght@400;800&family=Space+Grotesk:wght@300..700&family=Titan+One&family=Young+Serif&display=swap"
     rel="stylesheet">
   <link rel="icon" type="icon/png" size="32x32" href="favicon.ico">
 
@@ -16,10 +16,9 @@
     /* FONDO DE LA PAGINA */
     html {
       background-color: #000000;
-      opacity: 1;
-      background-image: linear-gradient(rgba(251, 251, 239, 250), transparent 0.5px), linear-gradient(to right, rgba(251, 251, 239, 250), #000000 0.5px);
-      background-size: 24px 24px;
-      scroll-behavior: smooth;
+      opacity: 1.0;
+      background-image: radial-gradient(#fbfbef 0.3px, #000000 1.0px);
+      background-size: 20px 20px;
     }
 
     /* LETRAS */
@@ -56,80 +55,167 @@
     }
 
     h4 {
-      color: #a5a4ff;
-      font-family: "Dangrek", sans-serif;
-      font-weight: 400;
+      color: #fbfbef;
+      font-family: "Changa One", sans-serif;
+      font-weight: 200;
       font-style: normal;
       font-size: 56px;
-      margin-bottom: -70px;
+      margin-bottom: -45px;
       transition: font-size 0.3s ease;
     }
 
     h5 {
-      color: #a4f1ff;
-      font-family: "Sniglet", system-ui;
+      color: #fbfbef;
+      font-family: "Lilita One", sans-serif;
       font-weight: 400;
       font-style: normal;
-      font-size: 42px;
-      margin-bottom: -10px;
+      font-size: 46px;
+      margin-bottom: -2px;
       transition: font-size 0.3s ease;
     }
 
     h6 {
-      color: #a4f1ff;
-      font-family: "Dangrek", sans-serif;
-      font-weight: 400;
+      color: #fbfbef;
+      font-family: "Lilita One", sans-serif;
+      font-weight: 100;
       font-style: normal;
       font-size: 32px;
-      text-align: center;
+      text-align: justify;
       margin-bottom: -10px;
     }
 
     h7 {
-      color: #ac84c3;
+      color: #fbfbef;
       font-family: "Dangrek", sans-serif;
-      font-weight: 200;
+      font-weight: 300;
       font-style: normal;
-      font-size: 24px;
+      font-size: 28px;
       text-align: center;
       margin-bottom: -10px;
     }
+
     h8 {
       color: #a4f1ff;
-      font-family: "Dangrek", sans-serif;
-      font-weight: 100;
+      font-family: "Google Sans Code", monospace;
+      font-optical-sizing: auto;
+      font-weight: 700;
       font-style: normal;
-      font-size: 22px;
+      font-size: 18px;
       text-align: center;
       margin-bottom: -10px;
     }
 
     p {
-      color: #ac84c3;
-      font-family: "Space Grotesk", sans-serif;
+      color: #fbfbef;
+      font-family: "Google Sans Code", monospace;
       font-optical-sizing: auto;
-      font-weight: 200;
+      font-weight: 400;
       font-style: normal;
       margin-right: 30px;
       margin-left: auto;
-      text-align: left;
+      font-size: 16px;
+      text-align: justify;
     }
 
-    #GeneralTxt {
-      padding-right: 20px;
-      padding-bottom: 20px;
-      margin-left: 17px;
-      margin-right: auto+200px;
+    #GeneralTxtBorder {
+      margin-left: 250px;
+      margin-right: 250px;
+    }
+
+    #twoColumnSquare {
+      box-sizing: border-box;
+      margin-left: 270px;
+      margin-right: 250px;
+      border-radius: 25px;
+      margin-top: 20px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .column {
+      flex: 1;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .left {
+      flex: .75;
+    }
+
+    .rigth {
+      flex: .30;
+    }
+
+    .lefttwo {
+      flex: .33;
+    }
+
+    .rigthtwo {
+      flex: .33;
+    }
+
+    .middle {
+      flex: .33;
+    }
+
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    @media screen and (max-width: 600px) {
+      .row {
+        flex-direction: column;
+        /* Changes flow direction to vertical */
+      }
     }
 
     #CentralMargin {
       display: flex;
       justify-content: center;
+      padding-top: 20px;
     }
 
     #imageborder {
       display: flex;
-      justify-content: center;
+      justify-content: left;
+      width: 100%;
+    }
+
+    /* Slider para comparacion de imagenes */
+    .img-comp-container {
+      position: relative;
+      height: 200px;
+
+    }
+
+    .img-comp-img {
+      border-radius: 10px;
+      position: absolute;
+      width: auto;
+      height: auto;
+      overflow: hidden;
+    }
+
+    .img-comp-img img {
+      display: block;
+
+    }
+
+    .img-comp-slider {
+      position: absolute;
+      z-index: 9;
+      cursor: ew-resize;
+      width: 40px;
+      height: 40px;
+      background-color: #fbfbef;
+      opacity: 0.9;
+      border-radius: 50%;
     }
 
     /* BARRA SUPERIOR */
@@ -143,7 +229,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 20px;
-      border-radius: 15px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
       background-color: #fbfbef;
       transition: all 0.3s ease-in-out;
     }
@@ -183,7 +270,8 @@
     #ColorBarAbajo {
       background-color: #ac84c3;
       display: flex;
-      border-radius: 15px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
       height: 80px;
     }
 
@@ -202,7 +290,84 @@
       align-items: right;
     }
   </style>
-
+  <script>
+    function initComparisons() {
+      var x, i;
+      /*find all elements with an "overlay" class:*/
+      x = document.getElementsByClassName("img-comp-overlay");
+      for (i = 0; i < x.length; i++) {
+        /*once for each "overlay" element:
+        pass the "overlay" element as a parameter when executing the compareImages function:*/
+        compareImages(x[i]);
+      }
+      function compareImages(img) {
+        var slider, img, clicked = 0, w, h;
+        /*get the width and height of the img element*/
+        w = img.offsetWidth;
+        h = img.offsetHeight;
+        /*set the width of the img element to 50%:*/
+        img.style.width = (w / 2) + "px";
+        /*create slider:*/
+        slider = document.createElement("DIV");
+        slider.setAttribute("class", "img-comp-slider");
+        /*insert slider*/
+        img.parentElement.insertBefore(slider, img);
+        /*position the slider in the middle:*/
+        slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+        slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+        /*execute a function when the mouse button is pressed:*/
+        slider.addEventListener("mousedown", slideReady);
+        /*and another function when the mouse button is released:*/
+        window.addEventListener("mouseup", slideFinish);
+        /*or touched (for touch screens:*/
+        slider.addEventListener("touchstart", slideReady);
+        /*and released (for touch screens:*/
+        window.addEventListener("touchend", slideFinish);
+        function slideReady(e) {
+          /*prevent any other actions that may occur when moving over the image:*/
+          e.preventDefault();
+          /*the slider is now clicked and ready to move:*/
+          clicked = 1;
+          /*execute a function when the slider is moved:*/
+          window.addEventListener("mousemove", slideMove);
+          window.addEventListener("touchmove", slideMove);
+        }
+        function slideFinish() {
+          /*the slider is no longer clicked:*/
+          clicked = 0;
+        }
+        function slideMove(e) {
+          var pos;
+          /*if the slider is no longer clicked, exit this function:*/
+          if (clicked == 0) return false;
+          /*get the cursor's x position:*/
+          pos = getCursorPos(e)
+          /*prevent the slider from being positioned outside the image:*/
+          if (pos < 0) pos = 0;
+          if (pos > w) pos = w;
+          /*execute a function that will resize the overlay image according to the cursor:*/
+          slide(pos);
+        }
+        function getCursorPos(e) {
+          var a, x = 0;
+          e = (e.changedTouches) ? e.changedTouches[0] : e;
+          /*get the x positions of the image:*/
+          a = img.getBoundingClientRect();
+          /*calculate the cursor's x coordinate, relative to the image:*/
+          x = e.pageX - a.left;
+          /*consider any page scrolling:*/
+          x = x - window.pageXOffset;
+          return x;
+        }
+        function slide(x) {
+          /*resize the image:*/
+          img.style.width = x + "px";
+          /*position the slider:*/
+          slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+        }
+      }
+    }
+  </script>
 </head>
 
 <!--BARRA SUPERIOR-->
@@ -218,15 +383,21 @@
   </div>
 </div>
 
-<div id="GeneralTxt">
+<div id="GeneralTxtBorder">
   <h4>Sea Waves Shader</h4>
-  <h5>Introduction</h5>
-  <p>Hi there! On this page, I’ll break down part of my process behind the creation of my sea waves shader. While I
+  <h5 style="padding-left: 20px;">Introduction</h5>
+  <hr
+    style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px;">
+  <p style="padding-left: 20px; padding-right: 15px;">Hi there! On this page, I’ll break down part of my process behind
+    the creation of my sea waves shader. While I
     won’t go into full detail, I hope that sharing my thinking process and technical decisions can give you insight into
     how it was built. <br>
     Here are some key details behind this shader:<br>
   <ul
-    style="list-style-type: circle; color: #ac84c3; font-family: Space Grotesk, sans-serif; font-optical-sizing: auto; font-weight: 200; font-style: normal; margin-right: 30px; margin-left: auto;text-align: left;">
+    style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
     <li>To create the waves, I took reference from this article in
       <a href="https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models"
         style="color: inherit" target="_blank">GPU Gems</a>, part of
@@ -239,24 +410,30 @@
     <li>To achieve a stylized look and improve performance, the shader is not set with transparency.</li>
   </ul>
   </p>
-  <p>
+  <p style="padding-left: 20px; padding-right: 15px;">
     Additional note: This breakdown focuses on my experimentation, decision-making process and investigation results,
     rather than a strict instruction set.<br>
-    With that being said, let’s jump into the shader.
+    With that being said, let’s jump into the shader.<br>
   </p>
+
 </div>
 <div id="CentralMargin">
-  <iframe width="60%" height="500" src="https://www.youtube.com/embed/unwhfF73x74" title="Visual Demo Sea Waves Shader"
+  <iframe width="960" height="540" src="https://www.youtube.com/embed/unwhfF73x74" title="Visual Demo Sea Waves Shader"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-<div id="GeneralTxt">
-  <h5>Shader Creation</h5>
-  <p>I will divide this section into the principal elements of the shader:</p>
+<div id="GeneralTxtBorder">
+  <h5 style="padding-left: 20px;">Shader Creation</h5>
+  <hr
+    style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px;">
+  <p style="padding-left: 20px;">I will divide this section into the principal elements of the shader:</p>
   <ul
-    style="list-style-type: circle; color: #ac84c3; font-family: Space Grotesk, sans-serif; font-optical-sizing: auto; font-weight: 200; font-style: normal; margin-right: 30px; margin-left: auto;text-align: left;">
+    style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 600;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
     <li><a href="#sectionVertexAnim" style="color: inherit; text-decoration:none;"> Vertex Animation </a></li>
     <li><a href="#sectionColor" style="color: inherit; text-decoration:none;"> Color Gradient </a></li>
     <li><a href="#sectionRipNor" style="color: inherit; text-decoration:none;"> Ripples Normal </a></li>
@@ -266,75 +443,190 @@
     <li><a href="#sectionFinal" style="color: inherit; text-decoration:none;"> Shader Final Steps </a></li>
   </ul>
 </div>
-<div id="sectionVertexAnim">
-  <div id="GeneralTxt">
-    <h6>Vertex Animation</h6>
-    <p>
+
+<div id="sectionVertexAnim" style="margin-top: -50px;">
+  <div id="GeneralTxtBorder">
+    <h6 style="padding-left: 25px;">Vertex Animation</h6>
+    <p style="padding-left: 25px;">
       For the shader and its desired look, I chose a vertex animation approach in order to give the waves depth and a
-      more physically inspired motion while complementing stylized aesthetic.<br>
+      more physically inspired motion while complementing a stylized aesthetic.<br>
       In this section, I will explain how I animated my plane through the displacement of its vertices.
     </p>
-    <h7>Gerstner Wave</h7>
-    <p>
-      The animation uses a mathematical formula known as the <strong>Gerstner wave</strong> (also called a <strong>trochoidal wave</strong>), which
-      describes a progressive wave of permanent form. On the following image, you can see that its like a modified sine
-      wave with prolonged valleys and with sharper peaks.
-    </p>
-    <div id="imageborder">
-      <a title="Kraaiennest, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
-        href="https://commons.wikimedia.org/wiki/File:Trochoidal_wave.svg"><img width="256" alt="Trochoidal wave"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Trochoidal_wave.svg/256px-Trochoidal_wave.svg.png?20150430214934"></a>
+  </div>
+  <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px;background-color: #fbfbef;">
+    <div class="row">
+      <div class="column left" style="  margin-bottom: -25px;">
+        <h7 style="padding-left: 15px; color: #181818;">Gerstner Wave</h7>
+        <p style="padding-left: 15px;color: #181818;">
+          The animation uses a mathematical formula known as the <strong>Gerstner wave</strong> (also called a
+          <strong>trochoidal wave</strong>), which
+          describes a progressive wave of permanent form. On the following image, you can see that its like a modified
+          sine
+          wave with prolonged valleys and with sharper peaks.
+        </p>
+      </div>
+      <div class="column rigth" style="padding-right: 30px;">
+        <div id="imageborder">
+          <a title="Kraaiennest, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
+            href="https://commons.wikimedia.org/wiki/File:Trochoidal_wave.svg"><img alt="Trochoidal wave"
+              src="Waves.png" style="width: 500px;"></a>
+
+        </div>
+      </div>
     </div>
-    <p>
-      This formula is commonly used in computer graphics to create realistic-looking ocean waves, if you want to take a
-      more in depth look behind the formula, you can check out Nvidia: GPU Gems, to get a better insight on how it works
-      and its different variables.
+    <p style="padding-left: 25px;color: #181818;">
+      This formula is commonly used in computer graphics to create realistic-looking ocean waves, if you want to take
+      a
+      more in depth look behind the formula, you can check out Nvidia: GPU Gems, to get a better insight on how it
+      works
+      and its different variables.<br>
     </p>
-    <h7>Creating a Material Function</h7>
-    <p>
-      So, how do we apply this complex-looking formula in Unreal? Well, through a Material Function that translates the
+  </div>
+  <div id="GeneralTxtBorder">
+    <h6 style="padding-left: 25px; margin-top:30px;">Creating a Material Function</h6>
+    <p style="padding-left: 25px;">
+      So, how do we apply this complex-looking formula in Unreal? Well, through a Material Function that translates
+      the
       mathematical expression into math operators, input nodes, and output nodes.
     </p>
+  </div>
+  <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px;">
     <div id="imageborder">
       <figure>
-        <img src="MaterialFunctionSS.png" alt="Material Function Screenshot">
+        <img src="MaterialFunctionSS.png" style="width: 100%; border-radius: 10px;" alt="Material Function Screenshot">
         <figcaption
-          style="list-style-type: circle; color: #ac84c3; font-family: Space Grotesk, sans-serif; font-optical-sizing: auto; font-weight: 200; font-style: normal; margin-right: 30px; margin-left: auto;text-align: left;">
-          (Yes the image is incredibly blurry but bear with me, I will show you more of each section as we go on)
+          style="list-style-type: circle; color: rgb(158, 158, 158); font-family: Google Sans Code, monospace; font-optical-sizing: auto; font-weight: 400; font-style: normal; margin-right: 30px; margin-left: auto; text-align: center; font-size: 14px; margin-top: 5px;">
+          (Yes the image is very blurry but bear with me, I will show you more of each section as we go)
         </figcaption>
       </figure>
     </div>
-    <p>Here is the formula we will build in Unreal:</p>
-    <div id="imageborder">
-      <img src="GerstnerFormula.png">
-    </div>
-    <h8>Formula Breakdown</h8>
-    <p>Let’s start defining what the letters on the formula stand for (and this is a bit of my research and undestanding of it): </p>
   </div>
-</div>
-
-
-<body>
-  <div id="ColorBarAbajo"> <!--BARRA CONTACTO-->
-    <div id="HeaderContainer">
-      <div id="Contactstxt">
-        <h3>Get in contact with me!</h3>
+  <div id="GeneralTxtBorder">
+    <h7 style="padding-left: 45px;">Formula Breakdown</h7>
+    <p style="padding-left: 45px;">Here is the formula I have built in Unreal:</p>
+    <div id="imageborder" style="padding-left: 45px;">
+      <img src="GerstnerFormula.png" style="border-radius: 10px; width: 40%;">
+    </div>
+    <p style="padding-left: 45px;">Let’s start defining what the letters on the formula stand for (this is a bit of my
+      research and undestanding of it): </p>
+  </div>
+  <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
+    <div class="row">
+      <div class="column left" style="  margin-bottom: -25px;">
+        <h8 style="padding-left: 15px; color: #fbfbef">Q: Steepness of the wave</h8>
+        <p style="padding-left: 15px;color: #fbfbef;">
+          This controls how sharp the wave peaks are. Higher values result in sharper crests, while lower values produce
+          rounder waves.<br>
+          This value typically goes on a range from 0 - 1 (Since going above 1 could cause visual artifacts).
+        </p>
       </div>
-      <div id="SocialMedia">
-        <a href="https://www.artstation.com/sarasierra07" target="_blank"><img src="ArtStation.png" width="36"
-            height="36"></a>
-        <a href="https://www.instagram.com/sarasierra07/" target="_blank"><img src="Insta.png" width="32" height="32">
-        </a>
-        <!--<a href="https://linktr.ee/sarasierra07" target="_blank"><img src="LinkTree.png" width="32"
+      <div class="column rigth" style="padding-right: 1px;">
+        <div id="imageborder">
+          <div class="img-comp-container">
+            <div class="img-comp-img">
+              <img src="Step1.gif" width="300" height="200">
+            </div>
+            <div class="img-comp-img img-comp-overlay">
+              <img src="Step0.gif" width="300" height="200">
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr
+    style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:68%; margin-top: 9px; margin-bottom: 25px; opacity: 50%;">
+  <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
+    <div class="row">
+      <div class="column left" style="  margin-bottom: -25px;">
+        <h8 style="padding-left: 15px; color: #fbfbef">λ: Wavelength</h8>
+        <p style="padding-left: 15px;color: #fbfbef;">
+          This represents the distance between waves, or how much space you will have between waves. The bigger the size
+          the more space there will be between them, meaning that your plane will appear to have less waves.<br><br>
+        </p>
+        <h8 style="padding-left: 15px; color: #fbfbef">W: Angular Frequency</h8>
+        <p style="padding-left: 15px;color: #fbfbef;">
+          Angular frequency helps you understand and personalize better the length of the wave, as it is related through
+          the following formula:<br>
+        </p>
+      </div>
+      <div class="column rigth" style="padding-right: 1px;">
+        <div id="imageborder">
+          <div class="img-comp-container">
+            <div class="img-comp-img">
+              <img src="Short.gif" width="300" height="200">
+            </div>
+            <div class="img-comp-img img-comp-overlay">
+              <img src="Long.gif" width="300" height="200">
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column left" style="  margin-bottom: -25px;">
+        <p style="padding-left: 15px;color: #6b47b8;">
+          {w} = \sqrt{g*k}
+        </p>
+      </div>
+      <div class="column rigth" style="padding-right: 30px;">
+        <div id="imageborder">
+          <a title="Kraaiennest, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
+            href="https://commons.wikimedia.org/wiki/File:Trochoidal_wave.svg"><img alt="Trochoidal wave"
+              src="Waves.png" style="width: 500px;"></a>
+
+        </div>
+      </div>
+    </div>
+    <p style="padding-left: 25px;">
+      <strong>Where:</strong> <br>
+    <ul
+      style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+      <li><strong>g: Gravity</strong> (you can expose this variable if you have different variables; in my case I will
+        stick to Earth´s gravity: 9.81)</li>
+      <li><strong>λ: Wavelength</strong> (this is the variable we will be exposing)</li>
+      <li><strong>k: Wave number</strong>, which could be replaced with 2π/λ<br>
+        (Why 2π? Not to get into its complex calculations, but overall it is a unit used to calculate 1 cycle on the
+        wave phase (1 cycle as 360° = 2π ); if you want to check more on this you can search for more information on
+        “sinusoidal waves” and their phases).</li>
+    </ul>
+    </p>
+  </div>
+
+
+  <script>
+    initComparisons();
+  </script>
+
+  <body>
+    <div id="ColorBarAbajo"> <!--BARRA CONTACTO-->
+      <div id="HeaderContainer">
+        <div id="Contactstxt">
+          <h3>Get in contact with me!</h3>
+        </div>
+        <div id="SocialMedia">
+          <a href="https://www.artstation.com/sarasierra07" target="_blank"><img src="ArtStation.png" width="36"
+              height="36"></a>
+          <a href="https://www.instagram.com/sarasierra07/" target="_blank"><img src="Insta.png" width="32" height="32">
+          </a>
+          <!--<a href="https://linktr.ee/sarasierra07" target="_blank"><img src="LinkTree.png" width="32"
                         height="32"></a>-->
-        <a href="https://www.linkedin.com/in/sarasierra07" target="_blank"><img src="Link.png" width="32"
-            height="32"></a>
-        <a href="mailto:ssierrar07@gmail.com ?subject=Hello!&body= I came from your website and I'm excited to keep in touch and continue learning together :D"
-          target="_blank"><img src="Mail.png" width="32" height="32"></a>
+          <a href="https://www.linkedin.com/in/sarasierra07" target="_blank"><img src="Link.png" width="32"
+              height="32"></a>
+          <a href="mailto:ssierrar07@gmail.com ?subject=Hello!&body= I came from your website and I'm excited to keep in touch and continue learning together :D"
+            target="_blank"><img src="Mail.png" width="32" height="32"></a>
+        </div>
       </div>
     </div>
-  </div>
 
-</body>
+  </body>
 
 </html>
