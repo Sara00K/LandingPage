@@ -32,11 +32,11 @@
       padding: 0;
     }
 
-    /* COSAS PARA EL MENU Y RESPONSIVIDAD */
+    /* COSAS PARA EL MENU Y RESPONSIVIDAD
     #MainContent {
-      transition: margin-right 0.5s ease;
-      transition: margin-left 0.5s ease;
-    }
+      transition: margin-right 0.3s ease;
+      transition: margin-left 0.3s ease;
+    }*/
 
     /* Cuando el menu se active*/
     .menu-open #MainContent {
@@ -187,7 +187,8 @@
     }
 
     /*Cosas para los headers y navegacion*/
-    #shadercreation, #optimizationsection,
+    #shadercreation,
+    #optimizationsection,
     #ending,
     #sectionVertexAnim,
     #sectionColor,
@@ -354,13 +355,20 @@
 
     @media (max-width: 768px) {
 
-      /* En móvil NO desplazamos contenido */
-      .menu-open #MainContent {
-        margin-right: 0;
+      /* Menu starts CLOSED on mobile */
+      #HamburgerMenu {
+        right: -120%;
+        width: 100%;
       }
 
-      #HamburgerMenu {
-        width: 100%;
+      /* Only opens when active */
+      #HamburgerMenu.active {
+        right: 0;
+      }
+
+      /* Content should NOT shift on mobile */
+      .menu-open #MainContent {
+        margin-right: 0;
       }
     }
 
@@ -1774,7 +1782,7 @@
         the
         value of experimentation, iteration, and optimization. If you’re learning, experimenting, or working to recreate
         something similar, feel free to reach out through
-        <a href="https://www.linkedin.com/in/sarasierra07" style="color: inherit" target="_blank">linkedin</a> or my contact's
+        <a href="www.linkedin.com/in/sarasierra07" style="color: inherit" target="_blank">linkedin</a> or my contact's
         below with any questions or thoughts! <br><br>
 
         Let’s keep creating, and see you in the next one ₊⊹
@@ -1794,50 +1802,43 @@
 <script>
   const hamburger = document.getElementById("Hamburger");
   const menu = document.getElementById("HamburgerMenu");
-  const menuItems = document.querySelectorAll(".menuItem");
 
-  function openMenu() {
-    menu.classList.add("active");
-    hamburger.classList.add("active");
-    document.body.classList.add("menu-open");
-  }
+  // ---- ESTADO INICIAL (menu abierto)
+  menu.classList.add("active");
+  hamburger.classList.add("active");
+  document.body.classList.add("menu-open");
 
-  // Toggle menu
+  // ---- Toggle SOLO con la X
   hamburger.addEventListener("click", (e) => {
     e.stopPropagation();
-    menu.classList.contains("active") ? closeMenu() : openMenu();
-  });
 
-  // Close when clicking a menu item
-  menuItems.forEach(item => {
-    item.addEventListener("click", () => {
+    const isOpen = menu.classList.contains("active");
+
+    if (isOpen) {
       menu.classList.remove("active");
-    });
-  });
-
-  // Close when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
-      menu.classList.remove("active");
-    }
-  });
-  function closeMenu() {
-    menu.classList.remove("active");
-    hamburger.classList.remove("active");
-    document.body.classList.remove("menu-open");
-  }
-
-  menuItems.forEach(item => {
-    item.addEventListener("click", closeMenu);
-  });
-
-  document.addEventListener("click", (e) => {
-    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
-      closeMenu();
+      hamburger.classList.remove("active");
+      document.body.classList.remove("menu-open");
+    } else {
+      menu.classList.add("active");
+      hamburger.classList.add("active");
+      document.body.classList.add("menu-open");
     }
   });
 </script>
-
+  <!--COSAS DE MENU PARA MOVIL-->
+  <script>
+    const isMobile = window.innerWidth <= 768;
+    
+    if (!isMobile) {
+      menu.classList.add("active");
+      hamburger.classList.add("active");
+      document.body.classList.add("menu-open");
+    }else{
+      menu.classList.remove("active");
+      hamburger.classList.remove("active");
+      document.body.classList.remove("menu-open");
+    }
+  </script>
 
 <!--BARRA DE ABAJO-->
 
@@ -1865,5 +1866,3 @@
 </body>
 
 </html>
-
-
