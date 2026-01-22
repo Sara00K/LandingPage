@@ -19,6 +19,7 @@
       opacity: 1.0;
       background-image: radial-gradient(#fbfbef86 0.005px, #000000 1.0px);
       background-size: 20px 20px;
+      scroll-behavior: smooth;
     }
 
     :root {
@@ -31,9 +32,21 @@
       padding: 0;
     }
 
+    /* COSAS PARA EL MENU Y RESPONSIVIDAD */
+    #MainContent {
+      transition: margin-right 0.3s ease;
+      transition: margin-left 0.3s ease;
+    }
+
+    /* Cuando el menu se active*/
+    .menu-open #MainContent {
+      margin-right: 150px;
+      margin-left: -180px;
+    }
+
     /* LETRAS */
     h1 {
-      color: #ac84c3;
+      color: #323564;
       font-family: "Dangrek", sans-serif;
       font-weight: 400;
       font-style: normal;
@@ -44,7 +57,7 @@
     }
 
     h2 {
-      color: #ff639f;
+      color: #ac84c3;
       font-family: "Sniglet", system-ui;
       font-weight: 400;
       font-style: normal;
@@ -175,7 +188,6 @@
 
     /*Cosas para los headers y navegacion*/
     #shadercreation,
-    #optimizationsection,
     #ending,
     #sectionVertexAnim,
     #sectionColor,
@@ -187,6 +199,10 @@
     #shadercreation {
       scroll-margin-top: 125px;
       /* adjust to match your sticky header height */
+    }
+
+    #optimizationsection {
+      scroll-margin-top: 0px;
     }
 
     #introduction {
@@ -275,7 +291,7 @@
     #Hamburger span {
       height: 3.5px;
       width: 100%;
-      background-color: #717cac;
+      background-color: #323564;
       border-radius: 2px;
       transition: all 0.3s ease;
     }
@@ -312,7 +328,7 @@
       margin-right: 5px;
       margin-left: auto;
       text-decoration: none;
-      color: #717cac;
+      color: #323564;
       font-size: 20px;
       transition: opacity 0.2s ease;
     }
@@ -321,10 +337,35 @@
       opacity: 0.6;
     }
 
+    /* HAMBURGER ANIMATION */
+    #Hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 8px);
+    }
+
+    #Hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    #Hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -10px);
+    }
+
     #HeaderContainer {
       display: flex;
       align-items: center;
       padding: 18px;
+    }
+
+    @media (max-width: 768px) {
+
+      /* En móvil NO desplazamos contenido */
+      .menu-open #MainContent {
+        margin-right: 0;
+      }
+
+      #HamburgerMenu {
+        width: 100%;
+      }
     }
 
     #Logo img {
@@ -356,9 +397,11 @@
     #ColorBarAbajo {
       bottom: 0;
       width: 100%;
-      background-color: #ac84c3;
+      background-color: #323564;
       display: flex;
       height: 80px;
+      position: relative;
+      z-index: 1003;
     }
 
     #Contactstxt {
@@ -492,1215 +535,1281 @@
   </div>
 </div>
 
-<!--INTRODUCTION-->
-<div id="GeneralTxtBorder" style="margin-top: 150px;">
-  <h4>Sea Waves Shader</h4>
-  <div id="introduction">
-    <h5 style="padding-left: 20px;">Introduction</h5>
-    <hr
-      style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px;">
-    <p style="padding-left: 20px; padding-right: 15px;">Hi there! On this page, I’ll break down part of my process
-      behind
-      the creation of my sea waves shader. While I
-      won’t go into full detail, I hope that sharing my thinking process and technical decisions can give you insight
-      into
-      how it was built. <br>
-      Here are some key details behind this shader:<br>
-    <ul
-      style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+<div id="MainContent">
+  <!--INTRODUCTION-->
+  <div id="GeneralTxtBorder" style="margin-top: 150px;">
+    <h4>Sea Waves Shader</h4>
+    <div id="introduction">
+      <h5 style="padding-left: 20px;">Introduction</h5>
+      <hr
+        style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px;">
+      <p style="padding-left: 20px; padding-right: 15px;">Hi there! On this page, I’ll break down part of my process
+        behind
+        the creation of my sea waves shader. While I
+        won’t go into full detail, I hope that sharing my thinking process and technical decisions can give you insight
+        into
+        how it was built. <br>
+        Here are some key details behind this shader:<br>
+      <ul
+        style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-      <li>To create the waves, I took reference from this article in
-        <a href="https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models"
-          style="color: inherit" target="_blank">GPU Gems</a>, part of
-        <a href="https://youtu.be/dXlzMScf584?list=PL78XDi0TS4lHBWhZJNOrslnkFWHwE67ak" style="color: inherit"
-          target="_blank">Ben Cloward’s water tutorials</a>, and
-        <a href="https://80.lv/articles/tutorial-ocean-shader-with-gerstner-waves" style="color: inherit"
-          target="_blank">Haily Williams’ Ocean Shader Breakdown.</a>
-      </li>
-      <li>This shader was developed using the Material Editor in Unreal Engine 5.4.</li>
-      <li>To achieve a stylized look and improve performance, the shader is not set with transparency.</li>
-    </ul>
-    </p>
-    <p style="padding-left: 20px; padding-right: 15px;">
-      Additional note: This breakdown focuses on my experimentation, decision-making process and investigation results,
-      rather than a strict instruction set.<br>
-      With that being said, let’s jump into the shader.<br>
-    </p>
-    <div id="CentralMargin">
-      <iframe width="960" height="540" src="https://www.youtube.com/embed/unwhfF73x74"
-        title="Visual Demo Sea Waves Shader" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <li>To create the waves, I took reference from this article in
+          <a href="https://developer.nvidia.com/gpugems/gpugems/part-i-natural-effects/chapter-1-effective-water-simulation-physical-models"
+            style="color: inherit" target="_blank">GPU Gems</a>, part of
+          <a href="https://youtu.be/dXlzMScf584?list=PL78XDi0TS4lHBWhZJNOrslnkFWHwE67ak" style="color: inherit"
+            target="_blank">Ben Cloward’s water tutorials</a>, and
+          <a href="https://80.lv/articles/tutorial-ocean-shader-with-gerstner-waves" style="color: inherit"
+            target="_blank">Haily Williams’ Ocean Shader Breakdown.</a>
+        </li>
+        <li>This shader was developed using the Material Editor in Unreal Engine 5.4.</li>
+        <li>To achieve a stylized look and improve performance, the shader is not set with transparency.</li>
+      </ul>
+      </p>
+      <p style="padding-left: 20px; padding-right: 15px;">
+        Additional note: This breakdown focuses on my experimentation, decision-making process and investigation
+        results,
+        rather than a strict instruction set.<br>
+        With that being said, let’s jump into the shader.<br>
+      </p>
+      <div id="CentralMargin">
+        <iframe width="960" height="540" src="https://www.youtube.com/embed/unwhfF73x74"
+          title="Visual Demo Sea Waves Shader" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
-</div>
 
-<!--SHADER CREATION-->
-<div id="shadercreation">
-  <div id="GeneralTxtBorder">
-    <h5 style="padding-left: 20px;">Shader Creation</h5>
-    <hr
-      style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px; margin-left: auto; margin-right: auto;">
-    <p style="padding-left: 20px;">I will divide this section into the principal elements of the shader:</p>
-    <ul
-      style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+  <!--SHADER CREATION-->
+  <div id="shadercreation">
+    <div id="GeneralTxtBorder">
+      <h5 style="padding-left: 20px;">Shader Creation</h5>
+      <hr
+        style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px; margin-left: auto; margin-right: auto;">
+      <p style="padding-left: 20px;">I will divide this section into the principal elements of the shader:</p>
+      <ul
+        style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 600;
       font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-      <li><a href="#sectionVertexAnim" style="color: inherit; text-decoration:none;"> Vertex Animation </a></li>
-      <li><a href="#sectionColor" style="color: inherit; text-decoration:none;"> Color Gradient </a></li>
-      <li><a href="#sectionRipNor" style="color: inherit; text-decoration:none;"> Ripples Normal </a></li>
-      <li><a href="#sectionRipEm" style="color: inherit; text-decoration:none;"> Ripples Emissive </a></li>
-      <li><a href="#sectionFoam" style="color: inherit; text-decoration:none;"> Objects Foam </a></li>
-      <li><a href="#sectionPlayer" style="color: inherit; text-decoration:none;"> Player Interaction </a></li>
-      <li><a href="#sectionFinal" style="color: inherit; text-decoration:none;"> Shader Final Steps </a></li>
-    </ul>
-  </div>
+        <li><a href="#sectionVertexAnim" style="color: inherit; text-decoration:none;"> Vertex Animation </a></li>
+        <li><a href="#sectionColor" style="color: inherit; text-decoration:none;"> Color Gradient </a></li>
+        <li><a href="#sectionRipNor" style="color: inherit; text-decoration:none;"> Ripples Normal </a></li>
+        <li><a href="#sectionRipEm" style="color: inherit; text-decoration:none;"> Ripples Emissive </a></li>
+        <li><a href="#sectionFoam" style="color: inherit; text-decoration:none;"> Objects Foam </a></li>
+        <li><a href="#sectionPlayer" style="color: inherit; text-decoration:none;"> Player Interaction </a></li>
+        <li><a href="#sectionFinal" style="color: inherit; text-decoration:none;"> Shader Final Steps </a></li>
+      </ul>
+    </div>
 
-  <!--VERTEX ANIM SECTION-->
-  <div id="sectionVertexAnim" style="margin-top: -50px;">
-    <div id="GeneralTxtBorder">
-      <h6 style="padding-left: 25px;">Vertex Animation</h6>
-      <p style="padding-left: 25px;">
-        For the shader and its desired look, I chose a vertex animation approach in order to give the waves depth and a
-        more physically inspired motion while complementing a stylized aesthetic.<br>
-        In this section, I will explain how I animated my plane through the displacement of its vertices.
-      </p>
-    </div>
-    <!--Gerstner Waves-->
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px;background-color: #fbfbef;">
-      <div class="row">
-        <div class="column left" style="  margin-bottom: -25px;">
-          <h7 style="padding-left: 15px; color: #181818;">Gerstner Wave</h7>
-          <p style="padding-left: 15px;color: #181818;">
-            The animation uses a mathematical formula known as the <strong>Gerstner wave</strong> (also called a
-            <strong>trochoidal wave</strong>), which
-            describes a progressive wave of permanent form. On the following image, you can see that its like a modified
-            sine
-            wave with prolonged valleys and with sharper peaks.
-          </p>
-        </div>
-        <div class="column rigth" style="padding-right: 30px;">
-          <div id="imageborder">
-            <a title="Kraaiennest, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
-              href="https://commons.wikimedia.org/wiki/File:Trochoidal_wave.svg"><img alt="Trochoidal wave"
-                src="SeaWavesResources/Waves.png" style="width: 500px;"></a>
-
-          </div>
-        </div>
+    <!--VERTEX ANIM SECTION-->
+    <div id="sectionVertexAnim" style="margin-top: -50px;">
+      <div id="GeneralTxtBorder">
+        <h6 style="padding-left: 25px;">Vertex Animation</h6>
+        <p style="padding-left: 25px;">
+          For the shader and its desired look, I chose a vertex animation approach in order to give the waves depth and
+          a
+          more physically inspired motion while complementing a stylized aesthetic.<br>
+          In this section, I will explain how I animated my plane through the displacement of its vertices.
+        </p>
       </div>
-      <p style="padding-left: 25px;color: #181818;">
-        This formula is commonly used in computer graphics to create realistic-looking ocean waves, if you want to take
-        a
-        more in depth look behind the formula, you can check out Nvidia: GPU Gems, to get a better insight on how it
-        works
-        and its different variables.<br>
-      </p>
-    </div>
-    <!--Creating the function-->
-    <div id="GeneralTxtBorder">
-      <h6 style="padding-left: 25px; margin-top:30px;">Creating a Material Function</h6>
-      <p style="padding-left: 25px;">
-        So, how do we apply this complex-looking formula in Unreal? Well, through a Material Function that translates
-        the
-        mathematical expression into math operators, input nodes, and output nodes.
-      </p>
-    </div>
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px;">
-      <div id="imageborder">
-        <figure>
-          <img src="SeaWavesResources/MaterialFunctionSS.png" style="width: 100%; border-radius: 10px;"
-            alt="Material Function Screenshot">
-          <figcaption
-            style="list-style-type: circle; color: rgb(158, 158, 158); font-family: Google Sans Code, monospace; font-optical-sizing: auto; font-weight: 400; font-style: normal; margin-right: 30px; margin-left: auto; text-align: center; font-size: 14px; margin-top: 5px;">
-            (Yes the image is very blurry but bear with me, I will show you more of each section as we go)
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-    <div id="GeneralTxtBorder">
-      <h7 style="padding-left: 45px;">Formula Breakdown</h7>
-      <p style="padding-left: 45px;">Here is the Gerstner formula we will build in Unreal:</p>
-      <div id="imageborder" style="padding-left: 45px;">
-        <img src="SeaWavesResources/GerstnerFormula.png" style="border-radius: 10px; width: 40%;">
-      </div>
-      <p style="padding-left: 45px;">Let’s start defining what the letters on the formula stand for (this is a bit of my
-        research and undestanding of it): </p>
-    </div>
-    <!--Steepness-->
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
-      <div class="row">
-        <div class="column left" style="  margin-bottom: -25px;">
-          <h8 style="padding-left: 15px; color: #fbfbef">Q: Steepness of the wave</h8>
-          <p style="padding-left: 15px;color: #fbfbef;">
-            This controls how sharp the wave peaks are. Higher values result in sharper crests, while lower values
-            produce
-            rounder waves.<br>
-            This value typically goes on a range from 0 - 1 (Since going above 1 could cause visual artifacts).
-          </p>
-        </div>
-        <div class="column rigth" style="padding-right: 1px;">
-          <div id="imageborder">
-            <div class="img-comp-container">
-              <div class="img-comp-img">
-                <img src="SeaWavesResources/Step1.gif" width="300" height="200">
-              </div>
-              <div class="img-comp-img img-comp-overlay">
-                <img src="SeaWavesResources/Step0.gif" width="300" height="200">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <hr
-      style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; margin-left: auto; margin-right: auto;">
-    <!--Wavelength + Angular Frequency-->
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
-      <div class="row">
-        <div class="column left" style="  margin-bottom: -25px;">
-          <h8 style="padding-left: 15px; color: #fbfbef">λ: Wavelength</h8>
-          <p style="padding-left: 15px;color: #fbfbef;">
-            This represents the distance between waves, or how much space you will have between waves. The bigger the
-            size
-            the more space there will be between them, meaning that your plane will appear to have less waves.<br><br>
-          </p>
-          <!--Angular Frequency-->
-          <h8 style="padding-left: 15px; color: #fbfbef">W: Angular Frequency</h8>
-          <p style="padding-left: 15px;color: #fbfbef;">
-            Angular frequency helps you understand and personalize better the length of the wave, as it is related
-            through
-            the following formula:<br>
-          </p>
-        </div>
-        <div class="column rigth" style="padding-right: 1px;">
-          <div id="imageborder">
-            <div class="img-comp-container">
-              <div class="img-comp-img">
-                <img src="SeaWavesResources/Short.gif" width="300" height="200">
-              </div>
-              <div class="img-comp-img img-comp-overlay">
-                <img src="SeaWavesResources/Long.gif" width="300" height="200">
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <div id="twoColumnSquare"
-        style="padding-bottom: 15px; padding-top: 15px;background-color: #fbfbef; margin-bottom: -40px;">
+      <!--Gerstner Waves-->
+      <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px;background-color: #fbfbef;">
         <div class="row">
-          <div class="column" style="margin-bottom: -40px; margin-top: -20px; margin-left: 20px;">
-            <p style="color: #181818;">
-              <br>
-              <math display="block">
-                <mrow>
-                  <mi>w</mi>
-                  <mo>=</mo>
-                  <msqrt>
-                    <mrow>
-                      <mn>g</mn>
-                      <mo>⁢*</mo>
-                      <mi>k</mi>
-                  </msqrt>
-                </mrow>
-              </math>
+          <div class="column left" style="  margin-bottom: -25px;">
+            <h7 style="padding-left: 15px; color: #323564;">Gerstner Wave</h7>
+            <p style="padding-left: 15px;color: #323564;">
+              The animation uses a mathematical formula known as the <strong>Gerstner wave</strong> (also called a
+              <strong>trochoidal wave</strong>), which
+              describes a progressive wave of permanent form. On the following image, you can see that its like a
+              modified
+              sine
+              wave with prolonged valleys and with sharper peaks.
             </p>
           </div>
-          <div class="column" style="margin-bottom: -40px; margin-top: -20px;">
-            <p style="color: #181818;">
-              <br>
-              or
+          <div class="column rigth" style="padding-right: 30px;">
+            <div id="imageborder">
+              <a title="Kraaiennest, CC BY-SA 4.0 &lt;https://creativecommons.org/licenses/by-sa/4.0&gt;, via Wikimedia Commons"
+                href="https://commons.wikimedia.org/wiki/File:Trochoidal_wave.svg"><img alt="Trochoidal wave"
+                  src="SeaWavesResources/Waves.png" style="width: 500px;"></a>
+
+            </div>
+          </div>
+        </div>
+        <p style="padding-left: 25px;color: #323564;">
+          This formula is commonly used in computer graphics to create realistic-looking ocean waves, if you want to
+          take
+          a
+          more in depth look behind the formula, you can check out Nvidia: GPU Gems, to get a better insight on how it
+          works
+          and its different variables.<br>
+        </p>
+      </div>
+      <!--Creating the function-->
+      <div id="GeneralTxtBorder">
+        <h6 style="padding-left: 25px; margin-top:30px;">Creating a Material Function</h6>
+        <p style="padding-left: 25px;">
+          So, how do we apply this complex-looking formula in Unreal? Well, through a Material Function that translates
+          the
+          mathematical expression into math operators, input nodes, and output nodes.
+        </p>
+      </div>
+      <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px;">
+        <div id="imageborder">
+          <figure>
+            <img src="SeaWavesResources/MaterialFunctionSS.png" style="width: 100%; border-radius: 10px;"
+              alt="Material Function Screenshot">
+            <figcaption
+              style="list-style-type: circle; color: rgb(158, 158, 158); font-family: Google Sans Code, monospace; font-optical-sizing: auto; font-weight: 400; font-style: normal; margin-right: 30px; margin-left: auto; text-align: center; font-size: 14px; margin-top: 5px;">
+              (Yes the image is very blurry but bear with me, I will show you more of each section as we go)
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+      <div id="GeneralTxtBorder">
+        <h7 style="padding-left: 45px;">Formula Breakdown</h7>
+        <p style="padding-left: 45px;">Here is the Gerstner formula we will build in Unreal:</p>
+        <div id="imageborder" style="padding-left: 45px;">
+          <img src="SeaWavesResources/GerstnerFormula.png" style="border-radius: 10px; width: 40%;">
+        </div>
+        <p style="padding-left: 45px;">Let’s start defining what the letters on the formula stand for (this is a bit of
+          my
+          research and undestanding of it): </p>
+      </div>
+      <!--Steepness-->
+      <div id="twoColumnSquare"
+        style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
+        <div class="row">
+          <div class="column left" style="  margin-bottom: -25px;">
+            <h8 style="padding-left: 15px; color: #fbfbef">Q: Steepness of the wave</h8>
+            <p style="padding-left: 15px;color: #fbfbef;">
+              This controls how sharp the wave peaks are. Higher values result in sharper crests, while lower values
+              produce
+              rounder waves.<br>
+              This value typically goes on a range from 0 - 1 (Since going above 1 could cause visual artifacts).
             </p>
           </div>
-          <div class="column" style="margin-bottom: -40px; margin-top: -20px; margin-right: 5px;">
-            <p style="color: #181818;">
-              <math display="block">
-                <mrow>
-                  <mi>w</mi>
-                  <mo>=</mo>
-                  <msqrt>
-                    <mrow>
-                      <mn>g</mn>
-                      <mo>⁢*</mo>
-                      <mfrac>
-                        <mrow>
-                          <mo>2</mo>
-                          <mi>π</mi>
-                        </mrow>
-                        <mrow>
-                          <mo>λ</mo>
-                        </mrow>
-                      </mfrac>
-                  </msqrt>
-                </mrow>
-              </math>
-            </p>
+          <div class="column rigth" style="padding-right: 1px;">
+            <div id="imageborder">
+              <div class="img-comp-container">
+                <div class="img-comp-img">
+                  <img src="SeaWavesResources/Step1.gif" width="300" height="200">
+                </div>
+                <div class="img-comp-img img-comp-overlay">
+                  <img src="SeaWavesResources/Step0.gif" width="300" height="200">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!--Angular Frequency Formula-->
-    <div id="twoColumnSquare" style="padding-bottom: 15px;">
-      <div class="row">
-        <div class="column" style="  margin-bottom: -25px; flex: .90; margin-left: -10px; margin-right: -100px;">
-          <p style="padding-left: 25px;">
-            <strong>Where:</strong> <br>
-          <ul
-            style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      <hr
+        style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; margin-left: auto; margin-right: auto;">
+      <!--Wavelength + Angular Frequency-->
+      <div id="twoColumnSquare"
+        style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
+        <div class="row">
+          <div class="column left" style="  margin-bottom: -25px;">
+            <h8 style="padding-left: 15px; color: #fbfbef">λ: Wavelength</h8>
+            <p style="padding-left: 15px;color: #fbfbef;">
+              This represents the distance between waves, or how much space you will have between waves. The bigger the
+              size
+              the more space there will be between them, meaning that your plane will appear to have less waves.<br><br>
+            </p>
+            <!--Angular Frequency-->
+            <h8 style="padding-left: 15px; color: #fbfbef">W: Angular Frequency</h8>
+            <p style="padding-left: 15px;color: #fbfbef;">
+              Angular frequency helps you understand and personalize better the length of the wave, as it is related
+              through
+              the following formula:<br>
+            </p>
+          </div>
+          <div class="column rigth" style="padding-right: 1px;">
+            <div id="imageborder">
+              <div class="img-comp-container">
+                <div class="img-comp-img">
+                  <img src="SeaWavesResources/Short.gif" width="300" height="200">
+                </div>
+                <div class="img-comp-img img-comp-overlay">
+                  <img src="SeaWavesResources/Long.gif" width="300" height="200">
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div id="twoColumnSquare"
+          style="padding-bottom: 15px; padding-top: 15px;background-color: #fbfbef; margin-bottom: -40px;">
+          <div class="row">
+            <div class="column" style="margin-bottom: -40px; margin-top: -20px; margin-left: 20px;">
+              <p style="color: #323564;">
+                <br>
+                <math display="block">
+                  <mrow>
+                    <mi>w</mi>
+                    <mo>=</mo>
+                    <msqrt>
+                      <mrow>
+                        <mn>g</mn>
+                        <mo>⁢*</mo>
+                        <mi>k</mi>
+                    </msqrt>
+                  </mrow>
+                </math>
+              </p>
+            </div>
+            <div class="column" style="margin-bottom: -40px; margin-top: -20px;">
+              <p style="color: #323564;">
+                <br>
+                or
+              </p>
+            </div>
+            <div class="column" style="margin-bottom: -40px; margin-top: -20px; margin-right: 5px;">
+              <p style="color: #323564;">
+                <math display="block">
+                  <mrow>
+                    <mi>w</mi>
+                    <mo>=</mo>
+                    <msqrt>
+                      <mrow>
+                        <mn>g</mn>
+                        <mo>⁢*</mo>
+                        <mfrac>
+                          <mrow>
+                            <mo>2</mo>
+                            <mi>π</mi>
+                          </mrow>
+                          <mrow>
+                            <mo>λ</mo>
+                          </mrow>
+                        </mfrac>
+                    </msqrt>
+                  </mrow>
+                </math>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Angular Frequency Formula-->
+      <div id="twoColumnSquare" style="padding-bottom: 15px;">
+        <div class="row">
+          <div class="column" style="  margin-bottom: -25px; flex: .90; margin-left: -10px; margin-right: -100px;">
+            <p style="padding-left: 25px;">
+              <strong>Where:</strong> <br>
+            <ul
+              style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-            <li><strong>g: Gravity</strong> (you can expose this variable if you have different variables; in my case I
-              will
-              stick to Earth´s gravity: 9.81)</li>
-            <li><strong>λ: Wavelength</strong> (this is the variable we will be exposing)</li>
-            <li><strong>k: Wave number</strong>, which could be replaced with 2π/λ<br>
-              (Why 2π? Not to get into its complex calculations, but overall it is a unit used to calculate 1 cycle on
-              the
-              wave phase (1 cycle as 360° = 2π ); if you want to check more on this you can search for more information
-              on
-              “sinusoidal waves” and their phases).</li>
-          </ul>
-          </p>
-        </div>
-        <div class="column" style="padding-right: 30px; flex: .05; margin-right: -50px; margin-top: 40px;">
-          <div id="imageborder">
-            <a title="Chetvorno, CC0, via Wikimedia Commons"
-              href="https://commons.wikimedia.org/wiki/File:Sine_and_cosine_animation.gif"><img
-                alt="Animation showing how the sine and cosine are defined"
-                src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Sine_and_cosine_animation.gif?20140527031028"
-                style="width: 256px; border-radius: 10px;"></a>
+              <li><strong>g: Gravity</strong> (you can expose this variable if you have different variables; in my case
+                I
+                will
+                stick to Earth´s gravity: 9.81)</li>
+              <li><strong>λ: Wavelength</strong> (this is the variable we will be exposing)</li>
+              <li><strong>k: Wave number</strong>, which could be replaced with 2π/λ<br>
+                (Why 2π? Not to get into its complex calculations, but overall it is a unit used to calculate 1 cycle on
+                the
+                wave phase (1 cycle as 360° = 2π ); if you want to check more on this you can search for more
+                information
+                on
+                “sinusoidal waves” and their phases).</li>
+            </ul>
+            </p>
+          </div>
+          <div class="column" style="padding-right: 30px; flex: .05; margin-right: -50px; margin-top: 40px;">
+            <div id="imageborder">
+              <a title="Chetvorno, CC0, via Wikimedia Commons"
+                href="https://commons.wikimedia.org/wiki/File:Sine_and_cosine_animation.gif"><img
+                  alt="Animation showing how the sine and cosine are defined"
+                  src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Sine_and_cosine_animation.gif?20140527031028"
+                  style="width: 256px; border-radius: 10px;"></a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <hr
-      style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; margin-left: auto; margin-right: auto;">
-    <!--Amplitude-->
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
-      <div class="row">
-        <div class="column" style="  margin-bottom: -25px; flex: .9;">
-          <h8 style="padding-left: 15px; color: #fbfbef">A: Amplitude</h8>
-          <p style="padding-left: 15px;color: #fbfbef;">
-            A.k.a de height of your wave.<br>
-          </p>
-        </div>
-        <div class="column" style="padding-right: 1px; flex: .1; margin-right: -50px;">
-          <div id="imageborder">
-            <img src="SeaWavesResources/amplitude.gif" width="300" height="200" style="border-radius: 10px;">
+      <hr
+        style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; margin-left: auto; margin-right: auto;">
+      <!--Amplitude-->
+      <div id="twoColumnSquare"
+        style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
+        <div class="row">
+          <div class="column" style="  margin-bottom: -25px; flex: .9;">
+            <h8 style="padding-left: 15px; color: #fbfbef">A: Amplitude</h8>
+            <p style="padding-left: 15px;color: #fbfbef;">
+              A.k.a de height of your wave.<br>
+            </p>
+          </div>
+          <div class="column" style="padding-right: 1px; flex: .1; margin-right: -50px;">
+            <div id="imageborder">
+              <img src="SeaWavesResources/amplitude.gif" width="300" height="200" style="border-radius: 10px;">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <hr style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; ">
-    <!--Direction-->
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
-      <h8 style="padding-left: 15px; color: #fbfbef">D: Direction</h8>
-      <p style="padding-left: 15px;color: #fbfbef;">
-        This controls where your waves will be moving to.<br>
-        The value for this is a Vector 3, although z value is not really used.
-      </p>
-    </div>
-    <hr style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; ">
-    <!--Phase Offset-->
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
-      <h8 style="padding-left: 15px; color: #fbfbef">ϕ: Phase Offset</h8>
-      <p style="padding-left: 15px;color: #fbfbef;">
-        Controls the speed movement in between your waves.<br>
-      </p>
-    </div>
-    <hr style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; ">
-    <!--Time-->
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
-      <h8 style="padding-left: 15px; color: #fbfbef">t: time</h8>
-      <br><br>
-      <h8 style="padding-left: 15px; color: #fbfbef">(x,y): Horizontal spatial coordinates</h8>
-      <br><br>
-      <h8 style="padding-left: 15px; color: #fbfbef">P(x,y,t): The resulting 3D position vector for the formula.</h8>
-      <br>
-      <p style="padding-left: 15px;color: #fbfbef;">z being the vertical displacement.</p>
+      <hr
+        style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; ">
+      <!--Direction-->
+      <div id="twoColumnSquare"
+        style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
+        <h8 style="padding-left: 15px; color: #fbfbef">D: Direction</h8>
+        <p style="padding-left: 15px;color: #fbfbef;">
+          This controls where your waves will be moving to.<br>
+          The value for this is a Vector 3, although z value is not really used.
+        </p>
+      </div>
+      <hr
+        style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; ">
+      <!--Phase Offset-->
+      <div id="twoColumnSquare"
+        style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
+        <h8 style="padding-left: 15px; color: #fbfbef">ϕ: Phase Offset</h8>
+        <p style="padding-left: 15px;color: #fbfbef;">
+          Controls the speed movement in between your waves.<br>
+        </p>
+      </div>
+      <hr
+        style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 50%; width: 68%; ">
+      <!--Time-->
+      <div id="twoColumnSquare"
+        style="padding-bottom: 15px; padding-top: 15px; margin-left: 300px; margin-right: 259px;">
+        <h8 style="padding-left: 15px; color: #fbfbef">t: time</h8>
+        <br><br>
+        <h8 style="padding-left: 15px; color: #fbfbef">(x,y): Horizontal spatial coordinates</h8>
+        <br><br>
+        <h8 style="padding-left: 15px; color: #fbfbef">P(x,y,t): The resulting 3D position vector for the formula.</h8>
+        <br>
+        <p style="padding-left: 15px;color: #fbfbef;">z being the vertical displacement.</p>
 
+      </div>
+      <hr
+        style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 25%; width: 68%; ">
+
+      <!--Material Function Breakdown-->
+      <div id="GeneralTxtBorder" style="margin-top: 50px;">
+        <h7 style="padding-left: 45px;">Material Function Breakdown</h7>
+        <p style="padding-left: 45px;">Now, let’s take a look into the Material Function. The way I worked on it is by
+          first
+          implementing elements independent of others and then using those in other parts where their results are
+          needed:
+        </p>
+        <!--QA-->
+        <p style="padding-left: 45px;">
+          We’ll start adding our <strong>Steepness (Q)</strong> and <strong>Amplitude (A)</strong>.
+        </p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+          <img src="SeaWavesResources/Step_Amplitude.png" style="border-radius: 10px; width: 80%;">
+        </div><br>
+        <!--Direction and Length-->
+        <p style="padding-left: 45px;">
+          We can then get our <strong>Direction (D)</strong> and <strong>WaveLength (w)</strong>.</p>
+        <p style="padding-left: 45px;">
+          (Notice that for our wavelength I will be using the formula from before).
+        </p>
+        </p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+          <img src="SeaWavesResources/Direction_Length.png" style="border-radius: 10px; width: 80%;">
+        </div><br>
+        <p style="padding-left: 45px;">
+          Bonus Note: You might have noticed that I multiplied k (wave number) with my normalized direction, this is to
+          make
+          sure that my direction vector magnitude is equal to my wave number; so that my wave follows the desired
+          direction
+          correctly.</p>
+        <!--Offset + Sin + Cosine-->
+        <p style="padding-left: 45px;">
+          Next, let’s create our <strong>phase offset</strong> and our <strong>cosine</strong> and <strong>sine</strong>
+          operations:
+        </p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+          <img src="SeaWavesResources/Offset_Sine_Cosine.png" style="border-radius: 10px; width: 80%;">
+        </div><br>
+        <!--VertexAnim-->
+        <p style="padding-left: 45px;">
+          We finally use all of our previous operations, follow the formula, and create our Vector3 offset animation :D
+        </p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+          <img src="SeaWavesResources/Final_Offset.png" style="border-radius: 10px; width: 80%;">
+        </div><br>
+        <!--Normal-->
+        <p style="padding-left: 45px;">
+          With our vertex animation complete, we can now compute the surface normals. For our light to respond
+          correctly,
+          we
+          need to calculate the plane orientation at any given point. <br>
+          For this, we will follow the next formula (from Gpu Gems):
+        </p>
+      </div>
+      <!--Normal-->
+      <div id="twoColumnSquare"
+        style="padding-bottom: 15px; padding-top: 15px; margin-left: 250px; margin-right: 259px;">
+        <div class="row">
+          <div class="column" style="  margin-bottom: -25px; flex: .75;">
+            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+              <img src="SeaWavesResources/Normal_MF.png" style="border-radius: 10px; width: 100%;">
+            </div>
+            <!--<img src="D:\TodoPortafolio_ELEMENTOS\ImagenesPaginaAgua\Normal_Formula.png" width="350" height="150"
+          style="border-radius: 10px">-->
+          </div>
+          <div class="column" style="padding-right: 1px; flex: .25;">
+            <p style="padding-left: 25px;color: #fbfbef;">
+              <br>
+
+              Where: <br>
+              C()=cos(wD x P+ϕt) <br>
+              S()=sin(wD x P+ϕt)<br>
+              *P=(x,y)
+            </p>
+          </div>
+        </div>
+        <p style="padding-left: 45px;"> <br>
+          And that’s all for the Gerstner Wave material function.
+        </p>
+      </div>
     </div>
+
     <hr style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 25%; width: 68%; ">
 
-    <!--Material Function Breakdown-->
+    <!--Material Function Block-->
     <div id="GeneralTxtBorder" style="margin-top: 50px;">
-      <h7 style="padding-left: 45px;">Material Function Breakdown</h7>
-      <p style="padding-left: 45px;">Now, let’s take a look into the Material Function. The way I worked on it is by
-        first
-        implementing elements independent of others and then using those in other parts where their results are needed:
-      </p>
-      <!--QA-->
-      <p style="padding-left: 45px;">
-        We’ll start adding our <strong>Steepness (Q)</strong> and <strong>Amplitude (A)</strong>.
-      </p>
+      <h7 style="padding-left: 45px;">The Material Function Block</h7>
       <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-        <img src="SeaWavesResources/Step_Amplitude.png" style="border-radius: 10px; width: 80%;">
-      </div><br>
-      <!--Direction and Length-->
-      <p style="padding-left: 45px;">
-        We can then get our <strong>Direction (D)</strong> and <strong>WaveLength (w)</strong>.</p>
-      <p style="padding-left: 45px;">
-        (Notice that for our wavelength I will be using the formula from before).
-      </p>
-      </p>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-        <img src="SeaWavesResources/Direction_Length.png" style="border-radius: 10px; width: 80%;">
-      </div><br>
-      <p style="padding-left: 45px;">
-        Bonus Note: You might have noticed that I multiplied k (wave number) with my normalized direction, this is to
-        make
-        sure that my direction vector magnitude is equal to my wave number; so that my wave follows the desired
-        direction
-        correctly.</p>
-      <!--Offset + Sin + Cosine-->
-      <p style="padding-left: 45px;">
-        Next, let’s create our <strong>phase offset</strong> and our <strong>cosine</strong> and <strong>sine</strong>
-        operations:
-      </p>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-        <img src="SeaWavesResources/Offset_Sine_Cosine.png" style="border-radius: 10px; width: 80%;">
-      </div><br>
-      <!--VertexAnim-->
-      <p style="padding-left: 45px;">
-        We finally use all of our previous operations, follow the formula, and create our Vector3 offset animation :D
-      </p>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-        <img src="SeaWavesResources/Final_Offset.png" style="border-radius: 10px; width: 80%;">
-      </div><br>
-      <!--Normal-->
-      <p style="padding-left: 45px;">
-        With our vertex animation complete, we can now compute the surface normals. For our light to respond correctly,
-        we
-        need to calculate the plane orientation at any given point. <br>
-        For this, we will follow the next formula (from Gpu Gems):
-      </p>
-    </div>
-    <!--Normal-->
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; margin-left: 250px; margin-right: 259px;">
-      <div class="row">
-        <div class="column" style="  margin-bottom: -25px; flex: .75;">
-          <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-            <img src="SeaWavesResources/Normal_MF.png" style="border-radius: 10px; width: 100%;">
-          </div>
-          <!--<img src="D:\TodoPortafolio_ELEMENTOS\ImagenesPaginaAgua\Normal_Formula.png" width="350" height="150"
-          style="border-radius: 10px">-->
-        </div>
-        <div class="column" style="padding-right: 1px; flex: .25;">
-          <p style="padding-left: 25px;color: #fbfbef;">
-            <br>
-
-            Where: <br>
-            C()=cos(wD x P+ϕt) <br>
-            S()=sin(wD x P+ϕt)<br>
-            *P=(x,y)
-          </p>
-        </div>
+        <img src="SeaWavesResources/GerstnerMF.png" style="border-radius: 10px; width: 45%;">
       </div>
-      <p style="padding-left: 45px;"> <br>
-        And that’s all for the Gertner Wave material function.
-      </p>
-    </div>
-  </div>
-
-  <hr style="height:2px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; opacity: 25%; width: 68%; ">
-
-  <!--Material Function Block-->
-  <div id="GeneralTxtBorder" style="margin-top: 50px;">
-    <h7 style="padding-left: 45px;">The Material Function Block</h7>
-    <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-      <img src="SeaWavesResources/GerstnerMF.png" style="border-radius: 10px; width: 45%;">
-    </div>
-    <p style="padding-left: 45px;">We can now apply the material function in to the main water shader. In my case I used
-      it three times: <br>
-    <ul
-      style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-      <li>One main wave that defines the principal wave motion.</li>
-      <li>Two support and disruptive waves to add variation to the main movement.</li>
-    </ul>
-    </p>
-    <p style="padding-left: 45px;">P.S. Don’t forget to add your waves offset and blend your normals.</p>
-  </div>
-  <div id="GeneralTxtBorder"
-    style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 60%; margin-left: auto; margin-right: auto;">
-    <p style="padding-left: 15px;color: #181818;">
-      (Please note that your plane must have more than 4 vertex in order to work correctly; the more vertices you have,
-      the more movement you will be able to observe).
-    </p>
-  </div>
-  <!--COLOR SECTION-->
-  <div id="sectionColor" style="margin-top: -10px; padding-bottom: 65px;">
-    <div id="GeneralTxtBorder">
-      <h6 style="padding-left: 25px;">Color Gradient</h6>
-    </div>
-    <div id="twoColumnSquare" style="padding-bottom: 0px; margin-left: 252px; margin-right: 259px;">
-      <div class="row">
-        <div class="column" style="  margin-bottom: -25px; flex: .9;">
-          <p style="padding-left: 15px;color: #fbfbef;">
-            We can now move on to our wave color gradient, which has the following characteristics:<br>
-          <ul
-            style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-            <li>Based on world position.</li>
-            <li>Adjustable transition steps.</li>
-          </ul>
-          </p>
-        </div>
-        <div class="column" style="padding-right: 1px; flex: .1; margin-right: -50px;">
-          <div id="imageborder">
-            <img src="SeaWavesResources/colorgrad.gif" width="300" height="200" style="border-radius: 10px;">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="GeneralTxtBorder">
-      <p style="padding-left: 25px;">
-        This one is a bit more direct. First, get your World Position and mask the B channel (z axis in Unreal). Then
-        adjust your gradient’s starting point and softness with a subtraction and multiplication respectively; finally
-        clamp your result between 0 and 1.
-        <br>To add in the color, use a <strong>lerp node</strong>, where the world position gradient acts as the alpha,
-        and the two
-        color properties as your 0 and 1 value:
+      <p style="padding-left: 45px;">We can now apply the material function in to the main water shader. In my case I
+        used
+        it three times: <br>
       <ul
         style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-        <li>0: Bottom color.</li>
-        <li>1: Top Color.</li>
+        <li>One main wave that defines the principal wave motion.</li>
+        <li>Two support and disruptive waves to add variation to the main movement.</li>
       </ul>
       </p>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-        <img src="SeaWavesResources/ColorGradient.png" style="border-radius: 10px; width: 80%;">
-      </div>
-    </div>
-  </div>
-
-  <!--RIPPLES NORMAL-->
-  <div id="sectionRipNor" style="margin-top: -50px;">
-    <div id="GeneralTxtBorder">
-      <h6 style="padding-left: 25px;">Ripples Normal</h6>
-      <p style="padding-left: 25px; padding-top: 15px; padding-bottom: 15px;">
-        In this section, we’ll look into the ripple normal maps and how they are used to simulate water movement on the
-        surface. <br>
-        For the texture UVs, I used <strong>Absolute World Position</strong>, followed by a Rotator parameter just so
-        that
-        you could
-        fine-tune the panning direction to better match the wave movement. With our UVs ready, I then sampled the same
-        normal map three times, each with its own movement direction and speed using <strong>Panner nodes</strong>:<br>
-      <ul
-        style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-        <li>The first texture sample uses the original UV scale.</li>
-        <li>The second uses a slightly larger UV scale.</li>
-        <li>Finally the third uses a much larger, “macro” UV scale.</li>
-      </ul>
-      </p>
-      <p style="padding-left: 25px;">
-        For this section you can check out
-        <a href="https://youtu.be/9GCfFKxg9c0?list=PL78XDi0TS4lHBWhZJNOrslnkFWHwE67ak" style="color: inherit"
-          target="_blank">Ben Cloward’s tutorial</a>, as this setup is pretty much what he did, including its
-        optimization
-        techniques.
-      </p>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-        <img src="SeaWavesResources/NormalRipples.png" style="border-radius: 10px; width: 90%;">
-      </div>
+      <p style="padding-left: 45px;">P.S. Don’t forget to add your waves offset and blend your normals.</p>
     </div>
     <div id="GeneralTxtBorder"
-      style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 60px;">
-      <p style="padding-left: 15px;color: #181818;">
-        (Please note that: My Normal Map isn’t blue, as the values have been remapped to be unpacked through the shader.
-        The Material <strong>Function MF_NormalRange</strong> handles remapping the values on a range of -1 and 1).
+      style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 60%; margin-left: auto; margin-right: auto;">
+      <p style="padding-left: 15px;color: #323564">
+        (Please note that your plane must have more than 4 vertex in order to work correctly; the more vertices you
+        have,
+        the more movement you will be able to observe).
       </p>
     </div>
-  </div>
-
-  <!--RIPPLES EMISSIVE-->
-  <div id="sectionRipEm" style="margin-top: 0px;">
-    <div id="GeneralTxtBorder">
-      <h6 style="padding-left: 25px;">Ripples Emissive</h6>
-      <p style="padding-left: 25px; padding-top: 15px; padding-bottom: 15px;">
-        Using sea water images as reference, I decided to reuse and tweak my normal map to create the white highlights
-        commonly seen in water reflections and surface ripples. <br>
-        Through this section, you will see the result of my experimentation and iteration process, with the goal of
-        achieving the following characteristics:
-      </p>
-    </div>
-    <div id="twoColumnSquare"
-      style="padding-bottom: 15px; padding-top: -250px; margin-left: 250px;">
-      <div class="row">
-        <div class="column" style="  margin-bottom: -25px; flex: 0.6">
-          <p>
-          <ul
-            style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-            <li>Overall soft emissive.</li>
-            <li>Strong water “reflections”.</li>
-            <li>Additional edges on the reflections.</li>
-            <li>View-dependent effect: Minimal reflection while looking down, but as the camera inclination increases;
-              so
-              does
-              the reflections you can observe.</li>
-          </ul>
-          </p>
-        </div>
-        <div class="column" style="padding-right: 50px; flex: 0.4;">
-          <div id="imageborder"
-            style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-            <img src="SeaWavesResources/fresnel.gif" style="border-radius: 10px; width: 100%;"
-              style="border-radius: 10px;">
-          </div>
-        </div>
+    <!--COLOR SECTION-->
+    <div id="sectionColor" style="margin-top: -10px; padding-bottom: 65px;">
+      <div id="GeneralTxtBorder">
+        <h6 style="padding-left: 25px;">Color Gradient</h6>
       </div>
-    </div>
-    <!--characteristics-->
-    <div id="GeneralTxtBorder">
-      <p style="padding-left: 25px;">
-        Overall I used the Blue channel of my normal map as a mask:
-      </p>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-        <img src="SeaWavesResources/Emissive.png" style="border-radius: 10px; width: 90%;">
-      </div>
-      <p style="padding-left: 25px;">
-      <ul
-        style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-        <li>For the overall soft emissive, I defined the mask and lowered it’s intensity.</li>
-        <li>For the view-dependent effect, I used a Fresnel with my normal map; where you can tweak the result and
-          operations.</li>
-        <p
-          style="padding-left: 30px; list-style-type: circle; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: auto; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8; background-color: #fbfbef; padding: 20px; border-radius: 10px; margin:10px; color: #181818;">
-          An alternative approach to creating this effects is by: using the dot product between the view direction
-          (camera) and the object; this way you generate a mask for when your camera is looking at the plane. I opted
-          out of this option as it didn’t produce the desired look; but, you could probably get it with a bit of
-          tweaking and adding more operations.
-        </p>
-        <li>For the edge I created two masks from my fresnel, and then defined them with a step:</li>
-        <ul
-          style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-          <li>The first mask is the complete reading of the fresnel with more definition.</li>
-          <li>The second mask is the fresnel reading with a tighter range.</li>
-          <li>You then subtract them to get your edge.</li>
-        </ul>
-      </ul>
-      </p>
-      <!--edge-->
-      <div id="twoColumnSquare"
-        style="padding-bottom: 55px;  margin-bottom: -40px; margin-left: auto; width: 90%; margin-top: -10px;">
+      <div id="twoColumnSquare" style="padding-bottom: 0px; margin-left: 252px; margin-right: 259px;">
         <div class="row">
-          <div class="column" style="flex: 0.3;">
-            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-              <img src="SeaWavesResources/edge2.png" style="border-radius: 10px; width: 90%;">
-            </div>
+          <div class="column" style="  margin-bottom: -25px; flex: .9;">
+            <p style="padding-left: 15px;color: #fbfbef;">
+              We can now move on to our wave color gradient, which has the following characteristics:<br>
+            <ul
+              style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+              <li>Based on world position.</li>
+              <li>Adjustable transition steps.</li>
+            </ul>
+            </p>
           </div>
-          <div class="column" style="flex: 0.1;">
-            <p> <br><br><br> <br> <strong>-</strong> </p>
-          </div>
-          <div class="column" style="flex: 0.3; margin-left: -125px">
-            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-              <img src="SeaWavesResources/edge1.png" style="border-radius: 10px; width: 90%;">
-            </div>
-          </div>
-          <div class="column" style="flex: 0.1;">
-            <p> <br><br><br> <br><strong>=</strong> </p>
-          </div>
-          <div class="column" style="flex: .3; margin-left: -125px">
-            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-              <img src="SeaWavesResources/edge3.png" style="border-radius: 10px; width: 90%;">
+          <div class="column" style="padding-right: 1px; flex: .1; margin-right: -50px;">
+            <div id="imageborder">
+              <img src="SeaWavesResources/colorgrad.gif" width="300" height="200" style="border-radius: 10px;">
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="GeneralTxtBorder">
-      <p style="padding-left: 25px;">
-        With all the elements prepared, you can add them carefully, ensuring both a visual and value balance on your
-        emissive result.
-      </p>
-    </div>
-  </div>
-
-  <!--FOAM-->
-  <div id="sectionFoam" style="margin-top: 50px;">
-    <div id="GeneralTxtBorder">
-      <h6 style="padding-left: 25px;">Objects Foam</h6>
-      <p style="padding-left: 25px; padding-top: 15px; padding-bottom: 15px;">
-        An additional element in the shader is: foam surrounding objects on the water. This effect is done through: Mesh
-        Distance Fields combined with a Texture and an animation to simulate an outer motion.
-      </p>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
-        <img src="SeaWavesResources/Foam.png" style="border-radius: 20px; width: 90%;">
+      <div id="GeneralTxtBorder">
+        <p style="padding-left: 25px;">
+          This one is a bit more direct. First, get your World Position and mask the B channel (z axis in Unreal). Then
+          adjust your gradient’s starting point and softness with a subtraction and multiplication respectively; finally
+          clamp your result between 0 and 1.
+          <br>To add in the color, use a <strong>lerp node</strong>, where the world position gradient acts as the
+          alpha,
+          and the two
+          color properties as your 0 and 1 value:
+        <ul
+          style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+          <li>0: Bottom color.</li>
+          <li>1: Top Color.</li>
+        </ul>
+        </p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+          <img src="SeaWavesResources/ColorGradient.png" style="border-radius: 10px; width: 80%;">
+        </div>
       </div>
     </div>
-    <div id="twoColumnSquare" style="margin-left: 250px; margin-right: 259px;">
-      <div class="row">
-        <div class="column" style="  margin-bottom: -25px; flex: .9;">
-          <p style="padding-left: 15px;color: #fbfbef; padding-top: 15px">
-            Distance Fields, gives you the distance of an object to the nearest surface (as long as they are enabled
-            both
-            on
-            the mesh and at the project). The distance field works kind of as a mask: the closer the object is to the
-            surface,
-            the more the black mask grows. <br>
-            For the shader, you use the data to detect the instersection of an object and the water plane: <br>
+
+    <!--RIPPLES NORMAL-->
+    <div id="sectionRipNor" style="margin-top: -50px;">
+      <div id="GeneralTxtBorder">
+        <h6 style="padding-left: 25px;">Ripples Normal</h6>
+        <p style="padding-left: 25px; padding-top: 15px; padding-bottom: 15px;">
+          In this section, we’ll look into the ripple normal maps and how they are used to simulate water movement on
+          the
+          surface. <br>
+          For the texture UVs, I used <strong>Absolute World Position</strong>, followed by a Rotator parameter just so
+          that
+          you could
+          fine-tune the panning direction to better match the wave movement. With our UVs ready, I then sampled the same
+          normal map three times, each with its own movement direction and speed using <strong>Panner
+            nodes</strong>:<br>
+        <ul
+          style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+          <li>The first texture sample uses the original UV scale.</li>
+          <li>The second uses a slightly larger UV scale.</li>
+          <li>Finally the third uses a much larger, “macro” UV scale.</li>
+        </ul>
+        </p>
+        <p style="padding-left: 25px;">
+          For this section you can check out
+          <a href="https://youtu.be/9GCfFKxg9c0?list=PL78XDi0TS4lHBWhZJNOrslnkFWHwE67ak" style="color: inherit"
+            target="_blank">Ben Cloward’s tutorial</a>, as this setup is pretty much what he did, including its
+          optimization
+          techniques.
+        </p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+          <img src="SeaWavesResources/NormalRipples.png" style="border-radius: 10px; width: 90%;">
+        </div>
+      </div>
+      <div id="GeneralTxtBorder"
+        style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 60px;">
+        <p style="padding-left: 15px;color: #323564">
+          (Please note that: My Normal Map isn’t blue, as the values have been remapped to be unpacked through the
+          shader.
+          The Material <strong>Function MF_NormalRange</strong> handles remapping the values on a range of -1 and 1).
+        </p>
+      </div>
+    </div>
+
+    <!--RIPPLES EMISSIVE-->
+    <div id="sectionRipEm" style="margin-top: 0px;">
+      <div id="GeneralTxtBorder">
+        <h6 style="padding-left: 25px;">Ripples Emissive</h6>
+        <p style="padding-left: 25px; padding-top: 15px; padding-bottom: 15px;">
+          Using sea water images as reference, I decided to reuse and tweak my normal map to create the white highlights
+          commonly seen in water reflections and surface ripples. <br>
+          Through this section, you will see the result of my experimentation and iteration process, with the goal of
+          achieving the following characteristics:
+        </p>
+      </div>
+      <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: -250px; margin-left: 250px;">
+        <div class="row">
+          <div class="column" style="  margin-bottom: -25px; flex: 0.6">
+            <p>
+            <ul
+              style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+              <li>Overall soft emissive.</li>
+              <li>Strong water “reflections”.</li>
+              <li>Additional edges on the reflections.</li>
+              <li>View-dependent effect: Minimal reflection while looking down, but as the camera inclination increases;
+                so
+                does
+                the reflections you can observe.</li>
+            </ul>
+            </p>
+          </div>
+          <div class="column" style="padding-right: 50px; flex: 0.4;">
+            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+              <img src="SeaWavesResources/fresnel.gif" style="border-radius: 10px; width: 100%;"
+                style="border-radius: 10px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--characteristics-->
+      <div id="GeneralTxtBorder">
+        <p style="padding-left: 25px;">
+          Overall I used the Blue channel of my normal map as a mask:
+        </p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+          <img src="SeaWavesResources/Emissive.png" style="border-radius: 10px; width: 90%;">
+        </div>
+        <p style="padding-left: 25px;">
+        <ul
+          style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+          <li>For the overall soft emissive, I defined the mask and lowered it’s intensity.</li>
+          <li>For the view-dependent effect, I used a Fresnel with my normal map; where you can tweak the result and
+            operations.</li>
+          <p
+            style="padding-left: 30px; list-style-type: circle; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: auto; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8; background-color: #fbfbef; padding: 20px; border-radius: 10px; margin:10px; color: #323564">
+            An alternative approach to creating this effects is by: using the dot product between the view direction
+            (camera) and the object; this way you generate a mask for when your camera is looking at the plane. I opted
+            out of this option as it didn’t produce the desired look; but, you could probably get it with a bit of
+            tweaking and adding more operations.
           </p>
-        </div>
-        <div class="column" style="padding-right: 1px; flex: .1; margin-right: -50px;">
-          <div id="imageborder">
-            <img src="SeaWavesResources/distancef.gif" width="300" height="200">
+          <li>For the edge I created two masks from my fresnel, and then defined them with a step:</li>
+          <ul
+            style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+            <li>The first mask is the complete reading of the fresnel with more definition.</li>
+            <li>The second mask is the fresnel reading with a tighter range.</li>
+            <li>You then subtract them to get your edge.</li>
+          </ul>
+        </ul>
+        </p>
+        <!--edge-->
+        <div id="twoColumnSquare"
+          style="padding-bottom: 55px;  margin-bottom: -40px; margin-left: auto; width: 90%; margin-top: -10px;">
+          <div class="row">
+            <div class="column" style="flex: 0.3;">
+              <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+                <img src="SeaWavesResources/edge2.png" style="border-radius: 10px; width: 90%;">
+              </div>
+            </div>
+            <div class="column" style="flex: 0.1;">
+              <p> <br><br><br> <br> <strong>-</strong> </p>
+            </div>
+            <div class="column" style="flex: 0.3; margin-left: -125px">
+              <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+                <img src="SeaWavesResources/edge1.png" style="border-radius: 10px; width: 90%;">
+              </div>
+            </div>
+            <div class="column" style="flex: 0.1;">
+              <p> <br><br><br> <br><strong>=</strong> </p>
+            </div>
+            <div class="column" style="flex: .3; margin-left: -125px">
+              <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+                <img src="SeaWavesResources/edge3.png" style="border-radius: 10px; width: 90%;">
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <div id="GeneralTxtBorder">
+        <p style="padding-left: 25px;">
+          With all the elements prepared, you can add them carefully, ensuring both a visual and value balance on your
+          emissive result.
+        </p>
+      </div>
     </div>
-    <div id="GeneralTxtBorder">
-      <p style="padding-left: 25px;">
-      <ul
-        style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+
+    <!--FOAM-->
+    <div id="sectionFoam" style="margin-top: 50px;">
+      <div id="GeneralTxtBorder">
+        <h6 style="padding-left: 25px;">Objects Foam</h6>
+        <p style="padding-left: 25px; padding-top: 15px; padding-bottom: 15px;">
+          An additional element in the shader is: foam surrounding objects on the water. This effect is done through:
+          Mesh
+          Distance Fields combined with a Texture and an animation to simulate an outer motion.
+        </p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto;">
+          <img src="SeaWavesResources/Foam.png" style="border-radius: 20px; width: 90%;">
+        </div>
+      </div>
+      <div id="twoColumnSquare" style="margin-left: 250px; margin-right: 259px;">
+        <div class="row">
+          <div class="column" style="  margin-bottom: -25px; flex: .9;">
+            <p style="padding-left: 15px;color: #fbfbef; padding-top: 15px">
+              Distance Fields, gives you the distance of an object to the nearest surface (as long as they are enabled
+              both
+              on
+              the mesh and at the project). The distance field works kind of as a mask: the closer the object is to the
+              surface,
+              the more the black mask grows. <br>
+              For the shader, you use the data to detect the instersection of an object and the water plane: <br>
+            </p>
+          </div>
+          <div class="column" style="padding-right: 1px; flex: .1; margin-right: -50px;">
+            <div id="imageborder">
+              <img src="SeaWavesResources/distancef.gif" width="300" height="200">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="GeneralTxtBorder">
+        <p style="padding-left: 25px;">
+        <ul
+          style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-        <li>I added a banding effect using <strong>time</strong> and <strong>frac</strong> to create an outword movement
-          motion to the mask.</li>
-        <li>The mask is then multiplied with a moving noise texture.</li>
-        <li>For the texture movement, I used the <strong>Motion_4WayChaos node</strong>, that helps us pan and rotate
-          the texture across multiple directions.</li>
-        <li>Finally, I added an additional circular mask to create an inner edge, purely for visual purposes, as I
-          wanted the object edge to feel more stylized.</li>
-      </ul>
-      </p>
+          <li>I added a banding effect using <strong>time</strong> and <strong>frac</strong> to create an outword
+            movement
+            motion to the mask.</li>
+          <li>The mask is then multiplied with a moving noise texture.</li>
+          <li>For the texture movement, I used the <strong>Motion_4WayChaos node</strong>, that helps us pan and rotate
+            the texture across multiple directions.</li>
+          <li>Finally, I added an additional circular mask to create an inner edge, purely for visual purposes, as I
+            wanted the object edge to feel more stylized.</li>
+        </ul>
+        </p>
+      </div>
     </div>
+
+    <!--PLAYER-->
+    <div id="sectionPlayer" style="margin-top: 50px;">
+      <div id="GeneralTxtBorder">
+        <h6 style="padding-left: 25px;">Player Interaction</h6>
+        <p style="padding-left: 25px; padding-top: 10px;">
+          I also developed an interactive element through <strong>Render Targets (RT)</strong>, where the player “draws”
+          on
+          the water surface
+          in real time to mark their steps.<br>
+        </p>
+        <!--Render Target-->
+        <h7 style="padding-left: 45px;">Render Targets</h7>
+        <p style="padding-left: 45px;">Let’s first go over what Render Targets are. Render targets are dynamic textures
+          that
+          can be modified at runtime and used on shaders. To implement this, you need to work on some elements:
+        <ul
+          style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+          <li><strong>Render Target Texture:</strong> works as a blank canvas, the place where you will be drawing on.
+          </li>
+          <li><strong>Brush:</strong> this is the material you will use to draw, like your pencil.</li>
+          <li><strong>Material Instance:</strong> a dynamic material instance of the brush that helps us modify the
+            render
+            target on runtime.</li>
+          <li><strong>Scripting Logic:</strong> make the interaction a reality through code (in this case I will be
+            using
+            blueprints).</li>
+        </ul>
+        </p>
+        <p style="padding-left: 45px; padding-bottom: 20px;">
+          If you want to check out more on Render Targets, I recommend you read
+          <a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/render-targets?application_version=4.27"
+            style="color: inherit" target="_blank">Unreal´s documentation</a>, as well as DanielElliot3D’s
+          <a href="https://youtu.be/LXduG19JFWg" style="color: inherit" target="_blank">Render Targets Series</a> which
+          I
+          used as reference when learning and
+          developing this system.
+        </p>
+        <h8 style="padding-left:50px; color: #fbfbef">The brush and textures</h8>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 15px;">
+          <img src="SeaWavesResources/Brush.png" style="border-radius: 10px; width: 90%;">
+        </div>
+        <p style="padding-left: 45px; padding-bottom: 5px;">
+          For the brush, I created a new material featuring an animated circular banding pattern. <br> This material is
+          set
+          to
+          Unlit and the only output used is the Emissive channel.
+        </p>
+      </div>
+      <div id="GeneralTxtBorder"
+        style="margin-top: 5px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 58%; margin-left: auto; margin-right: auto; margin-bottom: 30px;">
+        <p style="padding-left: 15px;color: #323564">
+          Bonus Note: the reason you subtract an offset to the UVs is to ensure that the brush is centered at the draw
+          location.
+        </p>
+      </div>
+      <div id="GeneralTxtBorder">
+        <p style="padding-left: 45px; padding-bottom: 10px;">
+          For the textures, create a Render Target (under the texture category on your Content Drawer), and adjust its
+          properties as needed. In my case, I used a resolution of 512x512 with an RTF RG8 format, which is sufficient
+          to
+          this
+          effect.
+        </p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 0px;">
+          <img src="SeaWavesResources/RT.png" style="border-radius: 10px; width: 90%;">
+        </div>
+      </div>
+      <!--On the Shader-->
+      <div id="GeneralTxtBorder">
+        <h7 style="padding-left: 45px;">On the Shader </h7>
+        <p style="padding-left: 45px;">With the brush material and render targets texures ready, the next step is to
+          apply
+          them on our main water shader. The render target is used as a <strong>Texture input</strong>, and in this case
+          as
+          a mask. This
+          mask is then multiplied by the same noise movement used for the foam. <br><br>
+          The parameters “Time” and “OnRT2” were added for my blueprint logic implemented later. <br><br>
+          You may notice that I have two RenderTarget textures. While a single Render Target would normally be
+          sufficient,
+          in here, two are used to enable a <strong>ping-ponging technique</strong>, which I will be explaining later.
+          This
+          approach is
+          optional and can be simplified if needed. <br></p>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-bottom: 20px;">
+          <img src="SeaWavesResources/Ripples.png" style="border-radius: 10px; width: 90%;">
+        </div>
+      </div>
+
+      <!--Anim notifies-->
+      <div id="GeneralTxtBorder">
+        <h7 style="padding-left: 45px;">Animation Notifies </h7>
+        <p style="padding-left: 45px;">To drive the interactions, I wanted the effect to trigger when the players walks,
+          runs, and lands. To achieve this, I used <strong>Animation Notifies</strong> on my character animation.
+          <br><br>
+          Animation Notifies allow you to define “notifications” or events on specific keyframes of your animation.
+          These
+          notifies are then connected to events on your Animation Blueprint, so that you can access them on other
+          blueprints
+          and call for events when the animation is triggered.
+        </p>
+      </div>
+      <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; padding-bottom: 50px;">
+        <div class="row">
+          <div class="column" style="  margin-bottom: -25px;">
+            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 0px;">
+              <img src="SeaWavesResources/AnimNot.png" style="border-radius: 10px; width: 90%;">
+            </div>
+          </div>
+          <div class="column" style="padding-right: 30px;">
+            <div id="imageborder">
+              <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto">
+                <img src="SeaWavesResources/animevent.png" style="border-radius: 10px; width: 90%;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Blueprint-->
+      <div id="GeneralTxtBorder">
+        <h7 style="padding-left: 45px;">Blueprint</h7>
+        <p style="padding-left: 45px; margin-bottom: -35px;">With the animation events on place, the next step is to
+          draw.
+          <br>Let us start with
+          the setup:
+        </p>
+      </div>
+      <div id="twoColumnSquare" style="margin-bottom: -35px;">
+        <div class="row">
+          <div class="column" style="  margin-bottom: -25px;">
+            <ul
+              style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+              <li>Clear the Render Target at the start of your game.</li>
+            </ul>
+
+            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 0px;">
+              <img src="SeaWavesResources/ClearRT.png" style="border-radius: 10px; width: 70%;">
+            </div>
+          </div>
+          <div class="column" style="padding-right: 30px;">
+            <ul
+              style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+              <li>Create a dynamic material instance of your brush.</li>
+            </ul>
+            <div id="imageborder">
+              <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto">
+                <img src="SeaWavesResources/DynamicMat.png" style="border-radius: 10px; width: 90%;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="twoColumnSquare" style="padding-bottom: 40px;">
+        <div class="row">
+          <div class="column" style="  margin-bottom: -25px;">
+            <ul
+              style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+              <li>On your character, add a simple mesh on their feet. We will use it as a reference to the position of
+                the
+                player’s feet. </li>
+            </ul>
+            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 0px;">
+              <img src="SeaWavesResources/PlayerRef.png" style="border-radius: 10px; width: 80%;">
+            </div>
+          </div>
+          <div class="column" style="padding-right: 30px;">
+            <ul
+              style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+              <li>Get a reference to you character animation, and bind the animation events to custom functions
+                responsible
+                for drawing to the Render Target.</li>
+            </ul>
+            <div id="imageborder">
+              <div id="imageborder" style="padding-left: 10px; margin-left: auto; margin-right: auto">
+                <img src="SeaWavesResources/CharRef.png" style="border-radius: 10px; width: 100%;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="GeneralTxtBorder">
+        <p style="padding-left: 45px; padding-bottom: 15px;">Now, when an animation event is triggered, we perform a
+          line
+          trace from the character’s feet or pelvis, in order to get the collision UVs from the plane blueprint. These
+          UVs
+          coordinates are then passed to the brush parameter “UV_Transform;” allowing the Render Target to be updated
+          and
+          drawn at the correct location.</p>
+        <div id="imageborder"
+          style="padding-left: 16px; margin-left: auto; margin-right: auto; padding-bottom: 20px; width: 100%;">
+          <iframe src="https://blueprintue.com/render/u22s5ih9/" scrolling="no" allowfullscreen
+            style="width: 100%; margin-left: auto; margin-right: auto; height: 600px;"></iframe>
+        </div>
+      </div>
+
+      <!--Ping Pong-->
+      <div id="GeneralTxtBorder" style="padding-top: 20px;">
+        <h8 style="padding-left: 45px; color: #fbfbef">Pin-Ponging</h8>
+        <p style="padding-left: 45px; margin-bottom: -5px;">But, let’s refine the interaction, I implemented a
+          ping-ponging
+          technique, which goes back and forth between two Render Targets. While one Render Target is active, the other
+          gradually fades away (is being cleared) and so on and so forth; this to reate a smoother temporal effect. <br>
+          This can be implemented using timed functions or timelines that modify shader parameters (in this case “Time”
+          and
+          “OnRT2”). The blueprint sample below shows:
+        <ul
+          style="padding-left: 80px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
+          <li>Activation and deactivation of Render Targets.</li>
+          <li>Render Target switching.</li>
+          <li>Left foot animation event.</li>
+        </ul>
+        </p>
+        <div id="imageborder"
+          style="padding-left: 16px; margin-left: auto; margin-right: auto; padding-bottom: 20px; width: 100%;">
+          <iframe src="https://blueprintue.com/render/rarqf2pk/" scrolling="no" allowfullscreen
+            style="width: 100%; margin-left: auto; margin-right: auto; height: 600px;"></iframe>
+        </div>
+        <p style="padding-left: 45px; margin-bottom: -5px;">This is the core logic behind the interaction and can be
+          explored and adapted to different necessities and scenarios.</p>
+      </div>
+    </div>
+
+    <!--FINAL SECTION-->
+    <div id="sectionFinal" style="margin-top: 50px;">
+      <div id="GeneralTxtBorder">
+        <h6 style="padding-left: 25px; padding-bottom: 10px;">Shader Final Steps</h6>
+        <p style="padding-left: 25px;">
+          We can finally work on the shader’s final steps:<br>
+        </p>
+      </div>
+      <div id="twoColumnSquare" style="padding-bottom: 15px">
+        <div class="row">
+          <div class="column" style="margin-bottom: -25px;">
+            <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;">
+              <img src="SeaWavesResources/final1.png" style="border-radius: 10px; width: 100%;">
+            </div>
+          </div>
+          <div class="column" style="padding-right: 30px; margin-bottom: -25px;">
+            <ul
+              style="list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 30px; line-height: 1.8;">
+              <li>The player interaction mask is used to add displacement to the World Position Offset.</li>
+              <li>Additionally, a water level parameter was introduced.</li>
+            </ul>
+            <p>
+              To connect everything we have:
+            </p>
+            <ul
+              style="list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 30px; line-height: 1.8;">
+              <li>Base Color.</li>
+              <li>Metallic parameter is added for subtle reflection.</li>
+              <li>The light emissive mask goes to the specular input.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="GeneralTxtBorder">
+        <ul
+          style="padding-left: 55px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 30px; line-height: 1.8;">
+          <li>The emissive effects are combined: water highlights + objects foam + character input. </li>
+          <li>Ripples normals + gerstner normals are connected on the Normal channel.</li>
+          <li>World position offset is connected using combined displacement. </li>
+        </ul>
+        <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-bottom: 10px;">
+          <img src="SeaWavesResources/final2.png" style="border-radius: 10px; width: 90%;">
+        </div>
+      </div>
+      <div id="GeneralTxtBorder"
+        style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 60px;">
+        <p style="padding-left: 15px;color: #323564">
+          All the screenshots and blueprints shown above are from the final optimized version of the shader. So, let’s
+          now
+          take a look into how that came to be; the next section will focus on its optimization process and changes made
+          along the way.
+        </p>
+      </div>
+    </div>
+
   </div>
 
-  <!--PLAYER-->
-  <div id="sectionPlayer" style="margin-top: 50px;">
+  <!--COMIENZA OPTIMIZACION-->
+  <div id="optimizationsection">
     <div id="GeneralTxtBorder">
-      <h6 style="padding-left: 25px;">Player Interaction</h6>
-      <p style="padding-left: 25px; padding-top: 10px;">
-        I also developed an interactive element through <strong>Render Targets (RT)</strong>, where the player “draws”
-        on
-        the water surface
-        in real time to mark their steps.<br>
-      </p>
-      <!--Render Target-->
-      <h7 style="padding-left: 45px;">Render Targets</h7>
-      <p style="padding-left: 45px;">Let’s first go over what Render Targets are. Render targets are dynamic textures
-        that
-        can be modified at runtime and used on shaders. To implement this, you need to work on some elements:
-      <ul
-        style="padding-left: 60px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-        <li><strong>Render Target Texture:</strong> works as a blank canvas, the place where you will be drawing on.
-        </li>
-        <li><strong>Brush:</strong> this is the material you will use to draw, like your pencil.</li>
-        <li><strong>Material Instance:</strong> a dynamic material instance of the brush that helps us modify the render
-          target on runtime.</li>
-        <li><strong>Scripting Logic:</strong> make the interaction a reality through code (in this case I will be using
-          blueprints).</li>
-      </ul>
-      </p>
-      <p style="padding-left: 45px; padding-bottom: 20px;">
-        If you want to check out more on Render Targets, I recommend you read
-        <a href="https://dev.epicgames.com/documentation/en-us/unreal-engine/render-targets?application_version=4.27"
-          style="color: inherit" target="_blank">Unreal´s documentation</a>, as well as DanielElliot3D’s
-        <a href="https://youtu.be/LXduG19JFWg" style="color: inherit" target="_blank">Render Targets Series</a> which I
-        used as reference when learning and
-        developing this system.
-      </p>
-      <h8 style="padding-left:50px; color: #fbfbef">The brush and textures</h8>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 15px;">
-        <img src="SeaWavesResources/Brush.png" style="border-radius: 10px; width: 90%;">
-      </div>
-      <p style="padding-left: 45px; padding-bottom: 5px;">
-        For the brush, I created a new material featuring an animated circular banding pattern. <br> This material is
-        set
-        to
-        Unlit and the only output used is the Emissive channel.
+      <h5 style="padding-left: 20px;">Optimization Process</h5>
+      <hr
+        style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px; margin-left: auto; margin-right: auto;">
+      <p style="padding-left: 15px;">
+        Here I present a comparison between the original shader and its optimized version.
       </p>
     </div>
-    <div id="GeneralTxtBorder"
-      style="margin-top: 5px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 58%; margin-left: auto; margin-right: auto; margin-bottom: 30px;">
-      <p style="padding-left: 15px;color: #181818;">
-        Bonus Note: the reason you subtract an offset to the UVs is to ensure that the brush is centered at the draw
-        location.
-      </p>
-    </div>
-    <div id="GeneralTxtBorder">
-      <p style="padding-left: 45px; padding-bottom: 10px;">
-        For the textures, create a Render Target (under the texture category on your Content Drawer), and adjust its
-        properties as needed. In my case, I used a resolution of 512x512 with an RTF RG8 format, which is sufficient to
-        this
-        effect.
-      </p>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 0px;">
-        <img src="SeaWavesResources/RT.png" style="border-radius: 10px; width: 90%;">
-      </div>
-    </div>
-    <!--On the Shader-->
-    <div id="GeneralTxtBorder">
-      <h7 style="padding-left: 45px;">On the Shader </h7>
-      <p style="padding-left: 45px;">With the brush material and render targets texures ready, the next step is to apply
-        them on our main water shader. The render target is used as a <strong>Texture input</strong>, and in this case
-        as
-        a mask. This
-        mask is then multiplied by the same noise movement used for the foam. <br><br>
-        The parameters “Time” and “OnRT2” were added for my blueprint logic implemented later. <br><br>
-        You may notice that I have two RenderTarget textures. While a single Render Target would normally be sufficient,
-        in here, two are used to enable a <strong>ping-ponging technique</strong>, which I will be explaining later.
-        This
-        approach is
-        optional and can be simplified if needed. <br></p>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-bottom: 20px;">
-        <img src="SeaWavesResources/Ripples.png" style="border-radius: 10px; width: 90%;">
-      </div>
-    </div>
-
-    <!--Anim notifies-->
-    <div id="GeneralTxtBorder">
-      <h7 style="padding-left: 45px;">Animation Notifies </h7>
-      <p style="padding-left: 45px;">To drive the interactions, I wanted the effect to trigger when the players walks,
-        runs, and lands. To achieve this, I used <strong>Animation Notifies</strong> on my character animation. <br><br>
-        Animation Notifies allow you to define “notifications” or events on specific keyframes of your animation. These
-        notifies are then connected to events on your Animation Blueprint, so that you can access them on other
-        blueprints
-        and call for events when the animation is triggered.</p>
-    </div>
-    <div id="twoColumnSquare" style="padding-bottom: 15px; padding-top: 15px; padding-bottom: 50px;">
-      <div class="row">
-        <div class="column" style="  margin-bottom: -25px;">
-          <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 0px;">
-            <img src="SeaWavesResources/AnimNot.png" style="border-radius: 10px; width: 90%;">
-          </div>
-        </div>
-        <div class="column" style="padding-right: 30px;">
-          <div id="imageborder">
-            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto">
-              <img src="SeaWavesResources/animevent.png" style="border-radius: 10px; width: 90%;">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Blueprint-->
-    <div id="GeneralTxtBorder">
-      <h7 style="padding-left: 45px;">Blueprint</h7>
-      <p style="padding-left: 45px; margin-bottom: -35px;">With the animation events on place, the next step is to draw.
-        <br>Let us start with
-        the setup:
-      </p>
-    </div>
-    <div id="twoColumnSquare" style="margin-bottom: -35px;">
-      <div class="row">
-        <div class="column" style="  margin-bottom: -25px;">
-          <ul
-            style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-            <li>Clear the Render Target at the start of your game.</li>
-          </ul>
-
-          <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 0px;">
-            <img src="SeaWavesResources/ClearRT.png" style="border-radius: 10px; width: 70%;">
-          </div>
-        </div>
-        <div class="column" style="padding-right: 30px;">
-          <ul
-            style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-            <li>Create a dynamic material instance of your brush.</li>
-          </ul>
-          <div id="imageborder">
-            <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto">
-              <img src="SeaWavesResources/DynamicMat.png" style="border-radius: 10px; width: 90%;">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="twoColumnSquare" style="padding-bottom: 40px;">
-      <div class="row">
-        <div class="column" style="  margin-bottom: -25px;">
-          <ul
-            style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-            <li>On your character, add a simple mesh on their feet. We will use it as a reference to the position of the
-              player’s feet. </li>
-          </ul>
-          <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-top: 0px;">
-            <img src="SeaWavesResources/PlayerRef.png" style="border-radius: 10px; width: 80%;">
-          </div>
-        </div>
-        <div class="column" style="padding-right: 30px;">
-          <ul
-            style="padding-left: 30px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-            <li>Get a reference to you character animation, and bind the animation events to custom functions
-              responsible
-              for drawing to the Render Target.</li>
-          </ul>
-          <div id="imageborder">
-            <div id="imageborder" style="padding-left: 10px; margin-left: auto; margin-right: auto">
-              <img src="SeaWavesResources/CharRef.png" style="border-radius: 10px; width: 100%;">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="GeneralTxtBorder">
-      <p style="padding-left: 45px; padding-bottom: 15px;">Now, when an animation event is triggered, we perform a line
-        trace from the character’s feet or pelvis, in order to get the collision UVs from the plane blueprint. These UVs
-        coordinates are then passed to the brush parameter “UV_Transform;” allowing the Render Target to be updated and
-        drawn at the correct location.</p>
-      <div id="imageborder"
-        style="padding-left: 16px; margin-left: auto; margin-right: auto; padding-bottom: 20px; width: 100%;">
-        <iframe src="https://blueprintue.com/render/u22s5ih9/" scrolling="no" allowfullscreen
-          style="width: 100%; margin-left: auto; margin-right: auto; height: 600px;"></iframe>
-      </div>
-    </div>
-
-    <!--Ping Pong-->
-    <div id="GeneralTxtBorder" style="padding-top: 20px;">
-      <h8 style="padding-left: 45px; color: #fbfbef">Pin-Ponging</h8>
-      <p style="padding-left: 45px; margin-bottom: -5px;">But, let’s refine the interaction, I implemented a
-        ping-ponging
-        technique, which goes back and forth between two Render Targets. While one Render Target is active, the other
-        gradually fades away (is being cleared) and so on and so forth; this to reate a smoother temporal effect. <br>
-        This can be implemented using timed functions or timelines that modify shader parameters (in this case “Time”
-        and
-        “OnRT2”). The blueprint sample below shows:
-      <ul
-        style="padding-left: 80px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8;">
-        <li>Activation and deactivation of Render Targets.</li>
-        <li>Render Target switching.</li>
-        <li>Left foot animation event.</li>
-      </ul>
-      </p>
-      <div id="imageborder"
-        style="padding-left: 16px; margin-left: auto; margin-right: auto; padding-bottom: 20px; width: 100%;">
-        <iframe src="https://blueprintue.com/render/rarqf2pk/" scrolling="no" allowfullscreen
-          style="width: 100%; margin-left: auto; margin-right: auto; height: 600px;"></iframe>
-      </div>
-      <p style="padding-left: 45px; margin-bottom: -5px;">This is the core logic behind the interaction and can be
-        explored and adapted to different necessities and scenarios.</p>
-    </div>
-  </div>
-
-  <!--FINAL SECTION-->
-  <div id="sectionFinal" style="margin-top: 50px;">
-    <div id="GeneralTxtBorder">
-      <h6 style="padding-left: 25px; padding-bottom: 10px;">Shader Final Steps</h6>
-      <p style="padding-left: 25px;">
-        We can finally work on the shader’s final steps:<br>
-      </p>
-    </div>
+    <!--Comparacion-->
     <div id="twoColumnSquare" style="padding-bottom: 15px">
       <div class="row">
+        <!--OG-->
         <div class="column" style="margin-bottom: -25px;">
-          <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;">
-            <img src="SeaWavesResources/final1.png" style="border-radius: 10px; width: 100%;">
+          <h8 style="color: #fbfbef;">Original Material</h8>
+          <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;margin-top: 10px;">
+            <img src="SeaWavesResources/OG1.png" style="border-radius: 10px; width: 100%;">
           </div>
-        </div>
-        <div class="column" style="padding-right: 30px; margin-bottom: -25px;">
-          <ul
-            style="list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 30px; line-height: 1.8;">
-            <li>The player interaction mask is used to add displacement to the World Position Offset.</li>
-            <li>Additionally, a water level parameter was introduced.</li>
-          </ul>
           <p>
-            To connect everything we have:
+            <strong>Instruction Count</strong> <br>
+            379 on fragment <br>
+            415 on vertex <br><br>
+            <strong>Shader Complexity</strong>
           </p>
-          <ul
-            style="list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 30px; line-height: 1.8;">
-            <li>Base Color.</li>
-            <li>Metallic parameter is added for subtle reflection.</li>
-            <li>The light emissive mask goes to the specular input.</li>
-          </ul>
+          <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;margin-top: 10px;">
+            <img src="SeaWavesResources/OG2.png" style="border-radius: 10px; width: 100%;">
+          </div>
+          <p>
+            <strong>RenderDoc – Rendering Process Notes</strong> <br>
+            Velocity: 60.00 (time) <br>Base Pass: 369.664 (time)
+          </p>
         </div>
-      </div>
-    </div>
-    <div id="GeneralTxtBorder">
-      <ul
-        style="padding-left: 55px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal; margin-right: 30px; margin-left: auto;text-align: left; padding-right: 30px; line-height: 1.8;">
-        <li>The emissive effects are combined: water highlights + objects foam + character input. </li>
-        <li>Ripples normals + gertner normals are connected on the Normal channel.</li>
-        <li>World position offset is connected using combined displacement. </li>
-      </ul>
-      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-bottom: 10px;">
-        <img src="SeaWavesResources/final2.png" style="border-radius: 10px; width: 90%;">
+        <!--OPTIMIZED-->
+        <div class="column" style="padding-right: 30px; margin-bottom: -25px;">
+          <h8 style="color: #fbfbef;">Optimized Material</h8>
+          <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+            <img src="SeaWavesResources/OP1.png" style="border-radius: 10px; width: 78%;">
+          </div>
+          <p>
+            <strong>Instruction Count</strong> <br>
+            264 on fragment <br>
+            337 on vertex<br><br>
+            <strong>Shader Complexity</strong>
+          </p>
+          <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;margin-top: 10px;">
+            <img src="SeaWavesResources/OP2.png" style="border-radius: 10px; width: 100%;">
+          </div>
+          <p>
+            <strong>RenderDoc – Rendering Process Notes</strong> <br>
+            Velocity: 56.96 (time) <br>Base Pass: 237.568 (time)
+          </p>
+        </div>
       </div>
     </div>
     <div id="GeneralTxtBorder"
-      style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 60px;">
-      <p style="padding-left: 15px;color: #181818;">
-        All the screenshots and blueprints shown above are from the final optimized version of the shader. So, let’s now
-        take a look into how that came to be; the next section will focus on its optimization process and changes made
-        along the way.
+      style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+      <p style="padding-left: 15px;color: #323564">
+        <strong>Note:</strong> It is important to mention that Instruction count and Shader Complexity are not always
+        the
+        best way to measure
+        optimization. The best way to approach optimization would be to actually test it on your game and platform
+        conditions. But in this case, I used these metrics alongside RenderDoc to obtain an overall performance
+        reference.
       </p>
     </div>
-  </div>
-
-</div>
-
-<!--COMIENZA OPTIMIZACION-->
-<div id="optimizationsection">
-  <div id="GeneralTxtBorder">
-    <h5 style="padding-left: 20px;">Optimization Process</h5>
-    <hr
-      style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px; margin-left: auto; margin-right: auto;">
-    <p style="padding-left: 15px;">
-      Here I present a comparison between the original shader and its optimized version.
-    </p>
-  </div>
-  <!--Comparacion-->
-  <div id="twoColumnSquare" style="padding-bottom: 15px">
-    <div class="row">
-      <!--OG-->
-      <div class="column" style="margin-bottom: -25px;">
-        <h8 style="color: #fbfbef;">Original Material</h8>
-        <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;margin-top: 10px;">
-          <img src="SeaWavesResources/OG1.png" style="border-radius: 10px; width: 100%;">
-        </div>
-        <p>
-          <strong>Instruction Count</strong> <br>
-          379 on fragment <br>
-          415 on vertex <br><br>
-          <strong>Shader Complexity</strong>
-        </p>
-        <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;margin-top: 10px;">
-          <img src="SeaWavesResources/OG2.png" style="border-radius: 10px; width: 100%;">
-        </div>
-        <p>
-          <strong>RenderDoc – Rendering Process Notes</strong> <br>
-          Velocity: 60.00 (time) <br>Base Pass: 369.664 (time)
-        </p>
-      </div>
-      <!--OPTIMIZED-->
-      <div class="column" style="padding-right: 30px; margin-bottom: -25px;">
-        <h8 style="color: #fbfbef;">Optimized Material</h8>
-        <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto; margin-top: 10px;">
-          <img src="SeaWavesResources/OP1.png" style="border-radius: 10px; width: 78%;">
-        </div>
-        <p>
-          <strong>Instruction Count</strong> <br>
-          264 on fragment <br>
-          337 on vertex<br><br>
-          <strong>Shader Complexity</strong>
-        </p>
-        <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;margin-top: 10px;">
-          <img src="SeaWavesResources/OP2.png" style="border-radius: 10px; width: 100%;">
-        </div>
-        <p>
-          <strong>RenderDoc – Rendering Process Notes</strong> <br>
-          Velocity: 56.96 (time) <br>Base Pass: 237.568 (time)
-        </p>
-      </div>
-    </div>
-  </div>
-  <div id="GeneralTxtBorder"
-    style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
-    <p style="padding-left: 15px;color: #181818;">
-      <strong>Note:</strong> It is important to mention that Instruction count and Shader Complexity are not always the
-      best way to measure
-      optimization. The best way to approach optimization would be to actually test it on your game and platform
-      conditions. But in this case, I used these metrics alongside RenderDoc to obtain an overall performance reference.
-    </p>
-  </div>
-  <div id="GeneralTxtBorder">
-    <p style="padding-left: 15px;">
-      Originally, the shader achieved the desired visual result, but it had many unnecessary operations and was very
-      messy. On the blueprint side, the interaction logic was split across two bluprints with one using tick execution,
-      which caused my FPS to drop to an average of 15-20; which was pretty bad. <br>
-      So let’s breakdown my optimization process.
-    </p>
-    <!--Comienza Shader-->
-    <h7 style="padding-left: 25px;">For my shader</h7>
-    <ul
-      style="padding-left: 25px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+    <div id="GeneralTxtBorder">
+      <p style="padding-left: 15px;">
+        Originally, the shader achieved the desired visual result, but it had many unnecessary operations and was very
+        messy. On the blueprint side, the interaction logic was split across two bluprints with one using tick
+        execution,
+        which caused my FPS to drop to an average of 15-20; which was pretty bad. <br>
+        So let’s breakdown my optimization process.
+      </p>
+      <!--Comienza Shader-->
+      <h7 style="padding-left: 25px;">For my shader</h7>
+      <ul
+        style="padding-left: 25px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8; margin-top: -5px;">
-      <li>I started by identifying where most of the resources were being used, which in this case was the emissive
-        channel. From there, I worked on levels of costs and dependencies: normal map → emissive → foam → render targets
-        →
-        general changes.</li>
-      <li>A small but impactful modification was changing how normal maps were handled. Instead of having a mostly blue
-        map, I reimported the map with adjusted channels, I then re-adjusted the range and finally reconstructed them
-        using DeriveNormalZ.</li>
-      <li>I reworked multiple operations to eliminate unnecesarry nodes and reused calculations whenever possible to
-        achieve similar results with fewer operations.</li>
-      <li>I searched and evaluated for expensive operations to see: whether they were necessary, if they could be
-        replaced, if they could be simplified, and how much it would affect the look. </li>
-      <li>I also searched for ways to implement vertex interpolators where possible to better balance the fragment and
-        vertex workload. </li>
-    </ul>
-  </div>
-  <div id="GeneralTxtBorder"
-    style="margin-top: 10px;border-style: solid; border-width: 10%; border-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
-    <p style="padding-left: 15px;">
-      What do <strong>vertex interpolators</strong> do? They pass your shader calculations through the vertex pass
-      instead
-      of the fragment pass. This way you can reduce per-pixel computations while improving performance.
-    </p>
-  </div>
-  <!--Comienza Player opt-->
-  <div id="GeneralTxtBorder" style="padding-top: 10px;">
-    <h7 style="padding-left: 25px;">Interactive Element Optimization</h7>
-    <p style="padding-left: 25px;">
-      This system was initially built for experimentation, which meant that there were a lot of tests and inefficient
-      runtime behaviour running through Tick. Additionally, the interaction logic was developed in two blueprints, where
-      they both did pretty much the same and it only caused severe performance drops. <br>
-      So in the cleaning process I made the following changes: <br>
-    <ul
-      style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+        <li>I started by identifying where most of the resources were being used, which in this case was the emissive
+          channel. From there, I worked on levels of costs and dependencies: normal map → emissive → foam → render
+          targets
+          →
+          general changes.</li>
+        <li>A small but impactful modification was changing how normal maps were handled. Instead of having a mostly
+          blue
+          map, I reimported the map with adjusted channels, I then re-adjusted the range and finally reconstructed them
+          using DeriveNormalZ.</li>
+        <li>I reworked multiple operations to eliminate unnecesarry nodes and reused calculations whenever possible to
+          achieve similar results with fewer operations.</li>
+        <li>I searched and evaluated for expensive operations to see: whether they were necessary, if they could be
+          replaced, if they could be simplified, and how much it would affect the look. </li>
+        <li>I also searched for ways to implement vertex interpolators where possible to better balance the fragment and
+          vertex workload. </li>
+      </ul>
+    </div>
+    <div id="GeneralTxtBorder"
+      style="margin-top: 10px;border-style: solid; border-width: 10%; border-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+      <p style="padding-left: 15px;">
+        What do <strong>vertex interpolators</strong> do? They pass your shader calculations through the vertex pass
+        instead
+        of the fragment pass. This way you can reduce per-pixel computations while improving performance.
+      </p>
+    </div>
+    <!--Comienza Player opt-->
+    <div id="GeneralTxtBorder" style="padding-top: 10px;">
+      <h7 style="padding-left: 25px;">Interactive Element Optimization</h7>
+      <p style="padding-left: 25px;">
+        This system was initially built for experimentation, which meant that there were a lot of tests and inefficient
+        runtime behaviour running through Tick. Additionally, the interaction logic was developed in two blueprints,
+        where
+        they both did pretty much the same and it only caused severe performance drops. <br>
+        So in the cleaning process I made the following changes: <br>
+      <ul
+        style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 100px; line-height: 1.8; margin-top: -5px;">
-      <li>Moved all necessary calculations into a single blueprint (on the character blueprint).</li>
-      <li>Created reusable functions for repeated logic to improve readability.</li>
-      <li>Refined the use of animation notifies (walk and landing); to call for specific interactions and events.</li>
-      <li>Implemented a pin-pong render target system (feature not originally in the shader), so that while one render
-        target is in use, the other is slowly cleared.</li>
-      <li>Replaced Tick-based logic with timelines and timed functions, maintaining my shader animation and improving
-        performance.</li>
-    </ul>
-    </p>
-  </div>
-  <!--Comienza LOD-->
-  <div id="GeneralTxtBorder" style="padding-top: 10px;">
-    <h7 style="padding-left: 25px;">Use of LODS</h7>
-    <p style="padding-left: 25px;">
-      Since water surfaces tend to cover large areas, I implemented three Levels of details to both my material and my
-      mesh: <br>
-    <ul
-      style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+        <li>Moved all necessary calculations into a single blueprint (on the character blueprint).</li>
+        <li>Created reusable functions for repeated logic to improve readability.</li>
+        <li>Refined the use of animation notifies (walk and landing); to call for specific interactions and events.</li>
+        <li>Implemented a pin-pong render target system (feature not originally in the shader), so that while one render
+          target is in use, the other is slowly cleared.</li>
+        <li>Replaced Tick-based logic with timelines and timed functions, maintaining my shader animation and improving
+          performance.</li>
+      </ul>
+      </p>
+    </div>
+    <!--Comienza LOD-->
+    <div id="GeneralTxtBorder" style="padding-top: 10px;">
+      <h7 style="padding-left: 25px;">Use of LODS</h7>
+      <p style="padding-left: 25px;">
+        Since water surfaces tend to cover large areas, I implemented three Levels of details to both my material and my
+        mesh: <br>
+      <ul
+        style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 100px; line-height: 1.8; margin-top: -5px;">
-      <li><strong>LOD 0:</strong> Original material and original plane.</li>
-      <li><strong>LOD 1:</strong> Reduced emissive details + no foam + no interactive calculation, and a lower-density
-        mesh.</li>
-      <li><strong>LOD 2:</strong> Further reduced emissive and vertex displacement operations, with an even
-        lower-density
-        mesh.</li>
-    </ul>
-    </p>
-    <p style="padding-left: 25px;">
-      Initially, I used Unreal´s automatic reduction settings for my plane, but mismatched borders created visible holes
-      on my wave movement on LOD change. To solve this, I created the LOD planes on Maya, ensuring that the edges
-      matched.
-      I then exported those planes into unreal and configure them on my LOD plane properties; as a result, the issue was
-      solved and transitions became stable.
-    </p>
-  </div>
-  <!--Comienza Results-->
-  <div id="GeneralTxtBorder" style="padding-top: 10px;">
-    <h7 style="padding-left: 25px;">Optimization Results</h7>
-    <p style="padding-left: 25px;">
-      These changes helped me: <br>
-    <ul
-      style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+        <li><strong>LOD 0:</strong> Original material and original plane.</li>
+        <li><strong>LOD 1:</strong> Reduced emissive details + no foam + no interactive calculation, and a lower-density
+          mesh.</li>
+        <li><strong>LOD 2:</strong> Further reduced emissive and vertex displacement operations, with an even
+          lower-density
+          mesh.</li>
+      </ul>
+      </p>
+      <p style="padding-left: 25px;">
+        Initially, I used Unreal´s automatic reduction settings for my plane, but mismatched borders created visible
+        holes
+        on my wave movement on LOD change. To solve this, I created the LOD planes on Maya, ensuring that the edges
+        matched.
+        I then exported those planes into unreal and configure them on my LOD plane properties; as a result, the issue
+        was
+        solved and transitions became stable.
+      </p>
+    </div>
+    <!--Comienza Results-->
+    <div id="GeneralTxtBorder" style="padding-top: 10px;">
+      <h7 style="padding-left: 25px;">Optimization Results</h7>
+      <p style="padding-left: 25px;">
+        These changes helped me: <br>
+      <ul
+        style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 100px; line-height: 1.8; margin-top: -5px;">
-      <li>Reduce shader instruction count from <strong>407 to 272</strong> in the fragment shader, and from <strong>289
-          to
-          317</strong> in the vertex shader.</li>
-      <li>Improve shader complexity visualization from a muddy red to a <strong>clean dark green</strong>.</li>
-      <li>Increase runtime performance from an average of <strong>15–30 FPS</strong> to <strong>40–60 FPS</strong>.</li>
-    </ul>
-    </p>
-    <p style="padding-left: 25px;">
-      Overall, this process reinforced the importance of balancing visuals and performance, because, even if some visual
-      aspects are sacrificed, there are often alternative solutions that preserve the core look while improving response
-      time and gameplay.
-      <br><br>
-      If I were to revisit this shader, I would further evaluate platform restrictions and alternative solutions such as
-      decals, VFX-based approaches, noise-driven water, flow maps, or other techniques. On the other hand, with this
-      gained knowledge I feel more confident to try on different math operations and formulas to test and achieve new
-      and
-      interestings materials.
-    </p>
+        <li>Reduce shader instruction count from <strong>407 to 272</strong> in the fragment shader, and from
+          <strong>289
+            to
+            317</strong> in the vertex shader.
+        </li>
+        <li>Improve shader complexity visualization from a muddy red to a <strong>clean dark green</strong>.</li>
+        <li>Increase runtime performance from an average of <strong>15–30 FPS</strong> to <strong>40–60 FPS</strong>.
+        </li>
+      </ul>
+      </p>
+      <p style="padding-left: 25px;">
+        Overall, this process reinforced the importance of balancing visuals and performance, because, even if some
+        visual
+        aspects are sacrificed, there are often alternative solutions that preserve the core look while improving
+        response
+        time and gameplay.
+        <br><br>
+        If I were to revisit this shader, I would further evaluate platform restrictions and alternative solutions such
+        as
+        decals, VFX-based approaches, noise-driven water, flow maps, or other techniques. On the other hand, with this
+        gained knowledge I feel more confident to try on different math operations and formulas to test and achieve new
+        and
+        interestings materials.
+      </p>
+    </div>
   </div>
-</div>
 
-<!--COMIENZA FINAL-->
-<div id="ending">
-  <div id="GeneralTxtBorder" style="padding-bottom: 20px;">
-    <h5 style="padding-left: 20px;">Ending</h5>
-    <hr
-      style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px; margin-left: auto; margin-right: auto;">
-    <p style="padding-left: 15px;">
-      And thats it for this shader’s process and documentation. <br><br>
+  <!--COMIENZA FINAL-->
+  <div id="ending">
+    <div id="GeneralTxtBorder" style="padding-bottom: 20px;">
+      <h5 style="padding-left: 20px;">Ending</h5>
+      <hr
+        style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px; margin-left: auto; margin-right: auto;">
+      <p style="padding-left: 15px;">
+        And thats it for this shader’s process and documentation. <br><br>
 
-      I hope this breakdown could help you in any way, not only from a technical perspective, but also in highlighting
-      the
-      value of experimentation, iteration, and optimization. If you’re learning, experimenting, or working to recreate
-      something similar, feel free to reach out with any questions or thoughts! <br><br>
+        I hope this breakdown could help you in any way, not only from a technical perspective, but also in highlighting
+        the
+        value of experimentation, iteration, and optimization. If you’re learning, experimenting, or working to recreate
+        something similar, feel free to reach out through
+        <a href="www.linkedin.com/in/sarasierra07" style="color: inherit" target="_blank">linkedin</a> or my contact's
+        below with any questions or thoughts! <br><br>
 
-      Let’s keep creating, and see you in the next one ₊⊹
-    </p> <br>
-    <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-bottom: 20px;">
-      <img src="SeaWavesResources/ending.gif" style="border-radius: 10px; width: 90%;">
+        Let’s keep creating, and see you in the next one ₊⊹
+      </p> <br>
+      <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-bottom: 20px;">
+        <img src="SeaWavesResources/ending.gif" style="border-radius: 10px; width: 90%;">
+      </div>
     </div>
   </div>
 </div>
 
+<!--LLAMA PARA COMPARACION DE IMAGENES-->
 <script>
   initComparisons();
 </script>
-
+<!--MENU DE HAMBURGESA-->
 <script>
   const hamburger = document.getElementById("Hamburger");
   const menu = document.getElementById("HamburgerMenu");
   const menuItems = document.querySelectorAll(".menuItem");
 
+  function openMenu() {
+    menu.classList.add("active");
+    hamburger.classList.add("active");
+    document.body.classList.add("menu-open");
+  }
+
   // Toggle menu
   hamburger.addEventListener("click", (e) => {
     e.stopPropagation();
-    menu.classList.toggle("active");
+    menu.classList.contains("active") ? closeMenu() : openMenu();
   });
 
   // Close when clicking a menu item
@@ -1716,7 +1825,25 @@
       menu.classList.remove("active");
     }
   });
+  function closeMenu() {
+    menu.classList.remove("active");
+    hamburger.classList.remove("active");
+    document.body.classList.remove("menu-open");
+  }
+
+  menuItems.forEach(item => {
+    item.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+      closeMenu();
+    }
+  });
 </script>
+
+
+<!--BARRA DE ABAJO-->
 
 <body>
   <div id="ColorBarAbajo"> <!--BARRA CONTACTO-->
@@ -1742,4 +1869,3 @@
 </body>
 
 </html>
-
