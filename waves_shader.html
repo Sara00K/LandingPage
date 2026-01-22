@@ -578,8 +578,8 @@
         With that being said, let’s jump into the shader.<br>
       </p>
       <div id="CentralMargin">
-        <iframe width="960" height="540" src="https://www.youtube.com/embed/unwhfF73x74"
-          title="Visual Demo Sea Waves Shader" frameborder="0"
+        <iframe width="961" height="540" src="https://www.youtube.com/embed/_1u8GC_Hta8"
+          title="Sea Waves Shader Visual Demo" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
@@ -1242,7 +1242,7 @@
           </div>
           <div class="column" style="padding-right: 1px; flex: .1; margin-right: -50px;">
             <div id="imageborder">
-              <img src="SeaWavesResources/distancef.gif" width="300" height="200">
+              <img src="SeaWavesResources/distancef.gif" width="300" height="200" style="border-radius: 10px;">
             </div>
           </div>
         </div>
@@ -1580,193 +1580,235 @@
       <hr
         style="height:4px; border-radius: 7.5px; background-color:#fbfbef; border-width:0; width:98%; margin-top: 9px; margin-bottom: 25px; margin-left: auto; margin-right: auto;">
       <p style="padding-left: 15px;">
-        Here I present a comparison between the original shader and its optimized version.
+        Here I present a comparison between the original shader and its optimized version. <br>
+        (The original material is on the left, while the optimized one is on the right)
       </p>
     </div>
     <!--Comparacion-->
     <div id="twoColumnSquare" style="padding-bottom: 15px">
       <div class="row">
+        <!--INSTRUCTION Count-->
+        <div class="column" style="margin-bottom: -25px;">
+          <h8 style="color: #fbfbef;">Instruction count on the shader</h8>
+          <div id="imageborder">
+            <div class="img-comp-container" style="margin-top: 20px; margin-bottom: 70px;">
+              <div class="img-comp-img">
+                <img src="SeaWavesResources/OP1.png" width="450" height="280">
+              </div>
+              <div class="img-comp-img img-comp-overlay">
+                <img src="SeaWavesResources/OG1.png" width="450" height="280">
+              </div>
+            </div>
+          </div><br>
+        </div>
+        <!--Shader complexity-->
+        <div class="column" style="margin-bottom: -25px;">
+          <h8 style="color: #fbfbef">Shader Complexity</h8>
+          <div id="imageborder">
+            <div class="img-comp-container" style="margin-top: 20px; margin-bottom: 70px;">
+              <div class="img-comp-img">
+                <img src="SeaWavesResources/OP2.png" width="450" height="280">
+              </div>
+              <div class="img-comp-img img-comp-overlay">
+                <img src="SeaWavesResources/OG2.png" width="450" height="280">
+              </div>
+            </div>
+          </div> <br>
+        </div>
+      </div>
+    </div>
+    <div id="twoColumnSquare" style="padding-bottom: 15px">
+      <div class="row">
         <!--OG-->
         <div class="column" style="margin-bottom: -25px;">
-          <h8 style="color: #fbfbef;">Original Material</h8>
-          <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;margin-top: 10px;">
-            <img src="SeaWavesResources/OG1.png" style="border-radius: 10px; width: 100%;">
-          </div>
+          <h8 style="color: #fbfbef;">Original Material - RenderDoc</h8>
           <p>
-            <strong>Instruction Count</strong> <br>
-            379 on fragment <br>
-            415 on vertex <br><br>
-            <strong>Shader Complexity</strong>
-          </p>
-          <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;margin-top: 10px;">
-            <img src="SeaWavesResources/OG2.png" style="border-radius: 10px; width: 100%;">
-          </div>
-          <p>
-            <strong>RenderDoc – Rendering Process Notes</strong> <br>
+            <strong>Rendering Process Notes</strong> <br>
             Velocity: 60.00 (time) <br>Base Pass: 369.664 (time)
           </p>
         </div>
-        <!--OPTIMIZED-->
-        <div class="column" style="padding-right: 30px; margin-bottom: -25px;">
-          <h8 style="color: #fbfbef;">Optimized Material</h8>
-          <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto; margin-top: 10px;">
-            <img src="SeaWavesResources/OP1.png" style="border-radius: 10px; width: 78%;">
-          </div>
+        <!--OP-->
+        <div class="column" style="margin-bottom: -25px;">
+          <h8 style="color: #fbfbef;">Optimized Material - RenderDoc</h8>
           <p>
-            <strong>Instruction Count</strong> <br>
-            264 on fragment <br>
-            337 on vertex<br><br>
-            <strong>Shader Complexity</strong>
-          </p>
-          <div id="imageborder" style="padding-left: 5px; margin-left: auto; margin-right: auto;margin-top: 10px;">
-            <img src="SeaWavesResources/OP2.png" style="border-radius: 10px; width: 100%;">
-          </div>
-          <p>
-            <strong>RenderDoc – Rendering Process Notes</strong> <br>
+            <strong>Rendering Process Notes</strong> <br>
             Velocity: 56.96 (time) <br>Base Pass: 237.568 (time)
           </p>
         </div>
       </div>
     </div>
-    <div id="GeneralTxtBorder"
-      style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
-      <p style="padding-left: 15px;color: #323564">
-        <strong>Note:</strong> It is important to mention that Instruction count and Shader Complexity are not always
-        the
-        best way to measure
-        optimization. The best way to approach optimization would be to actually test it on your game and platform
-        conditions. But in this case, I used these metrics alongside RenderDoc to obtain an overall performance
-        reference.
-      </p>
-    </div>
-    <div id="GeneralTxtBorder">
-      <p style="padding-left: 15px;">
-        Originally, the shader achieved the desired visual result, but it had many unnecessary operations and was very
-        messy. On the blueprint side, the interaction logic was split across two bluprints with one using tick
-        execution,
-        which caused my FPS to drop to an average of 15-20; which was pretty bad. <br>
-        So let’s breakdown my optimization process.
-      </p>
-      <!--Comienza Shader-->
-      <h7 style="padding-left: 25px;">For my shader</h7>
-      <ul
-        style="padding-left: 25px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+  </div>
+  <div id="GeneralTxtBorder"
+    style="margin-top: 10px; background-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+    <p style="padding-left: 15px;color: #323564">
+      <strong>Note:</strong> It is important to mention that Instruction count and Shader Complexity are not always
+      the
+      best way to measure
+      optimization. The best way to approach optimization would be to actually test it on your game and platform
+      conditions. But in this case, I used these metrics alongside RenderDoc to obtain an overall performance
+      reference.
+    </p>
+  </div>
+  <div id="GeneralTxtBorder">
+    <p style="padding-left: 15px;">
+      Originally, the shader achieved the desired visual result, but it had many unnecessary operations and was very
+      messy. On the blueprint side, the interaction logic was split across two bluprints with one using tick
+      execution,
+      which caused my FPS to drop to an average of 15-20; which was pretty bad. <br>
+      So let’s breakdown my optimization process.
+    </p>
+    <!--Comienza Shader-->
+    <h7 style="padding-left: 25px;">For my shader</h7>
+    <ul
+      style="padding-left: 25px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 60px; line-height: 1.8; margin-top: -5px;">
-        <li>I started by identifying where most of the resources were being used, which in this case was the emissive
-          channel. From there, I worked on levels of costs and dependencies: normal map → emissive → foam → render
-          targets
-          →
-          general changes.</li>
-        <li>A small but impactful modification was changing how normal maps were handled. Instead of having a mostly
-          blue
-          map, I reimported the map with adjusted channels, I then re-adjusted the range and finally reconstructed them
-          using DeriveNormalZ.</li>
-        <li>I reworked multiple operations to eliminate unnecesarry nodes and reused calculations whenever possible to
-          achieve similar results with fewer operations.</li>
-        <li>I searched and evaluated for expensive operations to see: whether they were necessary, if they could be
-          replaced, if they could be simplified, and how much it would affect the look. </li>
-        <li>I also searched for ways to implement vertex interpolators where possible to better balance the fragment and
-          vertex workload. </li>
-      </ul>
-    </div>
-    <div id="GeneralTxtBorder"
-      style="margin-top: 10px;border-style: solid; border-width: 10%; border-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
-      <p style="padding-left: 15px;">
-        What do <strong>vertex interpolators</strong> do? They pass your shader calculations through the vertex pass
-        instead
-        of the fragment pass. This way you can reduce per-pixel computations while improving performance.
-      </p>
-    </div>
-    <!--Comienza Player opt-->
-    <div id="GeneralTxtBorder" style="padding-top: 10px;">
-      <h7 style="padding-left: 25px;">Interactive Element Optimization</h7>
-      <p style="padding-left: 25px;">
-        This system was initially built for experimentation, which meant that there were a lot of tests and inefficient
-        runtime behaviour running through Tick. Additionally, the interaction logic was developed in two blueprints,
-        where
-        they both did pretty much the same and it only caused severe performance drops. <br>
-        So in the cleaning process I made the following changes: <br>
-      <ul
-        style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      <li>I started by identifying where most of the resources were being used, which in this case was the emissive
+        channel. From there, I worked on levels of costs and dependencies: normal map → emissive → foam → render
+        targets
+        →
+        general changes.</li>
+      <li>A small but impactful modification was changing how normal maps were handled. Instead of having a mostly
+        blue
+        map, I reimported the map with adjusted channels, I then re-adjusted the range and finally reconstructed them
+        using DeriveNormalZ.</li>
+      <li>I reworked multiple operations to eliminate unnecesarry nodes and reused calculations whenever possible to
+        achieve similar results with fewer operations.</li>
+      <li>I searched and evaluated for expensive operations to see: whether they were necessary, if they could be
+        replaced, if they could be simplified, and how much it would affect the look. </li>
+      <li>I also searched for ways to implement vertex interpolators where possible to better balance the fragment and
+        vertex workload. </li>
+    </ul>
+  </div>
+  <div id="GeneralTxtBorder"
+    style="margin-top: 10px;border-style: solid; border-width: 10%; border-color: #fbfbef; border-radius: 10px; padding: 5px; width: 63%; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+    <p style="padding-left: 15px;">
+      What do <strong>vertex interpolators</strong> do? They pass your shader calculations through the vertex pass
+      instead
+      of the fragment pass. This way you can reduce per-pixel computations while improving performance.
+    </p>
+  </div>
+  <!--Comienza Player opt-->
+  <div id="GeneralTxtBorder" style="padding-top: 10px;">
+    <h7 style="padding-left: 25px;">Interactive Element Optimization</h7>
+    <p style="padding-left: 25px;">
+      This system was initially built for experimentation, which meant that there were a lot of tests and inefficient
+      runtime behaviour running through Tick. Additionally, the interaction logic was developed in two blueprints,
+      where
+      they both did pretty much the same and it only caused severe performance drops. <br>
+      So in the cleaning process I made the following changes: <br>
+    <ul
+      style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 100px; line-height: 1.8; margin-top: -5px;">
-        <li>Moved all necessary calculations into a single blueprint (on the character blueprint).</li>
-        <li>Created reusable functions for repeated logic to improve readability.</li>
-        <li>Refined the use of animation notifies (walk and landing); to call for specific interactions and events.</li>
-        <li>Implemented a pin-pong render target system (feature not originally in the shader), so that while one render
-          target is in use, the other is slowly cleared.</li>
-        <li>Replaced Tick-based logic with timelines and timed functions, maintaining my shader animation and improving
-          performance.</li>
-      </ul>
-      </p>
-    </div>
-    <!--Comienza LOD-->
-    <div id="GeneralTxtBorder" style="padding-top: 10px;">
-      <h7 style="padding-left: 25px;">Use of LODS</h7>
-      <p style="padding-left: 25px;">
-        Since water surfaces tend to cover large areas, I implemented three Levels of details to both my material and my
-        mesh: <br>
-      <ul
-        style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+      <li>Moved all necessary calculations into a single blueprint (on the character blueprint).</li>
+      <li>Created reusable functions for repeated logic to improve readability.</li>
+      <li>Refined the use of animation notifies (walk and landing); to call for specific interactions and events.</li>
+      <li>Implemented a pin-pong render target system (feature not originally in the shader), so that while one render
+        target is in use, the other is slowly cleared.</li>
+      <li>Replaced Tick-based logic with timelines and timed functions, maintaining my shader animation and improving
+        performance.</li>
+    </ul>
+    </p>
+  </div>
+  <!--Comienza LOD-->
+  <div id="GeneralTxtBorder" style="padding-top: 10px;">
+    <h7 style="padding-left: 25px;">Use of LODS</h7>
+    <p style="padding-left: 25px;">
+      Since water surfaces tend to cover large areas, I implemented three Levels of details to both my material and my
+      mesh: <br>
+    <ul
+      style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 100px; line-height: 1.8; margin-top: -5px;">
-        <li><strong>LOD 0:</strong> Original material and original plane.</li>
-        <li><strong>LOD 1:</strong> Reduced emissive details + no foam + no interactive calculation, and a lower-density
-          mesh.</li>
-        <li><strong>LOD 2:</strong> Further reduced emissive and vertex displacement operations, with an even
-          lower-density
-          mesh.</li>
-      </ul>
-      </p>
-      <p style="padding-left: 25px;">
-        Initially, I used Unreal´s automatic reduction settings for my plane, but mismatched borders created visible
-        holes
-        on my wave movement on LOD change. To solve this, I created the LOD planes on Maya, ensuring that the edges
-        matched.
-        I then exported those planes into unreal and configure them on my LOD plane properties; as a result, the issue
-        was
-        solved and transitions became stable.
-      </p>
+      <li><strong>LOD 0:</strong> Original material and original plane.</li>
+      <li><strong>LOD 1:</strong> Reduced emissive details + no foam + no interactive calculation, and a lower-density
+        mesh.</li>
+      <li><strong>LOD 2:</strong> Further reduced emissive and vertex displacement operations, with an even
+        lower-density
+        mesh.</li>
+    </ul>
+    <div class="row">
+      <div class="column" style="flex:.33">
+        <div id="imageborder" style="padding-left: 10px; margin-left: auto; margin-right: auto">
+          <img src="SeaWavesResources/LODShader.png"
+            style="border-radius: 10px; width: 100%;">
+        </div>
+        <p>
+          Shader Visualization
+        </p>
+      </div>
+      <div class="column" style="flex:.33">
+        <div id="imageborder" style="padding-left: 10px; margin-left: auto; margin-right: auto">
+          <img src="SeaWavesResources/LODVisual.png"
+            style="border-radius: 10px; width: 100%;">
+        </div>
+        <p>
+          LOD Distribution
+        </p>
+      </div>
+      <div class="column" style="flex:.33">
+        <div id="imageborder" style="padding-left: 10px; margin-left: auto; margin-right: auto">
+          <img src="SeaWavesResources/LODWire.png"
+            style="border-radius: 10px; width: 100%;">
+        </div>
+        <p>
+          Wireframe Changes
+        </p>
+      </div>
     </div>
-    <!--Comienza Results-->
-    <div id="GeneralTxtBorder" style="padding-top: 10px;">
-      <h7 style="padding-left: 25px;">Optimization Results</h7>
-      <p style="padding-left: 25px;">
-        These changes helped me: <br>
-      <ul
-        style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
+    </p>
+    <div id="imageborder" style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-bottom: 20px;">
+      <img src="SeaWavesResources/LODTest.png"
+        style="border-radius: 10px; width: 60%; margin-left: auto; margin-right: auto;">
+    </div>
+    <p style="padding-left: 25px;">
+      Initially, I used Unreal´s automatic reduction settings for my plane, but mismatched borders created visible
+      holes
+      on my wave movement on LOD change. To solve this, I created the LOD planes on Maya, ensuring that the edges
+      matched.
+      I then exported those planes into unreal and configure them on my LOD plane properties; as a result, the issue
+      was
+      solved and transitions became stable.
+    </p>
+  </div>
+  <!--Comienza Results-->
+  <div id="GeneralTxtBorder" style="padding-top: 10px;">
+    <h7 style="padding-left: 25px;">Optimization Results</h7>
+    <p style="padding-left: 25px;">
+      These changes helped me: <br>
+    <ul
+      style="padding-left: 65px; list-style-type: circle; color: #fbfbef; font-family:Google Sans Code, monospace;
       font-optical-sizing: auto;
       font-weight: 400;
       font-style: normal; margin-right: -100px; margin-left: auto;text-align: left; padding-right: 100px; line-height: 1.8; margin-top: -5px;">
-        <li>Reduce shader instruction count from <strong>407 to 272</strong> in the fragment shader, and from
-          <strong>289
-            to
-            317</strong> in the vertex shader.
-        </li>
-        <li>Improve shader complexity visualization from a muddy red to a <strong>clean dark green</strong>.</li>
-        <li>Increase runtime performance from an average of <strong>15–30 FPS</strong> to <strong>40–60 FPS</strong>.
-        </li>
-      </ul>
-      </p>
-      <p style="padding-left: 25px;">
-        Overall, this process reinforced the importance of balancing visuals and performance, because, even if some
-        visual
-        aspects are sacrificed, there are often alternative solutions that preserve the core look while improving
-        response
-        time and gameplay.
-        <br><br>
-        If I were to revisit this shader, I would further evaluate platform restrictions and alternative solutions such
-        as
-        decals, VFX-based approaches, noise-driven water, flow maps, or other techniques. On the other hand, with this
-        gained knowledge I feel more confident to try on different math operations and formulas to test and achieve new
-        and
-        interestings materials.
-      </p>
-    </div>
+      <li>Reduce shader instruction count from <strong>407 to 272</strong> in the fragment shader, and from
+        <strong>289
+          to
+          317</strong> in the vertex shader.
+      </li>
+      <li>Improve shader complexity visualization from a muddy red to a <strong>clean dark green</strong>.</li>
+      <li>Increase runtime performance from an average of <strong>15–30 FPS</strong> to <strong>40–60 FPS</strong>.
+      </li>
+    </ul>
+    </p>
+    <p style="padding-left: 25px;">
+      Overall, this process reinforced the importance of balancing visuals and performance, because, even if some
+      visual
+      aspects are sacrificed, there are often alternative solutions that preserve the core look while improving
+      response
+      time and gameplay.
+      <br><br>
+      If I were to revisit this shader, I would further evaluate platform restrictions and alternative solutions such
+      as
+      decals, VFX-based approaches, noise-driven water, flow maps, or other techniques. On the other hand, with this
+      gained knowledge I feel more confident to try on different math operations and formulas to test and achieve new
+      and
+      interestings materials.
+    </p>
   </div>
 
   <!--COMIENZA FINAL-->
@@ -1825,20 +1867,20 @@
     }
   });
 </script>
-  <!--COSAS DE MENU PARA MOVIL-->
-  <script>
-    const isMobile = window.innerWidth <= 768;
-    
-    if (!isMobile) {
-      menu.classList.add("active");
-      hamburger.classList.add("active");
-      document.body.classList.add("menu-open");
-    }else{
-      menu.classList.remove("active");
-      hamburger.classList.remove("active");
-      document.body.classList.remove("menu-open");
-    }
-  </script>
+<!--COSAS DE MENU PARA MOVIL-->
+<script>
+  const isMobile = window.innerWidth <= 768;
+
+  if (!isMobile) {
+    menu.classList.add("active");
+    hamburger.classList.add("active");
+    document.body.classList.add("menu-open");
+  } else {
+    menu.classList.remove("active");
+    hamburger.classList.remove("active");
+    document.body.classList.remove("menu-open");
+  }
+</script>
 
 <!--BARRA DE ABAJO-->
 
