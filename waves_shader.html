@@ -21,6 +21,16 @@
       background-size: 20px 20px;
     }
 
+    :root {
+      overscroll-behavior: none;
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+    }
+
     /* LETRAS */
     h1 {
       color: #ac84c3;
@@ -164,7 +174,6 @@
     }
 
     /*Cosas para los headers y navegacion*/
-    #introduction,
     #shadercreation,
     #optimizationsection,
     #ending,
@@ -180,6 +189,11 @@
       /* adjust to match your sticky header height */
     }
 
+    #introduction {
+      scroll-margin-top: 225px;
+    }
+
+    /*Bloques*/
     #CentralMargin {
       display: flex;
       justify-content: center;
@@ -225,19 +239,86 @@
 
     /* BARRA SUPERIOR */
     #ColorBar {
-      position: sticky;
+      margin: 0;
+      overflow: hidden;
+      position: fixed;
+      padding-left: -10px;
+      /*position: sticky;*/
       top: 0;
       z-index: 999;
       transition: all 0.3s ease;
-      height: 80px;
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 20px;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
       background-color: #fbfbef;
       transition: all 0.3s ease-in-out;
+      width: 100%;
+    }
+
+    /* HAMBURGER BUTTON */
+    #Hamburger {
+      position: fixed;
+      right: 0;
+      margin-right: 35px;
+      /*margin-left: auto;*/
+      cursor: pointer;
+      width: 32px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1001;
+    }
+
+    #Hamburger span {
+      height: 3.5px;
+      width: 100%;
+      background-color: #717cac;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* MENU PANEL */
+    #HamburgerMenu {
+      position: fixed;
+      top: 100px;
+      /* misma altura que tu barra */
+      right: -100%;
+      width: 260px;
+      height: calc(100vh - 100px);
+      background-color: #fbfbef;
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      gap: 20px;
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+
+    /* ACTIVE MENU */
+    #HamburgerMenu.active {
+      right: 0;
+
+    }
+
+    /* LINKS */
+    #HamburgerMenu a {
+      font-family: "Google Sans Code", monospace;
+      font-optical-sizing: auto;
+      font-weight: 500;
+      font-style: normal;
+      margin-right: 5px;
+      margin-left: auto;
+      text-decoration: none;
+      color: #717cac;
+      font-size: 20px;
+      transition: opacity 0.2s ease;
+    }
+
+    #HamburgerMenu a:hover {
+      opacity: 0.6;
     }
 
     #HeaderContainer {
@@ -273,10 +354,10 @@
     /* INFO DE CONTACTO */
 
     #ColorBarAbajo {
+      bottom: 0;
+      width: 100%;
       background-color: #ac84c3;
       display: flex;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
       height: 80px;
     }
 
@@ -373,6 +454,7 @@
       }
     }
   </script>
+
 </head>
 
 <!--BARRA SUPERIOR-->
@@ -385,29 +467,32 @@
       <h1>Sara Sierra</h1>
       <h2>Technical Artist</h2>
     </div>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <ul class="menu">
-      <li><a class="menuItem" href="#introduction">Introduction</a></li>
-      <li><a class="menuItem" href="#shadercreation">Shader Creation</a></li>
-      <li><a class="menuItem" href="#optimizationsection">Optimization Process</a></li>
-      <li><a class="menuItem" href="#ending">Ending</a></li>
-    </ul>
-    <!--#introduction,
-    #shadercreation,
-    #optimizationsection,
-    #ending,
-    #sectionVertexAnim,
-    #sectionColor,
-    #sectionRipNor,
-    #sectionRipEm,
-    #sectionFoam,
-    #sectionPlayer,
-    #sectionFinal-->
 
+    <!-- HAMBURGER BUTTON -->
+    <div id="Hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- HAMBURGER MENU -->
+    <nav id="HamburgerMenu">
+      <a href="#introduction" class="menuItem">Introduction</a>
+      <a href="#shadercreation" class="menuItem">Shader Creation</a>
+      <a href="#sectionVertexAnim" class="menuItem" style="font-size: 16px; line-height: .6;"> Vertex Animation </a>
+      <a href="#sectionColor" class="menuItem" style="font-size: 16px; line-height: .6;"> Color Gradient </a>
+      <a href="#sectionRipNor" class="menuItem" style="font-size: 16px; line-height: .6;"> Ripples Normal </a>
+      <a href="#sectionRipEm" class="menuItem" style="font-size: 16px; line-height: .6;"> Ripples Emissive </a>
+      <a href="#sectionFoam" class="menuItem" style="font-size: 16px; line-height: .6;"> Objects Foam </a>
+      <a href="#sectionPlayer" class="menuItem" style="font-size: 16px; line-height: .6;"> Player Interaction </a>
+      <a href="#sectionFinal" class="menuItem" style="font-size: 16px; line-height: .6;"> Shader Final Steps </a>
+      <a href="#optimizationsection" class="menuItem">Optimization</a>
+      <a href="#ending" class="menuItem">Ending</a>
+    </nav>
   </div>
 </div>
 
-<div id="GeneralTxtBorder">
+<div id="GeneralTxtBorder" style="margin-top: 150px;">
   <h4>Sea Waves Shader</h4>
   <div id="introduction">
     <h5 style="padding-left: 20px;">Introduction</h5>
@@ -974,7 +1059,8 @@
         <div class="column" style="padding-right: 50px; flex: 0.2;">
           <div id="imageborder"
             style="padding-left: 45px; margin-left: auto; margin-right: auto; padding-right: 400px;">
-            <img src="SeaWavesResources/fresnel.gif" style="border-radius: 10px; width: 100%;" style="border-radius: 10px;">
+            <img src="SeaWavesResources/fresnel.gif" style="border-radius: 10px; width: 100%;"
+              style="border-radius: 10px;">
           </div>
         </div>
       </div>
@@ -1602,6 +1688,32 @@
   initComparisons();
 </script>
 
+<script>
+  const hamburger = document.getElementById("Hamburger");
+  const menu = document.getElementById("HamburgerMenu");
+  const menuItems = document.querySelectorAll(".menuItem");
+
+  // Toggle menu
+  hamburger.addEventListener("click", (e) => {
+    e.stopPropagation();
+    menu.classList.toggle("active");
+  });
+
+  // Close when clicking a menu item
+  menuItems.forEach(item => {
+    item.addEventListener("click", () => {
+      menu.classList.remove("active");
+    });
+  });
+
+  // Close when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove("active");
+    }
+  });
+</script>
+
 <body>
   <div id="ColorBarAbajo"> <!--BARRA CONTACTO-->
     <div id="HeaderContainer">
@@ -1626,6 +1738,3 @@
 </body>
 
 </html>
-
-
-
