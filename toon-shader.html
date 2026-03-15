@@ -14,415 +14,138 @@
 
 
   <style>
-        /* FONDO DE LA PAGINA */
-    html {
-      background-color: #000000;
-      opacity: 1.0;
-      background-image: radial-gradient(#fbfbef86 0.005px, #000000 1.0px);
-      background-size: 20px 20px;
-      scroll-behavior: smooth;
-    }
+        /* PAGE BACKGROUND */
 
-    :root {
-      overscroll-behavior: none;
-    }
+html{
+  background-color:#000;
+  background-image: radial-gradient(#fbfbef86 0.005px,#000 1px);
+  background-size:20px 20px;
+  scroll-behavior:smooth;
+}
 
-    body,
-    html {
-      margin: 0;
-      padding: 0;
-    }
+body{
+  margin:0;
+  padding:0;
+}
 
-    /* COSAS PARA EL MENU Y RESPONSIVIDAD
-    #MainContent {
-      transition: margin-right 0.3s ease;
-      transition: margin-left 0.3s ease;
-    }*/
+/* ---------------- TEXT ---------------- */
 
-    /* Cuando el menu se active*/
-    .menu-open #MainContent {
-      margin-right: 150px;
-      margin-left: -180px;
-    }
+h1{
+  color:#532658;
+  font-family:"Dangrek",sans-serif;
+  font-size:32px;
+  margin:0;
+}
 
-    /* LETRAS */
-    h1 {
-      color: #532658;
-      font-family: "Dangrek", sans-serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 56px;
-      text-align: left;
-      margin-bottom: -10px;
-      transition: font-size 0.3s ease;
-    }
+h2{
+  color:#8488c3;
+  font-family:"Sniglet",system-ui;
+  font-size:16px;
+  margin:0;
+}
 
-    h2 {
-      color: #8488c3;
-      font-family: "Sniglet", system-ui;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 24px;
-      text-align: left;
-      margin-top: 0px;
-      transition: font-size 0.3s ease;
-    }
+h4{
+  color:#fbfbef;
+  font-family:"Changa One",sans-serif;
+  font-size:56px;
+  margin-bottom:30px;
+}
 
-    h3 {
-      color: #fbfbef;
-      font-family: "Sniglet", system-ui;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 20px;
-      text-align: left;
-      margin: 0;
-    }
+h3{
+  color:#fbfbef;
+  font-family:"Sniglet",system-ui;
+  font-size:20px;
+}
 
-    h4 {
-      color: #fbfbef;
-      font-family: "Changa One", sans-serif;
-      font-weight: 200;
-      font-style: normal;
-      font-size: 56px;
-      margin-bottom: -45px;
-      transition: font-size 0.3s ease;
-    }
+p{
+  color:#fbfbef;
+  font-family:"Google Sans Code",monospace;
+  font-size:16px;
+  line-height:1.6;
+}
 
-    h5 {
-      color: #fbfbef;
-      font-family: "Lilita One", sans-serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 46px;
-      margin-bottom: -2px;
-      transition: font-size 0.3s ease;
-    }
+/* ----------- HEADER ----------- */
 
-    h6 {
-      color: #fbfbef;
-      font-family: "Lilita One", sans-serif;
-      font-weight: 100;
-      font-style: normal;
-      font-size: 32px;
-      text-align: justify;
-      margin-bottom: -10px;
-    }
+#ColorBar{
+  height:100px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 20px;
+  background:#fbfbef;
+}
 
-    h7 {
-      color: #fbfbef;
-      font-family: "Dangrek", sans-serif;
-      font-weight: 300;
-      font-style: normal;
-      font-size: 28px;
-      text-align: center;
-      margin-bottom: -10px;
-    }
+#HeaderContainer{
+  display:flex;
+  align-items:center;
+}
 
-    h8 {
-      color: #a4f1ff;
-      font-family: "Google Sans Code", monospace;
-      font-optical-sizing: auto;
-      font-weight: 700;
-      font-style: normal;
-      font-size: 18px;
-      text-align: center;
-      margin-bottom: -10px;
-    }
+#Logo img{
+  width:64px;
+  height:64px;
+}
 
-    p {
-      color: #fbfbef;
-      font-family: "Google Sans Code", monospace;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      font-style: normal;
-      margin-right: 30px;
-      margin-left: auto;
-      font-size: 16px;
-      text-align: justify;
-    }
+#Name{
+  margin-left:10px;
+}
 
-    #GeneralTxtBorder {
-      margin-left: 250px;
-      margin-right: 250px;
-    }
+/* ----------- MAIN CONTENT ----------- */
 
-    #twoColumnSquare {
-      box-sizing: border-box;
-      margin-left: 270px;
-      margin-right: 250px;
-      border-radius: 25px;
-      margin-top: 20px;
-    }
+#MainContent{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
+}
 
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
+/* -------- UNITY EMBED -------- */
 
-    .column {
-      flex: 1;
-      padding: 10px;
-      box-sizing: border-box;
-    }
+#UnityContainer{
+  margin-top:40px;
+  position:relative;
+  width:100%;
+  max-width:960px;
+  aspect-ratio:16/9;
+  margin-left:auto;
+  margin-right:auto;
+}
 
-    .left {
-      flex: .75;
-    }
+#UnityContainer iframe{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border:none;
+}
 
-    .rigth {
-      flex: .30;
-    }
+/* -------- FOOTER -------- */
 
-    .row:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
+#ColorBarAbajo{
+  width:100%;
+  background:#532658;
+  height:80px;
+  display:flex;
+  align-items:center;
+}
 
-    @media screen and (max-width: 600px) {
-      .row {
-        flex-direction: column;
-        /* Changes flow direction to vertical */
-      }
-    }
+#SocialMedia{
+  margin-left:auto;
+  display:flex;
+  gap:15px;
+  padding-right:30px;
+}
 
-    /*Cosas para los headers y navegacion*/
-    #shadercreation,
-    #optimizationsection,
-    #ending,
-    #sectionVertexAnim,
-    #sectionColor,
-    #sectionRipNor,
-    #sectionRipEm,
-    #sectionFoam,
-    #sectionPlayer,
-    #sectionFinal,
-    #shadercreation {
-      scroll-margin-top: 125px;
-      /* adjust to match your sticky header height */
-    }
+/* -------- MOBILE -------- */
 
-    #introduction {
-      scroll-margin-top: 225px;
-    }
+@media (max-width:700px){
 
-    /*Bloques*/
-    #CentralMargin {
-      display: flex;
-      justify-content: center;
-      padding-top: 20px;
-    }
+  h4{
+    font-size:42px;
+  }
 
-    #imageborder {
-      display: flex;
-      justify-content: left;
-      width: 100%;
-    }
+  #MainContent{
+    padding:30px 20px;
+  }
 
-    /* Slider para comparacion de imagenes */
-    .img-comp-container {
-      position: relative;
-      height: 200px;
-
-    }
-
-    .img-comp-img {
-      border-radius: 10px;
-      position: absolute;
-      width: auto;
-      height: auto;
-      overflow: hidden;
-    }
-
-    .img-comp-img img {
-      display: block;
-
-    }
-
-    .img-comp-slider {
-      position: absolute;
-      z-index: 9;
-      cursor: ew-resize;
-      width: 40px;
-      height: 40px;
-      background-color: #fbfbef;
-      opacity: 0.9;
-      border-radius: 50%;
-    }
-
-    /* BARRA SUPERIOR */
-    #ColorBar {
-      margin: 0;
-      overflow: hidden;
-      position: persistent;
-      padding-left: -10px;
-      /*position: sticky;*/
-      top: 0;
-      z-index: 999;
-      transition: all 0.3s ease;
-      height: 100px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      background-color: #fbfbef;
-      transition: all 0.3s ease-in-out;
-      width: 100%;
-    }
-
-    /* HAMBURGER BUTTON */
-    #Hamburger {
-      position: fixed;
-      right: 0;
-      margin-right: 35px;
-      /*margin-left: auto;*/
-      cursor: pointer;
-      width: 32px;
-      height: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      z-index: 1001;
-    }
-
-    #Hamburger span {
-      height: 3.5px;
-      width: 100%;
-      background-color: #323564;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-
-    /* MENU PANEL */
-    #HamburgerMenu {
-      position: fixed;
-      top: 100px;
-      /* misma altura que tu barra */
-      right: -100%;
-      width: 260px;
-      height: calc(100vh - 100px);
-      background-color: #fbfbef;
-      display: flex;
-      flex-direction: column;
-      padding: 30px;
-      gap: 20px;
-      transition: right 0.3s ease;
-      z-index: 1000;
-    }
-
-    /* ACTIVE MENU */
-    #HamburgerMenu.active {
-      right: 0;
-
-    }
-
-    /* LINKS */
-    #HamburgerMenu a {
-      font-family: "Google Sans Code", monospace;
-      font-optical-sizing: auto;
-      font-weight: 500;
-      font-style: normal;
-      margin-right: 5px;
-      margin-left: auto;
-      text-decoration: none;
-      color: #323564;
-      font-size: 20px;
-      transition: opacity 0.2s ease;
-    }
-
-    #HamburgerMenu a:hover {
-      opacity: 0.6;
-    }
-
-    /* HAMBURGER ANIMATION */
-    #Hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 8px);
-    }
-
-    #Hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    #Hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -10px);
-    }
-
-    #HeaderContainer {
-      display: flex;
-      align-items: center;
-      padding: 18px;
-    }
-
-    @media (max-width: 768px) {
-
-      /* Menu starts CLOSED on mobile */
-      #HamburgerMenu {
-        right: -120%;
-        width: 100%;
-      }
-
-      /* Only opens when active */
-      #HamburgerMenu.active {
-        right: 0;
-      }
-
-      /* Content should NOT shift on mobile */
-      .menu-open #MainContent {
-        margin-right: 0;
-      }
-    }
-
-    #Logo img {
-      margin-top: 10px;
-      margin-left: -10px;
-      width: 64px;
-      height: 64px;
-      transition: all 0.3s ease;
-    }
-
-    #Name {
-      margin-left: 10px;
-      margin-top: auto;
-      margin-bottom: auto;
-    }
-
-    #ColorBar #Name h1 {
-      font-size: 32px;
-      margin-top: auto;
-    }
-
-    #ColorBar #Name h2 {
-      font-size: 16px;
-      margin-top: auto;
-    }
-
-    /* INFO DE CONTACTO */
-
-    #ColorBarAbajo {
-      bottom: 0;
-      width: 100%;
-      background-color: #532658;
-      display: flex;
-      height: 80px;
-      position: persistent;
-      z-index: 1003;
-    }
-
-    #Contactstxt {
-      margin-left: 10px;
-    }
-
-    #SocialMedia {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-top: auto;
-      margin-bottom: auto;
-      position: absolute;
-      right: 32px;
-      align-items: right;
-    }
+}
   </style>
 
 </head>
@@ -457,15 +180,11 @@
         </p>
     </div>
   </div>
-<div id="CentralMargin", style="margin-bottom: 100px; margin-top: -20px">
-  <iframe src="UnityToonDemo/index.html" 
-        width="960" 
-        height="740" 
-        frameborder="0" 
-        allowfullscreen="true" 
-        mozallowfullscreen="true" 
-        webkitallowfullscreen="true">
-</iframe>
+  <div id="UnityContainer">
+  <iframe src="UnityToonDemo/index.html"
+    allowfullscreen>
+  </iframe>
+</div>
   </div>
 </div>
 
